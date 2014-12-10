@@ -29,7 +29,7 @@ namespace SpringSoftware.Core.DAL
         {
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     session.Save(entity);
                     session.Flush();
@@ -45,7 +45,7 @@ namespace SpringSoftware.Core.DAL
         {
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     session.SaveOrUpdate(entity);
                     session.Flush();
@@ -61,7 +61,7 @@ namespace SpringSoftware.Core.DAL
         {
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     session.Update(entity);
                     session.Flush();
@@ -77,7 +77,7 @@ namespace SpringSoftware.Core.DAL
         {
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     if (fun != null)
                     {
@@ -98,7 +98,7 @@ namespace SpringSoftware.Core.DAL
 
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     var queryString = string.Format("delete {0} where Id = :id",
                                                     typeof(T).Name);
@@ -118,7 +118,7 @@ namespace SpringSoftware.Core.DAL
 
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     var queryString = string.Format("delete {0} where Id = :id",
                                                     typeof(T).Name);
@@ -140,7 +140,7 @@ namespace SpringSoftware.Core.DAL
 
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     entityList = session.CreateCriteria(typeof(T)).List<T>().ToList();
                 }
@@ -158,7 +158,7 @@ namespace SpringSoftware.Core.DAL
 
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     entity = session.Get<T>(id);
                 }
@@ -176,7 +176,7 @@ namespace SpringSoftware.Core.DAL
 
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     var queryString = string.Format("from {0} ", typeof(T).Name);
                     result = session.Delete(queryString);
@@ -194,7 +194,7 @@ namespace SpringSoftware.Core.DAL
         {
             try
             {
-                using (var session = FluentNHibernateDAL.Instance.GetSession())
+                using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     return session.QueryOver<T>().SingleOrDefault();
                 }

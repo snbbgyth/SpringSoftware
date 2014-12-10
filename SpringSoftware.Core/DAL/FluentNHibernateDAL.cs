@@ -17,26 +17,26 @@ using SpringSoftware.Core.IDAL;
 
 namespace SpringSoftware.Core.DAL
 {
-    public class FluentNHibernateDAL : IFluentNHibernate
+    public class FluentNHibernateDal : IFluentNHibernate
     {
-        private static FluentNHibernateDAL _instance;
+        private static FluentNHibernateDal _instance;
 
         private static readonly object SyncObj = new object();
 
-        public static FluentNHibernateDAL Instance
+        public static FluentNHibernateDal Instance
         {
             get
             {
                 lock (SyncObj)
                 {
                     if (_instance == null)
-                        _instance = new FluentNHibernateDAL();
+                        _instance = new FluentNHibernateDal();
                 }
                 return _instance;
             }
         }
 
-        public FluentNHibernateDAL()
+        public FluentNHibernateDal()
         {
 
         }

@@ -8,11 +8,11 @@ using SpringSoftware.Core.IDAL;
 
 namespace SpringSoftware.Core.DAL
 {
-    public class OtherLogInfoDAL : DataOperationActivityBase<OtherLogInfo>, IOtherLogInfo
+    public class OtherLogInfoDal : DataOperationActivityBase<OtherLogInfo>, IOtherLogInfo
     {
-        public static OtherLogInfoDAL Current
+        public static OtherLogInfoDal Current
         {
-            get { return new OtherLogInfoDAL(); }
+            get { return new OtherLogInfoDal(); }
         }
     }
 }

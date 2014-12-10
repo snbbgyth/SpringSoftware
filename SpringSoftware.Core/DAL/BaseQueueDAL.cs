@@ -10,14 +10,14 @@ using SpringSoftware.Core.QueueDAL;
 
 namespace SpringSoftware.Core.DAL
 {
-    public abstract class BaseQueueDAL<T> : IDisposable where T : new()
+    public abstract class BaseQueueDal<T> : IDisposable where T : new()
     {
         /// <summary>
         /// Wait enqueue wirte log message semaphore will release
         /// </summary>
         private Semaphore _semaphore;
 
-        protected BaseQueueDAL()
+        protected BaseQueueDal()
         {
             _messageList = new ConcurrentQueue<T>();
             _semaphore = new Semaphore(0, int.MaxValue);

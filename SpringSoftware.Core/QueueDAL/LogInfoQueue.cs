@@ -10,7 +10,7 @@ using SpringSoftware.Core.Help;
 
 namespace SpringSoftware.Core.QueueDAL
 {
-    public class LogInfoQueue : BaseQueueDAL<OtherLogInfo>
+    public class LogInfoQueue : BaseQueueDal<OtherLogInfo>
     {
         private static readonly object SyncObj = new object();
 
@@ -39,7 +39,7 @@ namespace SpringSoftware.Core.QueueDAL
         {
             try
             {
-                OtherLogInfoDAL.Current.SaveOrUpdate(entity);
+                OtherLogInfoDal.Current.SaveOrUpdate(entity);
             }
             catch (Exception ex)
             {

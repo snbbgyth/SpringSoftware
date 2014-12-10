@@ -16,14 +16,15 @@ namespace SpringSoftware.Core.BLL
         {
             base.Load(builder);
 
-            builder.RegisterType<FluentNHibernateDAL>()
+            builder.RegisterType<FluentNHibernateDal>()
                 .As<IFluentNHibernate>()
                 .SingleInstance();
-
-            builder.RegisterType<OtherLogInfoDAL>()
-    .As<IOtherLogInfo>();
-
             builder.Register(c => c.Resolve<IFluentNHibernate>().GetSession()).As<ISession>().InstancePerLifetimeScope();
+            builder.RegisterType<OtherLogInfoDal>()
+    .As<IOtherLogInfo>();
+           
+            builder.RegisterType<NewsDal>()
+.As<INewsDal>();
         }
     }
 }
