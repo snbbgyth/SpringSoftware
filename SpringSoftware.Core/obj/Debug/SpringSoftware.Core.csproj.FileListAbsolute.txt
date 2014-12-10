@@ -1,0 +1,17 @@
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\SpringSoftware.Core.dll.config
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\SpringSoftware.Core.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\SpringSoftware.Core.pdb
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\Autofac.Configuration.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\Autofac.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\FluentNHibernate.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\Iesi.Collections.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\NHibernate.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\Autofac.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\Autofac.Configuration.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\FluentNHibernate.pdb
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\FluentNHibernate.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\Iesi.Collections.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\NHibernate.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.csprojResolveAssemblyReference.cache
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.pdb
