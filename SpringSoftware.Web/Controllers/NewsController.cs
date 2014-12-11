@@ -17,9 +17,9 @@ namespace SpringSoftware.Web.Controllers
         //private NewViewModel db = new NewViewModel();
         private INewsDal _newsDal;
 
-        public NewsController(INewsDal newsDal)
+        public NewsController()
         {
-            _newsDal = newsDal;
+            _newsDal = DependencyResolver.Current.GetService<INewsDal>();
         }
         // GET: /News/
         public ActionResult Index()

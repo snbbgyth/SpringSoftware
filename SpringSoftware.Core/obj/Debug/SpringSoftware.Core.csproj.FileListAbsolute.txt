@@ -12,7 +12,6 @@ H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\b
 H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\FluentNHibernate.xml
 H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\Iesi.Collections.xml
 H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\NHibernate.xml
-H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.csprojResolveAssemblyReference.cache
 H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.dll
 H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.pdb
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\SpringSoftware.Core.dll.config
@@ -32,3 +31,14 @@ D:\OpenSource\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\NHibernate.xml
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.csprojResolveAssemblyReference.cache
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.dll
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.pdb
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\EntityFramework.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\EntityFramework.SqlServer.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\System.Data.SQLite.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\System.Data.SQLite.EF6.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\System.Data.SQLite.Linq.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\EntityFramework.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\EntityFramework.SqlServer.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\System.Data.SQLite.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\zh-Hans\EntityFramework.resources.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.csprojResolveAssemblyReference.cache

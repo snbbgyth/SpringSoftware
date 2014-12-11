@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
+using System.Reflection;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using Autofac;
+using Autofac.Integration.Mvc;
+using SpringSoftware.Core.BLL;
 
 namespace SpringSoftware.Web
 {
@@ -20,6 +26,17 @@ namespace SpringSoftware.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            var container = BuildContainer();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
+
+        private static IContainer BuildContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired();
+            // FunnelWeb Database
+            builder.RegisterModule(new CoreModule());
+            return builder.Build();
         }
     }
 }

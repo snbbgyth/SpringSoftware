@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpringSoftware.Core.DbModel;
+using SpringSoftware.Core.IDAL;
 
 namespace SpringSoftware.Core.DAL
 {
-   public class NewsDal:DataOperationActivityBase<News>
-   {
+    public class NewsDal : DataOperationActivityBase<News>, INewsDal
+    {
     }
 }

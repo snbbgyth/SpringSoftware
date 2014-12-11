@@ -25,6 +25,7 @@ namespace SpringSoftware.Core.BLL
            
             builder.RegisterType<NewsDal>()
 .As<INewsDal>();
+            //builder.Build();
         }
     }
 }

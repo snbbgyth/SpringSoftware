@@ -139,3 +139,16 @@ D:\OpenSource\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\FluentNHibern
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\FluentNHibernate.xml
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\NHibernate.xml
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\Iesi.Collections.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\SpringSoftware.Core.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\Autofac.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\FluentNHibernate.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\NHibernate.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\Iesi.Collections.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\SpringSoftware.Core.pdb
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\Autofac.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\FluentNHibernate.pdb
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\FluentNHibernate.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\NHibernate.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\Iesi.Collections.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\Autofac.Integration.Mvc.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Tests\bin\Debug\Autofac.Integration.Mvc.xml

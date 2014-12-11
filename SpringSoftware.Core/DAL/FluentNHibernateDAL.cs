@@ -153,7 +153,7 @@ namespace SpringSoftware.Core.DAL
         {
             // specify the criteria that types must meet in order to be mapped
             // any type for which this method returns false will not be mapped.
-            return type.Namespace == "EMDataCenter.Common.DBModel";
+            return type.Namespace == "SpringSoftware.Core.DbModel";
         }
 
         public override bool IsComponent(Type type)

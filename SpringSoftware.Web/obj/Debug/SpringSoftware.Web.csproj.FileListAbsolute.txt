@@ -186,3 +186,7 @@ D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\zh-Hans\Microsoft.Owi
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\obj\Debug\SpringSoftware.Web.csprojResolveAssemblyReference.cache
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\obj\Debug\SpringSoftware.Web.dll
 D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\obj\Debug\SpringSoftware.Web.pdb
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Web\bin\Autofac.Configuration.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Web\bin\Autofac.Integration.Mvc.dll
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Web\bin\Autofac.Configuration.xml
+H:\MyComanyDesign\SpringSoftwareSite\Source\SpringSoftware\SpringSoftware.Web\bin\Autofac.Integration.Mvc.xml
