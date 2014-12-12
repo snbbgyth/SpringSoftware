@@ -9,11 +9,11 @@ namespace SpringSoftware.Core.IDAL
 {
     public interface IDataOperationActivity<T>
     {
-        void Insert(T entity);
+        int Insert(T entity);
 
-        void SaveOrUpdate(T entity);
+        int SaveOrUpdate(T entity);
 
-        void Modify(T entity);
+        int Modify(T entity);
 
         IList<T> QueryByFun(Expression<Func<T, bool>> fun);
 
@@ -28,6 +28,26 @@ namespace SpringSoftware.Core.IDAL
         T FirstOrDefault();
 
         T FirstOrDefault(Expression<Func<T, bool>> fun);
+
+         Task<int> InsertAsync(T entity);
+
+         Task<int> SaveOrUpdateAsync(T entity);
+
+         Task<int> ModifyAsync(T entity);
+
+        Task<IList<T>> QueryByFunAsync(Expression<Func<T, bool>> fun);
+
+        Task<int> DeleteByIdAsync(string id);
+
+        Task<List<T>> QueryAllAsync();
+
+        Task<T> QueryByIdAsync(string id);
+
+        Task<int> DeleteAllAsync();
+
+        Task<T> FirstOrDefaultAsync();
+
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> fun);
 
     }
 }

@@ -25,7 +25,7 @@ namespace SpringSoftware.Core.DAL
 
         }
 
-        public virtual void Insert(T entity)
+        public virtual int Insert(T entity)
         {
             try
             {
@@ -33,15 +33,17 @@ namespace SpringSoftware.Core.DAL
                 {
                     session.Save(entity);
                     session.Flush();
+                    return 1;
                 }
             }
             catch (Exception ex)
             {
                 LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
+                return 0;
             }
         }
 
-        public virtual void SaveOrUpdate(T entity)
+        public virtual int SaveOrUpdate(T entity)
         {
             try
             {
@@ -49,15 +51,17 @@ namespace SpringSoftware.Core.DAL
                 {
                     session.SaveOrUpdate(entity);
                     session.Flush();
+                    return 1;
                 }
             }
             catch (Exception ex)
             {
                 LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
+                return 0;
             }
         }
 
-        public virtual void Modify(T entity)
+        public virtual int  Modify(T entity)
         {
             try
             {
@@ -65,11 +69,13 @@ namespace SpringSoftware.Core.DAL
                 {
                     session.Update(entity);
                     session.Flush();
+                    return 1;
                 }
             }
             catch (Exception ex)
             {
                 LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
+                return 0;
             }
         }
 
@@ -225,6 +231,68 @@ namespace SpringSoftware.Core.DAL
                 LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
             }
             return null;
+        }
+
+
+        public async Task<int> InsertAsync(T entity)
+        {
+            var task = Task.Factory.StartNew(() => Insert(entity));
+           return  await task;
+           
+        }
+
+        public async Task<int> SaveOrUpdateAsync(T entity)
+        {
+            var task = Task.Factory.StartNew(() => SaveOrUpdate(entity));
+           return  await task;
+        }
+
+        public async Task<int> ModifyAsync(T entity)
+        {
+            var task = Task.Factory.StartNew(() => Modify(entity));
+            return  await task;
+        }
+
+        public async Task<IList<T>> QueryByFunAsync(Expression<Func<T, bool>> fun)
+        {
+            var task = Task.Factory.StartNew(() => QueryByFun(fun));
+            return  await task;
+        }
+
+        public async Task<int> DeleteByIdAsync(string id)
+        {
+            var task = Task.Factory.StartNew(() => DeleteById(id));
+            return await task;
+        }
+
+        public async Task<List<T>> QueryAllAsync()
+        {
+            var task = Task.Factory.StartNew(() => QueryAll());
+            return await task;
+        }
+
+        public async Task<T> QueryByIdAsync(string id)
+        {
+            var task = Task.Factory.StartNew(() => QueryById(id));
+            return await task;
+        }
+
+        public async Task<int> DeleteAllAsync()
+        {
+            var task = Task.Factory.StartNew(() => DeleteAll());
+            return await task;
+        }
+
+        public async Task<T> FirstOrDefaultAsync()
+        {
+            var task = Task.Factory.StartNew(() => FirstOrDefault());
+            return await task;
+        }
+
+        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> fun)
+        {
+            var task = Task.Factory.StartNew(() => FirstOrDefault(fun));
+            return await task;
         }
     }
 }

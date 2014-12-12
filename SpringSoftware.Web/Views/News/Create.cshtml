@@ -47,10 +47,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NewsTypeId, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.NewsType.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NewsTypeId)
-                @Html.ValidationMessageFor(model => model.NewsTypeId)
+                @Html.EditorFor(model => model.NewsType.Name)
+                @Html.ValidationMessageFor(model => model.NewsType.Name)
             </div>
         </div>
 

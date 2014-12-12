@@ -15,17 +15,11 @@ namespace SpringSoftware.Core.BLL
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-
-            builder.RegisterType<FluentNHibernateDal>()
-                .As<IFluentNHibernate>()
-                .SingleInstance();
+            builder.RegisterType<FluentNHibernateDal>().As<IFluentNHibernate>().SingleInstance();
             builder.Register(c => c.Resolve<IFluentNHibernate>().GetSession()).As<ISession>().InstancePerLifetimeScope();
-            builder.RegisterType<OtherLogInfoDal>()
-    .As<IOtherLogInfo>();
-           
-            builder.RegisterType<NewsDal>()
-.As<INewsDal>();
-            //builder.Build();
+            builder.RegisterType<OtherLogInfoDal>().As<IOtherLogInfo>();
+            builder.RegisterType<NewsDal>().As<INewsDal>();
+            builder.RegisterType<NewsTypeDal>().As<INewsTypeDal>();
         }
     }
 }

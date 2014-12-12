@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using FluentNHibernate;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -153,8 +154,10 @@ namespace SpringSoftware.Core.DAL
         {
             // specify the criteria that types must meet in order to be mapped
             // any type for which this method returns false will not be mapped.
+           
             return type.Namespace == "SpringSoftware.Core.DbModel";
         }
+ 
 
         public override bool IsComponent(Type type)
         {
@@ -163,5 +166,7 @@ namespace SpringSoftware.Core.DAL
             // somewhere or using some form of conventional and/or attribute design
             return false;
         }
+
+    
     }
 }

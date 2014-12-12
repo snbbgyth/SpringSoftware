@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpringSoftware.Core.DbModel;
-using SpringSoftware.Core.IDAL;
 
-namespace SpringSoftware.Core.DAL
+namespace SpringSoftware.Core.IDAL
 {
-   public  class NewsTypeDal:DataOperationActivityBase<NewsType>,INewsTypeDal
+   public interface INewsTypeDal:IDataOperationActivity<NewsType>
    {
-
-   }
+    }
 }

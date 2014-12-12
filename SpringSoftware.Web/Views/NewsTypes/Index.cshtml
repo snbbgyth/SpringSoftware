@@ -1,5 +1,4 @@
-﻿@using SpringSoftware.Web.Help
-@model IEnumerable<SpringSoftware.Core.DbModel.News>
+﻿@model IEnumerable<SpringSoftware.Core.DbModel.NewsType>
 
 @{
     ViewBag.Title = "Index";
@@ -13,16 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsPublish)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NewsType.Name)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
@@ -45,16 +35,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content.ToSummary())
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsPublish)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NewsType.Name)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreateDate)

@@ -29,5 +29,7 @@ namespace SpringSoftware.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.NewsType> NewsTypes { get; set; }
     }
 }
