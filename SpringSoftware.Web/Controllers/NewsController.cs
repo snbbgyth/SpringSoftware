@@ -14,7 +14,6 @@ namespace SpringSoftware.Web.Controllers
 {
     public class NewsController : Controller
     {
-        //private NewViewModel db = new NewViewModel();
         private INewsDal _newsDal;
 
         public NewsController()
