@@ -13,6 +13,7 @@ using FluentNHibernate.Conventions.Instances;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.Help;
 using SpringSoftware.Core.IDAL;
 
@@ -101,7 +102,8 @@ namespace SpringSoftware.Core.DAL
                 {
                     _fluentConfig = Fluently.Configure()
                                             .Database(SQLiteConfiguration.Standard.UsingFile(UtilHelper.SqliteFilePath))
-                                            .Mappings(m => m.AutoMappings.Add(CreateAutomappings));
+                                            .Mappings(m => m.FluentMappings.AddFromAssemblyOf<News>());
+                    //m.AutoMappings.Add(CreateAutomappings));
                     BuildSchema(_fluentConfig.BuildConfiguration());
                 }
                 return _fluentConfig;
@@ -154,8 +156,8 @@ namespace SpringSoftware.Core.DAL
         {
             // specify the criteria that types must meet in order to be mapped
             // any type for which this method returns false will not be mapped.
-           
-            return type.Namespace == "SpringSoftware.Core.DbModel";
+
+            return type.Namespace == "SpringSoftware.Core.DbModel" ;
         }
  
 

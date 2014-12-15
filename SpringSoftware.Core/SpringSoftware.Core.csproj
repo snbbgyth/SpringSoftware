@@ -78,6 +78,8 @@
     <Compile Include="DAL\NewsTypeDAL.cs" />
     <Compile Include="DAL\OtherLogInfoDAL.cs" />
     <Compile Include="DbModel\Mappings\NewsMapping.cs" />
+    <Compile Include="DbModel\Mappings\NewsTypeMapping.cs" />
+    <Compile Include="DbModel\Mappings\OtherlogInfoMapping.cs" />
     <Compile Include="DbModel\News.cs" />
     <Compile Include="DbModel\NewsType.cs" />
     <Compile Include="DbModel\OtherLogInfo.cs" />

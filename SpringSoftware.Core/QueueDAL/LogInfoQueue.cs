@@ -57,7 +57,7 @@ namespace SpringSoftware.Core.QueueDAL
         {
             var entity = new OtherLogInfo
             {
-                CreateTime = DateTime.Now,
+                CreateDate = DateTime.Now,
                 ClassName = type.Name,
                 MethodName = methodName,
                 Message = exception.Message,
@@ -71,7 +71,7 @@ namespace SpringSoftware.Core.QueueDAL
         {
             var entity = new OtherLogInfo
             {
-                CreateTime = DateTime.Now,
+                CreateDate = DateTime.Now,
                 ClassName = type.Name,
                 MethodName = methodName,
                 Message = exception.Message,
@@ -87,7 +87,7 @@ namespace SpringSoftware.Core.QueueDAL
         {
             var entity = new OtherLogInfo
             {
-                CreateTime = DateTime.Now,
+                CreateDate = DateTime.Now,
                 ClassName = type.Name,
                 MethodName = methodName,
                 Message = exception.Message,
@@ -104,7 +104,7 @@ namespace SpringSoftware.Core.QueueDAL
         {
             var entity = new OtherLogInfo
             {
-                CreateTime = DateTime.Now,
+                CreateDate = DateTime.Now,
                 ClassName = type.Name,
                 MethodName = methodName,
                 Message = message,
@@ -118,7 +118,7 @@ namespace SpringSoftware.Core.QueueDAL
         {
             var entity = new OtherLogInfo
             {
-                CreateTime = DateTime.Now,
+                CreateDate = DateTime.Now,
                 ClassName = type.Name,
                 MethodName = methodName,
                 ClientName = clientName,
@@ -133,7 +133,7 @@ namespace SpringSoftware.Core.QueueDAL
         {
             var entity = new OtherLogInfo
             {
-                CreateTime = DateTime.Now,
+                CreateDate = DateTime.Now,
                 ClassName = type.Name,
                 MethodName = methodName,
                 Message = message,
@@ -149,7 +149,7 @@ namespace SpringSoftware.Core.QueueDAL
         {
             var entity = new OtherLogInfo
             {
-                CreateTime = DateTime.Now,
+                CreateDate = DateTime.Now,
                 ClassName = type.Name,
                 MethodName = methodName,
                 Message = message,

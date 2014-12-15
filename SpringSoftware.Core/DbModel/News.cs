@@ -24,8 +24,14 @@ namespace SpringSoftware.Core.DbModel
 
        [DisplayName("是否发布")]
        public virtual bool IsPublish { get; set; }
+ 
+       public  virtual NewsType NewsType { get; set; }
 
-    
-       public virtual NewsType NewsType { get; set; }
+       public virtual IList<NewsType> NewsTypeList { get; set; }
+
+       public News()
+       {
+           NewsTypeList=new List<NewsType>(){{new NewsType()}};
+       }
     }
 }

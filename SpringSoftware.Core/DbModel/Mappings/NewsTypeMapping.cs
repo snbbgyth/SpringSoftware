@@ -7,9 +7,9 @@ using FluentNHibernate.Mapping;
 
 namespace SpringSoftware.Core.DbModel.Mappings
 {
-    public class NewsMapping : ClassMap<News>
+    public class NewsTypeMapping : ClassMap<NewsType>
     {
-        public NewsMapping()
+        public NewsTypeMapping()
         {
             Id(x => x.Id);
             Map(x => x.CreateDate);
@@ -18,17 +18,7 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.LastModifier);
             Map(x => x.LastModifyDate);
 
-
-            Map(x => x.IsPublish);
-            Map(x => x.Content);
-            //Map(x => x.NewsTypeId);
-            Map(x => x.Title);
-            References(x => x.NewsType, "NewsTypeId");
-
-            HasManyToMany(x => x.NewsTypeList)
-              .Cascade.All()
-              .Inverse()
-              .Table("NewsType");
+            Map(x => x.Name);
         }
     }
 }

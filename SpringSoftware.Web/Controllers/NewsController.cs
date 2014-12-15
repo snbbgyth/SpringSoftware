@@ -46,7 +46,9 @@ namespace SpringSoftware.Web.Controllers
         // GET: /News/Create
         public ActionResult Create()
         {
-            return View();
+            var news = new News();
+           
+            return View(news);
         }
 
         // POST: /News/Create
