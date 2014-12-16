@@ -45,10 +45,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(modelItem =>item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Content.ToSummary())
+            @Html.Raw(item.Content.StripTagsRegex().ToSummary());
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsPublish)

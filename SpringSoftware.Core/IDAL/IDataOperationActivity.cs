@@ -17,11 +17,11 @@ namespace SpringSoftware.Core.IDAL
 
         IList<T> QueryByFun(Expression<Func<T, bool>> fun);
 
-        int DeleteById(string id);
+        int DeleteById(dynamic id);
 
         List<T> QueryAll();
 
-        T QueryById(string id);
+        T QueryById(dynamic id);
 
         int DeleteAll();
 
@@ -37,11 +37,11 @@ namespace SpringSoftware.Core.IDAL
 
         Task<IList<T>> QueryByFunAsync(Expression<Func<T, bool>> fun);
 
-        Task<int> DeleteByIdAsync(string id);
+        Task<int> DeleteByIdAsync(dynamic id);
 
         Task<List<T>> QueryAllAsync();
 
-        Task<T> QueryByIdAsync(string id);
+        Task<T> QueryByIdAsync(dynamic id);
 
         Task<int> DeleteAllAsync();
 

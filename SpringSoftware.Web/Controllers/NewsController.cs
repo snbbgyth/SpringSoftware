@@ -15,10 +15,12 @@ namespace SpringSoftware.Web.Controllers
     public class NewsController : Controller
     {
         private INewsDal _newsDal;
+        private INewsTypeDal _newsTypeDal;
 
         public NewsController()
         {
             _newsDal = DependencyResolver.Current.GetService<INewsDal>();
+            _newsTypeDal = DependencyResolver.Current.GetService<INewsTypeDal>();
         }
         // GET: /News/
         public ActionResult Index()
@@ -34,7 +36,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var news = _newsDal.QueryById( id.ToString());
+            var news = _newsDal.QueryById( id);
             if (news == null)
             {
                 return HttpNotFound();
@@ -46,7 +48,8 @@ namespace SpringSoftware.Web.Controllers
         public ActionResult Create()
         {
             var news = new News();
-           
+            news.NewsTypeList = _newsTypeDal.QueryAll();
+            //news.NewsType=new NewsType();
             return View(news);
         }
 
@@ -55,7 +58,7 @@ namespace SpringSoftware.Web.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Title,Content,IsPublish,NewsTypeId,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
+        public ActionResult Create([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +76,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = _newsDal.QueryById(id.ToString());
+            News news = _newsDal.QueryById(id);
             if (news == null)
             {
                 return HttpNotFound();
@@ -86,7 +89,7 @@ namespace SpringSoftware.Web.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Title,Content,IsPublish,NewsTypeId,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +106,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = _newsDal.QueryById(id.ToString());
+            News news = _newsDal.QueryById(id);
             if (news == null)
             {
                 return HttpNotFound();
@@ -116,7 +119,7 @@ namespace SpringSoftware.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _newsDal.DeleteById(id.ToString());
+            _newsDal.DeleteById(id);
             return RedirectToAction("Index");
         }
 

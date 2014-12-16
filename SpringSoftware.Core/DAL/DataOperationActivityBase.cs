@@ -6,11 +6,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SpringSoftware.Core.IDAL;
+using SpringSoftware.Core.Model;
 using SpringSoftware.Core.QueueDAL;
 
 namespace SpringSoftware.Core.DAL
 {
-    public abstract class DataOperationActivityBase<T> : IDataOperationActivity<T> where T : class, new()
+    public abstract class DataOperationActivityBase<T> : IDataOperationActivity<T> where T : BaseTable, new()
     {
         #region Private Variable
 
@@ -29,6 +30,7 @@ namespace SpringSoftware.Core.DAL
         {
             try
             {
+                InitInsertBaseTable(entity);
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     session.Save(entity);
@@ -43,10 +45,17 @@ namespace SpringSoftware.Core.DAL
             }
         }
 
+        private void InitInsertBaseTable(T entity)
+        {
+            entity.CreateDate = DateTime.Now;
+            entity.LastModifyDate = DateTime.Now;
+        }
+
         public virtual int SaveOrUpdate(T entity)
         {
             try
             {
+                InitInsertBaseTable(entity);
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     session.SaveOrUpdate(entity);
@@ -61,10 +70,17 @@ namespace SpringSoftware.Core.DAL
             }
         }
 
+        private void InitModifyBaseTable(T entity)
+        {
+            entity.CreateDate = DateTime.Now;
+            entity.LastModifyDate = DateTime.Now;
+        }
+
         public virtual int  Modify(T entity)
         {
             try
             {
+                InitModifyBaseTable(entity);
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     session.Update(entity);
@@ -118,7 +134,7 @@ namespace SpringSoftware.Core.DAL
             return result;
         }
 
-        public virtual int DeleteById(string id)
+        public virtual int DeleteById(dynamic id)
         {
             int reslut = 0;
 
@@ -158,7 +174,7 @@ namespace SpringSoftware.Core.DAL
             return entityList;
         }
 
-        public virtual T QueryById(string id)
+        public virtual T QueryById(dynamic id)
         {
             T entity = default(T);
 
@@ -259,7 +275,7 @@ namespace SpringSoftware.Core.DAL
             return  await task;
         }
 
-        public async Task<int> DeleteByIdAsync(string id)
+        public async Task<int> DeleteByIdAsync(dynamic id)
         {
             var task = Task.Factory.StartNew(() => DeleteById(id));
             return await task;
@@ -271,7 +287,7 @@ namespace SpringSoftware.Core.DAL
             return await task;
         }
 
-        public async Task<T> QueryByIdAsync(string id)
+        public async Task<T> QueryByIdAsync(dynamic id)
         {
             var task = Task.Factory.StartNew(() => QueryById(id));
             return await task;

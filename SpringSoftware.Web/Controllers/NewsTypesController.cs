@@ -36,7 +36,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NewsType newsType = await _newsTypeDal.QueryByIdAsync(id.ToString());
+            NewsType newsType = await _newsTypeDal.QueryByIdAsync(id);
             if (newsType == null)
             {
                 return HttpNotFound();
@@ -74,7 +74,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NewsType newsType = await _newsTypeDal.QueryByIdAsync(id.ToString());
+            NewsType newsType = await _newsTypeDal.QueryByIdAsync(id);
             if (newsType == null)
             {
                 return HttpNotFound();
@@ -105,7 +105,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var  result = await _newsTypeDal.DeleteByIdAsync(id.ToString());
+            var  result = await _newsTypeDal.DeleteByIdAsync(id);
             if (result == 0)
             {
                 return HttpNotFound();
@@ -119,7 +119,7 @@ namespace SpringSoftware.Web.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
 
-            await _newsTypeDal.DeleteByIdAsync(id.ToString());
+            await _newsTypeDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }
 

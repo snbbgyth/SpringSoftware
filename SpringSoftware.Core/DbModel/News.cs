@@ -31,7 +31,7 @@ namespace SpringSoftware.Core.DbModel
 
        public News()
        {
-           NewsTypeList=new List<NewsType>(){{new NewsType()}};
+         
        }
     }
 }
