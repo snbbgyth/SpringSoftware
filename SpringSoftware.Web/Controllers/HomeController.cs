@@ -20,6 +20,21 @@ namespace SpringSoftware.Web.Controllers
             return View();
         }
 
+        public ActionResult ProductIntro()
+        {
+            ViewBag.Message = "企业简介.";
+
+            return View();
+        }
+
+        public ActionResult CompanyIntro()
+        {
+            ViewBag.Message = "企业简介.";
+
+            return View();
+        }
+
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
