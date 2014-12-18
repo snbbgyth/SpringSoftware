@@ -72,7 +72,7 @@ namespace SpringSoftware.Core.DAL
 
         private void InitModifyBaseTable(T entity)
         {
-            entity.CreateDate = DateTime.Now;
+            //entity.CreateDate = DateTime.Now;
             entity.LastModifyDate = DateTime.Now;
         }
 

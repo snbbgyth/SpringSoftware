@@ -25,11 +25,15 @@ namespace SpringSoftware.Web.Models
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+ 
+        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.NewsType> NewsTypes { get; set; }
     }
 }

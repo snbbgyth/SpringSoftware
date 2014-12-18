@@ -20,7 +20,7 @@ namespace SpringSoftware.Web.Controllers
             return View();
         }
 
-        public ActionResult ProductIntro()
+        public ActionResult WebSiteProductIntro()
         {
             ViewBag.Message = "企业简介.";
 

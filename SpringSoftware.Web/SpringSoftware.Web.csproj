@@ -54,6 +54,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -207,8 +219,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Home\1.png" />
+    <Content Include="Images\Product\1.jpg" />
+    <Content Include="Images\Product\2.jpg" />
+    <Content Include="Images\Product\3.jpg" />
+    <Content Include="Images\Product\4.jpg" />
+    <Content Include="Images\Product\5.jpg" />
+    <Content Include="Images\Product\6.jpg" />
+    <Content Include="Images\Product\7.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Data\DBFile.sqlite" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -427,7 +447,7 @@
     <Content Include="Views\NewsTypes\Details.cshtml" />
     <Content Include="Views\NewsTypes\Edit.cshtml" />
     <Content Include="Views\NewsTypes\Index.cshtml" />
-    <Content Include="Views\Home\ProductIntro.cshtml" />
+    <Content Include="Views\Home\WebSiteProductIntro.cshtml" />
     <Content Include="Views\Home\CompanyIntro.cshtml" />
   </ItemGroup>
   <ItemGroup />
