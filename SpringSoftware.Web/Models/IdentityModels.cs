@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SpringSoftware.Web.DAL;
 
 namespace SpringSoftware.Web.Models
 {
@@ -25,11 +26,11 @@ namespace SpringSoftware.Web.Models
         {
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        static ApplicationDbContext()
         {
-            base.OnModelCreating(modelBuilder);
- 
+            Database.SetInitializer(new MySqlInitializer());
         }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
