@@ -11,7 +11,7 @@ namespace SpringSoftware.Core.DbModel.Mappings
     {
         public OtherlogInfoMapping()
         {
-            Id(x => x.Id);
+            Id(x => x.Id).UniqueKey("Id").GeneratedBy.Identity();
             Map(x => x.CreateDate);
             Map(x => x.Creater);
             Map(x => x.IsDelete);

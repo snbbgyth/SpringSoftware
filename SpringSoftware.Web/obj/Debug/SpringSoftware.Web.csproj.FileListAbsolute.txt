@@ -387,3 +387,6 @@ D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\bin\zh-Han
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\obj\Debug\SpringSoftware.Web.csprojResolveAssemblyReference.cache
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\obj\Debug\SpringSoftware.Web.dll
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\obj\Debug\SpringSoftware.Web.pdb
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\MySql.Data.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\MySql.Data.Entity.EF6.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\MySql.Web.dll

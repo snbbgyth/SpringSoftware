@@ -309,3 +309,5 @@ D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Tests\bin\Debu
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Tests\obj\Debug\SpringSoftware.Tests.csprojResolveAssemblyReference.cache
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Tests\obj\Debug\SpringSoftware.Tests.dll
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Tests\obj\Debug\SpringSoftware.Tests.pdb
+H:\Projects\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\MySql.Data.Entity.EF6.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\MySql.Data.dll

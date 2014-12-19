@@ -10,6 +10,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
+using MySql.Data.MySqlClient;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -101,7 +102,10 @@ namespace SpringSoftware.Core.DAL
                 if (_fluentConfig == null)
                 {
                     _fluentConfig = Fluently.Configure()
-                                            .Database(SQLiteConfiguration.Standard.UsingFile(UtilHelper.SqliteFilePath))
+                        .Database((MySQLConfiguration.Standard.ConnectionString(c => c.FromConnectionStringWithKey("DefaultConnection")
+        ))
+    )
+                                            //.Database(SQLiteConfiguration.Standard.UsingFile(UtilHelper.SqliteFilePath))
                                             .Mappings(m => m.FluentMappings.AddFromAssemblyOf<News>());
                     //m.AutoMappings.Add(CreateAutomappings));
                     BuildSchema(_fluentConfig.BuildConfiguration());
