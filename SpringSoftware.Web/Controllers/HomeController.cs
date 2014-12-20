@@ -27,6 +27,20 @@ namespace SpringSoftware.Web.Controllers
             return View();
         }
 
+        public ActionResult SoftwareProductIntro()
+        {
+            ViewBag.Message = "企业简介.";
+
+            return View();
+        }
+
+        public ActionResult TrainProductIntro()
+        {
+            ViewBag.Message = "企业简介.";
+
+            return View();
+        }
+
         public ActionResult CompanyIntro()
         {
             ViewBag.Message = "企业简介.";

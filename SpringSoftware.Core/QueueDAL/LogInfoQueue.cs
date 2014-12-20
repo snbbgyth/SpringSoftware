@@ -47,8 +47,6 @@ namespace SpringSoftware.Core.QueueDAL
             }
         }
 
-
-
         #region OtherLogInfo(Error,Warning,Information)
 
         #region Error

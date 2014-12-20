@@ -4,87 +4,115 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<body>
 
-<div>
-    <h4>News</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <div id="layout-wrapper">
+        <div id="content">
+            <div>
+                <h1>@Html.DisplayFor(model => model.Title)</h1>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pull-left">
+                            最后修改者：<a href="#">@Html.DisplayFor(model => model.LastModifier)</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            最后修改日期：@Html.DisplayFor(model => model.LastModifyDate)
+                        </div>
+                    </div>
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+                <div class="CompanyIntroBody">
+                    @Html.Raw(Model.Content)
+                </div>
 
-        <dd>
-            @Html.Raw(Model.Content)
-        </dd>
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPublish)
-        </dt>
+</body>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsPublish)
-        </dd>
+@*<div>
+        <h4>News</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsType.Name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NewsType.Name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
+            <dd>
+                @Html.Raw(Model.Content)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsPublish)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastModifyDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsPublish)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastModifyDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NewsType.Name)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NewsType.Name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsDelete)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Creater)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Creater)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifyDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastModifier)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastModifyDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastModifier)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDelete)
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.IsDelete)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Creater)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Creater)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModifier)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastModifier)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

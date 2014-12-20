@@ -26,3 +26,4 @@ H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Release\zh-Hans\Entity
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Release\SpringSoftware.Core.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Release\SpringSoftware.Core.pdb
+H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Release\SpringSoftware.Core.csprojResolveAssemblyReference.cache

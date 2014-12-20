@@ -5,9 +5,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Web;
 using SpringSoftware.Web.Models;
-using System.Data.SQLite;
-using System.Data.SQLite.Linq;
-using System.Data.SQLite.EF6;
+
 namespace SpringSoftware.Web.DAL
 {
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>

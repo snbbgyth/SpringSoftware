@@ -62,7 +62,6 @@ H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\NHibernate.xml
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\System.Data.SQLite.xml
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\zh-Hans\EntityFramework.resources.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
-H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.csprojResolveAssemblyReference.cache
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.pdb
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Core\bin\Debug\SpringSoftware.Core.dll.config

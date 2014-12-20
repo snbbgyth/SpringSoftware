@@ -5,12 +5,39 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>最近新闻</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+</p>*@
+
+@foreach (var item in Model)
+{
+    <div >
+        <h2>
+            <a href="/News/Details/@item.Id">@item.Title</a> 
+        </h2>
+        <div class="col-md-6">
+            <div class="pull-left">
+                来源：<a href="#">@item.Creater</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+              最后修改时间 @item.LastModifyDate
+            </div>
+        </div>
+      
+        <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary())</p>
+
+    </div>
+}
+
+
+
+
+
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -79,4 +106,4 @@
     </tr>
 }
 
-</table>
+</table>*@

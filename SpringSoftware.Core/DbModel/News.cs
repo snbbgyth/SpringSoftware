@@ -20,6 +20,8 @@ namespace SpringSoftware.Core.DbModel
        [AllowHtml]
        [UIHint("tinymce_jquery_full")]
        [DisplayName("正文")]
+       
+      
        public virtual string Content { get; set; }
 
        [DisplayName("是否发布")]
@@ -27,7 +29,7 @@ namespace SpringSoftware.Core.DbModel
  
        public  virtual NewsType NewsType { get; set; }
 
-       public virtual IList<NewsType> NewsTypeList { get; set; }
+       public  virtual IList<NewsType> NewsTypeList { get; set; }
 
        public News()
        {
