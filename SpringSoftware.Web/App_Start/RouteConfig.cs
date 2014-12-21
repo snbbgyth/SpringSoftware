@@ -13,11 +13,18 @@ namespace SpringSoftware.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+            //    new string[] { "MvcApplication1.Areas.Web.Controllers" }
+            //);
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+               "Default",
+               "{controller}/{action}/{id}",
+               new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+              new string[] { "SpringSoftware.Web.Controllers" }
+          );
         }
     }
 }

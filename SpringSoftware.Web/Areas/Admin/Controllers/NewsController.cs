@@ -10,7 +10,7 @@ using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Models;
 
-namespace SpringSoftware.Web.Controllers
+namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
     public class NewsController : Controller
     {
@@ -36,7 +36,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var news = _newsDal.QueryById( id);
+            var news = _newsDal.QueryById(id);
             if (news == null)
             {
                 return HttpNotFound();
@@ -44,30 +44,30 @@ namespace SpringSoftware.Web.Controllers
             return View(news);
         }
 
-        //// GET: /News/Create
-        //public ActionResult Create()
-        //{
-        //    var news = new News();
-        //    news.NewsTypeList = _newsTypeDal.QueryAll();
-        //    //news.NewsType=new NewsType();
-        //    return View(news);
-        //}
+        // GET: /News/Create
+        public ActionResult Create()
+        {
+            var news = new News();
+            news.NewsTypeList = _newsTypeDal.QueryAll();
+            //news.NewsType=new NewsType();
+            return View(news);
+        }
 
-        //// POST: /News/Create
-        //// 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        //// 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _newsDal.Insert(news);
-        //        return RedirectToAction("Index");
-        //    }
+        // POST: /News/Create
+        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
+        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
+        {
+            if (ModelState.IsValid)
+            {
+                _newsDal.Insert(news);
+                return RedirectToAction("Index");
+            }
 
-        //    return View(news);
-        //}
+            return View(news);
+        }
 
         // GET: /News/Edit/5
         public ActionResult Edit(int? id)
@@ -93,7 +93,7 @@ namespace SpringSoftware.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               _newsDal.Modify(news);
+                _newsDal.Modify(news);
                 return RedirectToAction("Index");
             }
             return View(news);

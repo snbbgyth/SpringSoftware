@@ -17,11 +17,9 @@ namespace SpringSoftware.Core.DbModel
        [DisplayName("标题")]
        public virtual string Title { get; set; }
 
-       [AllowHtml]
-       [UIHint("tinymce_jquery_full")]
+       //[AllowHtml]
+       //[UIHint("tinymce_jquery_full")]
        [DisplayName("正文")]
-       
-      
        public virtual string Content { get; set; }
 
        [DisplayName("是否发布")]
