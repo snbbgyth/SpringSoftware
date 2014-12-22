@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
@@ -13,114 +13,113 @@ using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
-    public class NewsController : Controller
+    public class NewsTypesController : Controller
     {
-        private INewsDal _newsDal;
         private INewsTypeDal _newsTypeDal;
 
-        public NewsController()
+        public NewsTypesController()
         {
-            _newsDal = DependencyResolver.Current.GetService<INewsDal>();
             _newsTypeDal = DependencyResolver.Current.GetService<INewsTypeDal>();
         }
-        // GET: /News/
+
+        // GET: NewsTypes
         public async Task<ActionResult> Index()
         {
-            var entityList = await _newsDal.QueryAllAsync();
-            return View(entityList);
+
+            return View(await _newsTypeDal.QueryAllAsync());
         }
 
-        // GET: /News/Details/5
+        // GET: NewsTypes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var news = await _newsDal.QueryByIdAsync(id);
-            if (news == null)
+            NewsType newsType = await _newsTypeDal.QueryByIdAsync(id);
+            if (newsType == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(newsType);
         }
 
-        // GET: /News/Create
-        public async Task<ActionResult> Create()
+        // GET: NewsTypes/Create
+        public ActionResult Create()
         {
-            var news = new News();
-            news.NewsTypeList = await _newsTypeDal.QueryAllAsync();
-            //news.NewsType=new NewsType();
-            return View(news);
+            return View();
         }
 
-        // POST: /News/Create
+        // POST: NewsTypes/Create
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] NewsType newsType)
         {
             if (ModelState.IsValid)
             {
-               await _newsDal.InsertAsync(news);
+
+                await _newsTypeDal.InsertAsync(newsType);
                 return RedirectToAction("Index");
             }
 
-            return View(news);
+            return View(newsType);
         }
 
-        // GET: /News/Edit/5
+        // GET: NewsTypes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = await _newsDal.QueryByIdAsync(id);
-            if (news == null)
+            NewsType newsType = await _newsTypeDal.QueryByIdAsync(id);
+            if (newsType == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(newsType);
         }
 
-        // POST: /News/Edit/5
+        // POST: NewsTypes/Edit/5
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] NewsType newsType)
         {
             if (ModelState.IsValid)
             {
-               await _newsDal.ModifyAsync(news);
+
+                await _newsTypeDal.ModifyAsync(newsType);
                 return RedirectToAction("Index");
             }
-            return View(news);
+            return View(newsType);
         }
 
-        // GET: /News/Delete/5
+        // GET: NewsTypes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news =await _newsDal.QueryByIdAsync(id);
-            if (news == null)
+            var result = await _newsTypeDal.DeleteByIdAsync(id);
+            if (result == 0)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return RedirectToAction("Index");
         }
 
-        // POST: /News/Delete/5
+        // POST: NewsTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-           await _newsDal.DeleteByIdAsync(id);
+
+            await _newsTypeDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }
 
@@ -128,7 +127,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                //db.Dispose();
+                // db.Dispose();
             }
             base.Dispose(disposing);
         }

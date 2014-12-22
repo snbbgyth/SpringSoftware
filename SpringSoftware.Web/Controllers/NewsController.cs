@@ -22,6 +22,7 @@ namespace SpringSoftware.Web.Controllers
             _newsDal = DependencyResolver.Current.GetService<INewsDal>();
             _newsTypeDal = DependencyResolver.Current.GetService<INewsTypeDal>();
         }
+
         // GET: /News/
         public ActionResult Index()
         {
@@ -36,7 +37,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var news = _newsDal.QueryById( id);
+            var news = _newsDal.QueryById(id);
             if (news == null)
             {
                 return HttpNotFound();
@@ -93,7 +94,7 @@ namespace SpringSoftware.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               _newsDal.Modify(news);
+                _newsDal.Modify(news);
                 return RedirectToAction("Index");
             }
             return View(news);
@@ -127,7 +128,6 @@ namespace SpringSoftware.Web.Controllers
         {
             if (disposing)
             {
-                //db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -10,66 +10,22 @@ namespace SpringSoftware.Web.Areas.Admin
     {
         internal static void RegisterRoutes(AreaRegistrationContext context)
         {
-            //context.IgnoreRoute("{resource}.axd/{*pathInfo}");
-       //     context.MapRoute(
-       //     "Admin",
-       //     "{controller}/{action}/{id}",
-       //     new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-       //    new string[] { "SpringSoftware.Web.Areas.Admin.Controllers" }
-       //);
+
 
             context.MapRoute(
-                "Admin_Logout",
-                "admin/logout",
-                new { controller = "Login", action = "Logout" }
+                "Admin_News",
+                "admin/News/{action}",
+                new { controller = "News", action = "Index", area = "Admin" }
                 );
 
-            //context.MapRoute(
-            //    "Admin_Login",
-            //    "admin/login/{action}",
-            //    new { controller = "Login", action = "Login" }
-            //    );
+            context.MapRoute(
+    "Admin_NewsTypes",
+    "admin/NewsTypes/{action}",
+    new { controller = "NewsTypes", action = "Index", area = "Admin" }
+    );
 
-            //context.MapRoute(
-            //    "Admin_Install",
-            //    "admin/install/{action}",
-            //    new { controller = "Install", action = "Index" }
-            //    );
 
-            //context.MapRoute(
-            //    "Admin_SqlAuthentication",
-            //    "admin/sqlauthentication/{action}",
-            //    new { controller = "SqlAuthentication", action = "Index" }
-            //    );
 
-            //context.MapRoute("Admin_Get", "get/{*path}", new { controller = "Upload", action = "Render" });
-
-            ////need to do this route explicitly otherwise we can't handle nice URLs when directory browsing
-            //context.MapRoute(
-            //    "Admin_Upload",
-            //    "upload/{action}/{*path}",
-            //    new { controller = "Upload", action = "Index", path = "/" }
-            //    );
-
-            ////an explicit route to the edit page so that it can be done well
-            //context.MapRoute(
-            //    "Admin_Wiki_Edit",
-            //    "admin/{controller}/edit/{*page}",
-            //    new { controller = "WikiAdmin", action = "Edit", page = UrlParameter.Optional }
-            //    );
-
-            //context.MapRoute(
-            //    "Admin_Wiki_Delete",
-            //    "admin/delete/{id}",
-            //    new { controller = "WikiAdmin", action = "DeletePage" }
-            //    );
-
-            ////anything else we expect is on the admin controller, so just route to it
-            //context.MapRoute(
-            //    "Admin_default",
-            //    "admin/{action}/{id}",
-            //    new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
-            //    );
         }
     }
 }

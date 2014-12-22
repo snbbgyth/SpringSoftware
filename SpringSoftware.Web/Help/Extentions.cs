@@ -15,7 +15,6 @@ namespace SpringSoftware.Web.Help
             return content.Substring(0, 50) + ".........";
         }
 
-
         public static string StripTagsRegex(this string source)
         {
             return Regex.Replace(source, "<.*?>", string.Empty);

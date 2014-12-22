@@ -16,35 +16,30 @@ namespace SpringSoftware.Web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult WebSiteProductIntro()
         {
             ViewBag.Message = "企业简介.";
-
             return View();
         }
 
         public ActionResult SoftwareProductIntro()
         {
             ViewBag.Message = "企业简介.";
-
             return View();
         }
 
         public ActionResult TrainProductIntro()
         {
             ViewBag.Message = "企业简介.";
-
             return View();
         }
 
         public ActionResult CompanyIntro()
         {
             ViewBag.Message = "企业简介.";
-
             return View();
         }
 
@@ -52,7 +47,6 @@ namespace SpringSoftware.Web.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

@@ -195,6 +195,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\BundleConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsTypesController.cs" />
     <Compile Include="Areas\Admin\RouteConfig.cs" />
     <Compile Include="Areas\Admin\ViewBundleRegistrar.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -239,6 +240,12 @@
     <Content Include="Areas\Admin\Views\News\Details.cshtml" />
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\News\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsTypes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsTypes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsTypes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsTypes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsTypes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Web.config" />
     <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
