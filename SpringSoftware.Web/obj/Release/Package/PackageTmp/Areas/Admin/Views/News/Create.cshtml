@@ -1,26 +1,31 @@
-﻿@model SpringSoftware.Core.DbModel.News
+﻿
+@model SpringSoftware.Core.DbModel.News
 
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using System.Web.Optimization
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+
+<h2>Create</h2>
 
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>News</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Title)
+                @Html.TextBoxFor(model => model.Title, new { style = "width:800px" })
                 @Html.ValidationMessageFor(model => model.Title)
             </div>
         </div>
@@ -28,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Content)
+                @Html.TextAreaFor(model => model.Content)
                 @Html.ValidationMessageFor(model => model.Content)
             </div>
         </div>
@@ -44,34 +49,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NewsType.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NewsType.Name)
-                @Html.HiddenFor(model=>model.NewsType.Id)
-
+                @Html.DropDownListFor(model => model.NewsType.Id, Model.NewsTypeList.Select(t => new SelectListItem
+                {
+                    Text = t.Name,
+                    Value = t.Id.ToString()
+                }))
                 @Html.ValidationMessageFor(model => model.NewsType.Name)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreateDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreateDate)
-                @Html.ValidationMessageFor(model => model.CreateDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastModifyDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastModifyDate)
-                @Html.ValidationMessageFor(model => model.LastModifyDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsDelete, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IsDelete)
-                @Html.ValidationMessageFor(model => model.IsDelete)
             </div>
         </div>
 
@@ -93,7 +76,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>

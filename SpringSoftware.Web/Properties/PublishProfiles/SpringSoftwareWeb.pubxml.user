@@ -9,6 +9,132 @@
     <_PublishTargetUrl>H:\MyComanyDesign\SpringSoftwareSite\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="Areas/Admin/Views/Account/ConfirmEmail.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/ExternalLoginConfirmation.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/ExternalLoginFailure.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/ForgotPassword.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/ForgotPasswordConfirmation.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/Login.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/Register.cshtml">
+      <publishTime>12/22/2014 15:39:46</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/ResetPassword.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/ResetPasswordConfirmation.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/SendCode.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/VerifyCode.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/_ExternalLoginsListPartial.cshtml">
+      <publishTime>12/22/2014 13:11:44</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Manage/AddPhoneNumber.cshtml">
+      <publishTime>12/22/2014 13:46:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Manage/ChangePassword.cshtml">
+      <publishTime>12/22/2014 13:46:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Manage/Index.cshtml">
+      <publishTime>12/22/2014 13:46:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Manage/ManageLogins.cshtml">
+      <publishTime>12/22/2014 13:46:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Manage/SetPassword.cshtml">
+      <publishTime>12/22/2014 13:46:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Manage/VerifyPhoneNumber.cshtml">
+      <publishTime>12/22/2014 13:46:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/News/Create.cshtml">
+      <publishTime>12/22/2014 10:56:58</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/News/Delete.cshtml">
+      <publishTime>12/22/2014 16:26:46</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/News/Details.cshtml">
+      <publishTime>12/22/2014 16:19:26</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/News/Edit.cshtml">
+      <publishTime>12/22/2014 16:24:13</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/News/Index.cshtml">
+      <publishTime>12/22/2014 16:18:41</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/NewsTypes/Create.cshtml">
+      <publishTime>12/22/2014 17:06:13</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/NewsTypes/Delete.cshtml">
+      <publishTime>12/22/2014 17:08:07</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/NewsTypes/Details.cshtml">
+      <publishTime>12/22/2014 17:08:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/NewsTypes/Edit.cshtml">
+      <publishTime>12/22/2014 17:10:43</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/NewsTypes/Index.cshtml">
+      <publishTime>12/22/2014 17:11:29</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/RolesAdmin/Create.cshtml">
+      <publishTime>12/22/2014 17:11:45</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/RolesAdmin/Delete.cshtml">
+      <publishTime>12/22/2014 16:55:40</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/RolesAdmin/Details.cshtml">
+      <publishTime>12/22/2014 17:12:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/RolesAdmin/Edit.cshtml">
+      <publishTime>12/22/2014 17:13:23</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/RolesAdmin/Index.cshtml">
+      <publishTime>12/22/2014 17:13:57</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Shared/_Layout.cshtml">
+      <publishTime>12/22/2014 14:57:53</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Shared/_LoginPartial.cshtml">
+      <publishTime>12/22/2014 13:16:12</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UsersAdmin/Create.cshtml">
+      <publishTime>12/22/2014 17:14:19</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UsersAdmin/Delete.cshtml">
+      <publishTime>12/22/2014 17:14:57</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UsersAdmin/Details.cshtml">
+      <publishTime>12/22/2014 17:26:56</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UsersAdmin/Edit.cshtml">
+      <publishTime>12/22/2014 17:28:49</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/UsersAdmin/Index.cshtml">
+      <publishTime>12/22/2014 17:01:31</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Web.config">
+      <publishTime>12/22/2014 11:17:38</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/_ViewStart.cshtml">
+      <publishTime>12/21/2014 10:59:43</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>12/15/2014 16:13:12</publishTime>
     </File>
@@ -91,10 +217,10 @@
       <publishTime>12/15/2014 16:13:13</publishTime>
     </File>
     <File Include="bin/SpringSoftware.Core.dll">
-      <publishTime>12/20/2014 17:45:51</publishTime>
+      <publishTime>12/22/2014 17:33:47</publishTime>
     </File>
     <File Include="bin/SpringSoftware.Web.dll">
-      <publishTime>12/20/2014 17:52:52</publishTime>
+      <publishTime>12/22/2014 17:33:48</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.dll">
       <publishTime>12/15/2014 16:13:12</publishTime>
@@ -832,7 +958,7 @@
       <publishTime>12/18/2014 09:57:07</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/20/2014 17:01:06</publishTime>
+      <publishTime>12/21/2014 09:31:39</publishTime>
     </File>
     <File Include="Views/Home/SoftwareProductIntro.cshtml">
       <publishTime>12/20/2014 17:36:10</publishTime>
@@ -874,7 +1000,7 @@
       <publishTime>12/20/2014 16:41:52</publishTime>
     </File>
     <File Include="Views/News/Index.cshtml">
-      <publishTime>12/20/2014 15:59:57</publishTime>
+      <publishTime>12/22/2014 16:11:43</publishTime>
     </File>
     <File Include="Views/NewsTypes/Create.cshtml">
       <publishTime>12/16/2014 09:37:08</publishTime>
@@ -916,10 +1042,10 @@
       <publishTime>12/15/2014 16:13:12</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/20/2014 17:19:28</publishTime>
+      <publishTime>12/21/2014 11:10:59</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>12/15/2014 16:13:12</publishTime>
+      <publishTime>12/22/2014 13:49:44</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>12/15/2014 16:13:12</publishTime>
