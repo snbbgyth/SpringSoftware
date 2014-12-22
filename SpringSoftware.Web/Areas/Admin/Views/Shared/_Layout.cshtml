@@ -60,7 +60,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
+                    <li>@Html.ActionLink("主页", "Index", "Home",new {Area="Home"},null)</li>
                     <li>@Html.ActionLink("新闻", "Index", "News")</li>
                     <li>@Html.ActionLink("新闻类型", "Index", "NewsTypes")</li>
                     <li>@Html.ActionLink("权限", "Index", "RolesAdmin")</li>
