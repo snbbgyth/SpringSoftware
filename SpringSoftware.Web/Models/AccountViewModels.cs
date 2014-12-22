@@ -79,6 +79,10 @@ namespace SpringSoftware.Web.Models
         [Display(Name = "确认密码")]
         [Compare("Password", ErrorMessage = "密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
     }
 
     public class ResetPasswordViewModel

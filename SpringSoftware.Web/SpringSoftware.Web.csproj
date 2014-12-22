@@ -194,8 +194,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\BundleConfig.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsTypesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RolesAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersAdminController.cs" />
     <Compile Include="Areas\Admin\RouteConfig.cs" />
     <Compile Include="Areas\Admin\ViewBundleRegistrar.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -204,6 +208,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\NewsTypesController.cs" />
     <Compile Include="DAL\Configuration.cs" />
+    <Compile Include="DAL\MySqlConfiguration.cs" />
     <Compile Include="DAL\MySqlHistoryContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +218,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="DAL\MySqlInitializer.cs" />
+    <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -246,6 +252,35 @@
     <Content Include="Areas\Admin\Views\NewsTypes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NewsTypes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ResetPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\SendCode.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\VerifyCode.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\SetPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Areas\Admin\Views\RolesAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\RolesAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\RolesAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\RolesAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UsersAdmin\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

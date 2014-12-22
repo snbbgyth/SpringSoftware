@@ -17,7 +17,7 @@ namespace SpringSoftware.Web
             routes.MapRoute(
                "Default",
                "{controller}/{action}/{id}",
-               new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+               new { controller = "Home", action = "Index", id = UrlParameter.Optional ,Area="Home"},
               new string[] { "SpringSoftware.Web.Controllers" }
           );
 
