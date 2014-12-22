@@ -15,12 +15,12 @@ namespace SpringSoftware.Web.Controllers
     public class NewsController : Controller
     {
         private INewsDal _newsDal;
-        private INewsTypeDal _newsTypeDal;
+        //private INewsTypeDal _newsTypeDal;
 
         public NewsController()
         {
             _newsDal = DependencyResolver.Current.GetService<INewsDal>();
-            _newsTypeDal = DependencyResolver.Current.GetService<INewsTypeDal>();
+            //_newsTypeDal = DependencyResolver.Current.GetService<INewsTypeDal>();
         }
 
         // GET: /News/
@@ -43,85 +43,6 @@ namespace SpringSoftware.Web.Controllers
                 return HttpNotFound();
             }
             return View(news);
-        }
-
-        //// GET: /News/Create
-        //public ActionResult Create()
-        //{
-        //    var news = new News();
-        //    news.NewsTypeList = _newsTypeDal.QueryAll();
-        //    //news.NewsType=new NewsType();
-        //    return View(news);
-        //}
-
-        //// POST: /News/Create
-        //// 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        //// 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _newsDal.Insert(news);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(news);
-        //}
-
-        // GET: /News/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            News news = _newsDal.QueryById(id);
-            if (news == null)
-            {
-                return HttpNotFound();
-            }
-            return View(news);
-        }
-
-        // POST: /News/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
-        {
-            if (ModelState.IsValid)
-            {
-                _newsDal.Modify(news);
-                return RedirectToAction("Index");
-            }
-            return View(news);
-        }
-
-        // GET: /News/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            News news = _newsDal.QueryById(id);
-            if (news == null)
-            {
-                return HttpNotFound();
-            }
-            return View(news);
-        }
-
-        // POST: /News/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            _newsDal.DeleteById(id);
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

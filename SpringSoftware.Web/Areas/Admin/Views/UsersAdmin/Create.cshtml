@@ -1,12 +1,10 @@
 ﻿@model  SpringSoftware.Web.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "新建";
 }
-
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
 </hgroup>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -33,16 +31,16 @@
             </div>
         </div>
 
- 
-        <h4>Select Role for User</h4>
-        <hr />
-        @Html.DropDownList("RoleId","No Roles")
+        <h4>选择用户权限</h4>
+   
+        <div class="control-group">
+            @Html.DropDownList("RoleId", "No Roles")
+        </div>
         <div class="form-actions no-color">
-            <input type="submit" value="Create" class="btn" />
+            <input type="submit" value="新建" class="btn" />
         </div>
     </fieldset>
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

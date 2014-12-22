@@ -1,6 +1,7 @@
-﻿@model  SpringSoftware.Web.Models.ApplicationUser
+﻿@using NHibernate.Util
+@model  SpringSoftware.Web.Models.ApplicationUser
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "编辑";
 }
 
 <hgroup class="title">
@@ -25,11 +26,25 @@
  
         <h4>Modify Role for User</h4>
         <hr />
-        @Html.DropDownList("RoleId", "No Roles")
-        <div class="form-actions no-color">
-            <input type="submit" value="Edit" class="btn" />
+        <div class="control-group">
+            @Html.DropDownList("RoleId", "No Roles")
+
         </div>
-    </fieldset>
+        @foreach (var item in Model.Roles)
+        {
+            <tr>
+                <td>
+                    @Html.DropDownList("RoleId", item.RoleId)
+                </td>
+            </tr>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="保存" class="btn btn-default" />
+            </div>
+        </div>
+</fieldset>
 }
 
 @section Scripts {

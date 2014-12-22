@@ -13,6 +13,7 @@ using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class NewsController : Controller
     {
         private INewsDal _newsDal;
@@ -50,6 +51,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             var news = new News();
             news.NewsTypeList = await _newsTypeDal.QueryAllAsync();
+           
             //news.NewsType=new NewsType();
             return View(news);
         }
@@ -63,7 +65,9 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-               await _newsDal.InsertAsync(news);
+                news.Creater = User.Identity.Name;
+                news.LastModifier = User.Identity.Name;
+                await _newsDal.InsertAsync(news);
                 return RedirectToAction("Index");
             }
 
@@ -77,6 +81,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             News news = await _newsDal.QueryByIdAsync(id);
             if (news == null)
             {
@@ -94,7 +99,8 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-               await _newsDal.ModifyAsync(news);
+                news.LastModifier = User.Identity.Name;
+                await _newsDal.ModifyAsync(news);
                 return RedirectToAction("Index");
             }
             return View(news);
@@ -107,7 +113,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news =await _newsDal.QueryByIdAsync(id);
+            News news = await _newsDal.QueryByIdAsync(id);
             if (news == null)
             {
                 return HttpNotFound();
@@ -120,7 +126,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-           await _newsDal.DeleteByIdAsync(id);
+            await _newsDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }
 

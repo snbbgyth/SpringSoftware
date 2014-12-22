@@ -15,6 +15,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
+
         public UsersAdminController()
         {
             context = new ApplicationDbContext();

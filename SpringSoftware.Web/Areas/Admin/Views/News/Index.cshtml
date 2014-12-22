@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc.Html
+@using SpringSoftware.Web.Help
 @model IEnumerable<SpringSoftware.Core.DbModel.News>
 
 @{
@@ -8,9 +9,42 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新建", "Create")
 </p>
-<table class="table">
+@foreach (var item in Model)
+{
+    <div>
+        <h2>
+            @*<a href="/admin/News/Details/@item.Id">@item.Title</a>*@
+            @Html.ActionLink(@item.Title, "Details", new { id = item.Id })
+        </h2>
+        <div class="col-md-6">
+            <div class="pull-left">
+                来源：<a href="#">@item.Creater</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                最后修改时间 @item.LastModifyDate
+            </div>
+        </div>
+
+        <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary())</p>
+        <div class="col-md-6">
+            <div class="pull-left">
+                @Html.ActionLink("编辑", "Edit", new { id = item.Id })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                @Html.ActionLink("删除", "Delete", new { id = item.Id })
+            </div>
+        </div>
+
+    </div>
+}
+
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -73,4 +107,4 @@
     </tr>
 }
 
-</table>
+</table>*@

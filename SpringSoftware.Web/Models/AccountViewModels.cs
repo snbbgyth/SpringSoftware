@@ -81,7 +81,7 @@ namespace SpringSoftware.Web.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "用户名")]
         public string UserName { get; set; }
     }
 

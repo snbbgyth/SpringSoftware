@@ -13,6 +13,7 @@ using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class NewsTypesController : Controller
     {
         private INewsTypeDal _newsTypeDal;
@@ -59,7 +60,8 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                newsType.Creater = User.Identity.Name;
+                newsType.LastModifier = User.Identity.Name;
                 await _newsTypeDal.InsertAsync(newsType);
                 return RedirectToAction("Index");
             }
@@ -91,7 +93,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                newsType.LastModifier = User.Identity.Name;
                 await _newsTypeDal.ModifyAsync(newsType);
                 return RedirectToAction("Index");
             }
