@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
@@ -49,6 +50,13 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var user = await UserManager.FindByIdAsync(id);
+
+            //ViewBag.RoleId = new SelectList(RoleManager.Roles, "Id", "Name", user.Roles.Any() ? user.Roles.First().RoleId : null);
+            ViewBag.RoleNameList = (from roleId in user.Roles
+                                    select RoleManager.Roles.FirstOrDefault(t => t.Id == roleId.RoleId)
+                                        into role
+                                        where role != null
+                                        select role.Name).ToList();
             return View(user);
         }
 
@@ -113,21 +121,43 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.RoleId = new SelectList(RoleManager.Roles, "Id", "Name");
-
             var user = await UserManager.FindByIdAsync(id);
             if (user == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.RoleId = new SelectList(RoleManager.Roles, "Id", "Name");
+
+
+            ViewBag.UserRoleList = GetUserRole(user);
             return View(user);
+        }
+
+        private List<UserRoleViewModel> GetUserRole(ApplicationUser user)
+        {
+            var userRoleList = new List<UserRoleViewModel> { };
+            foreach (var role in user.Roles)
+            {
+                var entity = RoleManager.Roles.FirstOrDefault(t => t.Id == role.RoleId);
+                if (entity != null)
+                    userRoleList.Add(new UserRoleViewModel
+                    {
+                        UserId = user.Id,
+                        UserName = user.UserName,
+                        RoleId = role.RoleId,
+                        RoleName = entity.Name
+                    });
+
+            }
+            return userRoleList;
         }
 
         //
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserName,Id")] ApplicationUser formuser, string id, string RoleId)
+        public async Task<ActionResult> Edit([Bind(Include = "UserName,Id")] ApplicationUser formuser, string id,
+            string RoleId)
         {
             if (id == null)
             {
@@ -142,17 +172,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 //Update the user details
                 await UserManager.UpdateAsync(user);
 
-                //If user has existing Role then remove the user from the role
-                // This also accounts for the case when the Admin selected Empty from the drop-down and
-                // this means that all roles for the user must be removed
-                var rolesForUser = await UserManager.GetRolesAsync(id);
-                if (rolesForUser.Count() > 0)
-                {
-                    foreach (var item in rolesForUser)
-                    {
-                        var result = await UserManager.RemoveFromRoleAsync(id, item);
-                    }
-                }
+   
 
                 if (!String.IsNullOrEmpty(RoleId))
                 {
@@ -167,7 +187,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                         return View();
                     }
                 }
-                return RedirectToAction("Index");
+                 return RedirectToAction("Edit", new { id = id });
             }
             else
             {
@@ -175,6 +195,14 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        [ActionName("DeleteRole")]
+        public async Task<ActionResult> DeleteRole(string roleName, string userId)
+        {
+            await UserManager.RemoveFromRoleAsync(userId, roleName);
+            return RedirectToAction("Edit", new { id = userId });
+        }
+
 
         ////
         //// GET: /Users/Delete/5
@@ -204,7 +232,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         //        {
         //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //        }
-
         //        var user = await context.Users.FindAsync(id);
         //        var logins = user.Logins;
         //        foreach (var login in logins)
@@ -214,7 +241,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         //        var rolesForUser = await IdentityManager.Roles.GetRolesForUserAsync(id, CancellationToken.None);
         //        if (rolesForUser.Count() > 0)
         //        {
-
         //            foreach (var item in rolesForUser)
         //            {
         //                var result = await IdentityManager.Roles.RemoveUserFromRoleAsync(user.Id, item.Id, CancellationToken.None);

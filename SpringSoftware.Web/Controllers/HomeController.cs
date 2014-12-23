@@ -15,7 +15,7 @@ namespace SpringSoftware.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "关于我们";
             return View();
         }
 

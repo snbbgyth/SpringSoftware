@@ -15,12 +15,10 @@ namespace SpringSoftware.Web.Controllers
     public class NewsController : Controller
     {
         private INewsDal _newsDal;
-        //private INewsTypeDal _newsTypeDal;
 
         public NewsController()
         {
             _newsDal = DependencyResolver.Current.GetService<INewsDal>();
-            //_newsTypeDal = DependencyResolver.Current.GetService<INewsTypeDal>();
         }
 
         // GET: /News/
