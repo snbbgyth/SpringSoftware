@@ -195,6 +195,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\BundleConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsTypesController.cs" />
@@ -203,9 +204,8 @@
     <Compile Include="Areas\Admin\Models\UserRoleViewModel.cs" />
     <Compile Include="Areas\Admin\RouteConfig.cs" />
     <Compile Include="Areas\Admin\ViewBundleRegistrar.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="DAL\Configuration.cs" />
     <Compile Include="DAL\MySqlConfiguration.cs" />
@@ -281,6 +281,10 @@
     <Content Include="Areas\Admin\Views\UsersAdmin\Details.cshtml" />
     <Content Include="Areas\Admin\Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Comments\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Comments\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Comments\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Comments\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -479,6 +483,8 @@
     <Content Include="Views\Home\CompanyIntro.cshtml" />
     <Content Include="Views\Home\SoftwareProductIntro.cshtml" />
     <Content Include="Views\Home\TrainProductIntro.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Successful.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

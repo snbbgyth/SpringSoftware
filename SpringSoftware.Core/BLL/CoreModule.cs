@@ -20,6 +20,7 @@ namespace SpringSoftware.Core.BLL
             builder.RegisterType<OtherLogInfoDal>().As<IOtherLogInfo>();
             builder.RegisterType<NewsDal>().As<INewsDal>();
             builder.RegisterType<NewsTypeDal>().As<INewsTypeDal>();
+            builder.RegisterType<CommentDal>().As<ICommentDal>();
         }
     }
 }

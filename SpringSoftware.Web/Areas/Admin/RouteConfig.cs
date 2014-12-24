@@ -40,6 +40,11 @@ namespace SpringSoftware.Web.Areas.Admin
              "Admin_UsersAdmin",
              "admin/UsersAdmin/{action}",
              new { controller = "UsersAdmin", action = "Index", area = "Admin" });
+
+            context.MapRoute(
+            "Admin_Comments",
+            "admin/Comments/{action}",
+             new { controller = "Comments", action = "Index", area = "Admin" });
         }
     }
 }

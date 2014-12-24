@@ -82,12 +82,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\CoreModule.cs" />
-    <Compile Include="DAL\BaseQueueDAL.cs" />
+    <Compile Include="DAL\BaseQueueDal.cs" />
+    <Compile Include="DAL\CommentDal.cs" />
     <Compile Include="DAL\DataOperationActivityBase.cs" />
-    <Compile Include="DAL\FluentNHibernateDAL.cs" />
-    <Compile Include="DAL\NewsDAL.cs" />
-    <Compile Include="DAL\NewsTypeDAL.cs" />
-    <Compile Include="DAL\OtherLogInfoDAL.cs" />
+    <Compile Include="DAL\FluentNHibernateDal.cs" />
+    <Compile Include="DAL\NewsDal.cs" />
+    <Compile Include="DAL\NewsTypeDal.cs" />
+    <Compile Include="DAL\OtherLogInfoDal.cs" />
+    <Compile Include="DbModel\Comment.cs" />
+    <Compile Include="DbModel\Mappings\CommentMapping.cs" />
     <Compile Include="DbModel\Mappings\NewsMapping.cs" />
     <Compile Include="DbModel\Mappings\NewsTypeMapping.cs" />
     <Compile Include="DbModel\Mappings\OtherlogInfoMapping.cs" />
@@ -97,6 +100,7 @@
     <Compile Include="Help\Constants.cs" />
     <Compile Include="Help\Enums.cs" />
     <Compile Include="Help\UtilHelper.cs" />
+    <Compile Include="IDAL\ICommentDal.cs" />
     <Compile Include="IDAL\IDataOperationActivity.cs" />
     <Compile Include="IDAL\IFluentNHibernate.cs" />
     <Compile Include="IDAL\INewsDal.cs" />
