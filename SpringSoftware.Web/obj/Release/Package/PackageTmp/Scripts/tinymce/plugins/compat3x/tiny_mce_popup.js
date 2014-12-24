@@ -197,7 +197,9 @@ tinyMCEPopup = {
 	},
 
 	/**
-	 * Restores any stored selection. This can be useful since some browsers
+	 * Restores any sto
+     
+     selection. This can be useful since some browsers
 	 * looses it's selection if a control element is selected/focused inside the dialogs.
 	 *
 	 * @method restoreSelection

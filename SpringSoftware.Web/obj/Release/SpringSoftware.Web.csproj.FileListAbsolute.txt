@@ -99,3 +99,7 @@ H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\zh-Hans\Microsoft.Owin.
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\obj\Release\SpringSoftware.Web.csprojResolveAssemblyReference.cache
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\obj\Release\SpringSoftware.Web.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\obj\Release\SpringSoftware.Web.pdb
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.xml
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.xml

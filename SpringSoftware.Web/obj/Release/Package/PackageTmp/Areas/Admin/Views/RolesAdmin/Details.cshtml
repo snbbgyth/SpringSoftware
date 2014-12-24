@@ -1,9 +1,5 @@
 ﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
 
-@{
-    ViewBag.Title = "Details";
-}
-
 <div>
     <h4>角色</h4>
     <hr />
@@ -20,11 +16,11 @@
 
 <table class="table table-striped">
 
-    @foreach (var item in Model.Users)
+    @foreach (var item in ViewBag.UserNameList)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item)
             </td>
         </tr>
     }

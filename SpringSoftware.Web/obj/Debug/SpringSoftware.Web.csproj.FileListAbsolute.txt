@@ -390,3 +390,7 @@ D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\obj\Debug\
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\MySql.Data.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\MySql.Data.Entity.EF6.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\MySql.Web.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.xml
+H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.xml
