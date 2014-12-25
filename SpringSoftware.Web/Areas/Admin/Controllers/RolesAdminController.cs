@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.Models;
+using PagedList;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
@@ -33,9 +34,42 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         public ApplicationDbContext context { get; private set; }
         //
         // GET: /Roles/
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(RoleManager.Roles);
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<IdentityRole> entityList =   RoleManager.Roles.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                entityList = entityList.Where(s => s.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    entityList = entityList.OrderByDescending(s => s.Name);
+                    break;
+  
+                default:  // Name ascending 
+                    entityList = entityList.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(entityList.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: /Roles/Details/5

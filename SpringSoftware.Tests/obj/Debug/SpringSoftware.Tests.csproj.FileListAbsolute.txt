@@ -311,3 +311,5 @@ D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Tests\obj\Debu
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Tests\obj\Debug\SpringSoftware.Tests.pdb
 H:\Projects\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\MySql.Data.Entity.EF6.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\MySql.Data.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\PagedList.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Tests\bin\Debug\PagedList.xml

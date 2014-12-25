@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Models;
+using PagedList;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
@@ -24,10 +25,41 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         }
 
         // GET: NewsTypes
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
 
-            return View(await _newsTypeDal.QueryAllAsync());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<NewsType> entityList = await _newsTypeDal.QueryAllAsync();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                entityList = entityList.Where(s => s.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    entityList = entityList.OrderByDescending(s => s.Name);
+                    break;
+                default:  // Name ascending 
+                    entityList = entityList.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(entityList.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: NewsTypes/Details/5

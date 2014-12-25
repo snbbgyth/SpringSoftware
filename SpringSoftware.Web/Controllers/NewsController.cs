@@ -4,11 +4,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Models;
+using PagedList;
 
 namespace SpringSoftware.Web.Controllers
 {
@@ -22,20 +24,45 @@ namespace SpringSoftware.Web.Controllers
         }
 
         // GET: /News/
-        public ActionResult Index()
+        public async Task<ActionResult> Index(string currentFilter, string searchString, int? page)
         {
-            var entityList = _newsDal.QueryAll();
-            return View(entityList);
+ 
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<News> entityList = await _newsDal.QueryAllAsync();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                entityList = entityList.Where(s => s.Content.Contains(searchString)
+                                       || s.Title.Contains(searchString)
+                                       || s.Creater.Contains(searchString)
+                                       || s.LastModifier.Contains(searchString));
+            }
+         
+           entityList = entityList.OrderByDescending(s => s.LastModifyDate);
+    
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(entityList.ToPagedList(pageNumber, pageSize));
+        
         }
 
         // GET: /News/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var news = _newsDal.QueryById(id);
+            var news = await _newsDal.QueryByIdAsync(id);
             if (news == null)
             {
                 return HttpNotFound();

@@ -12,7 +12,7 @@ namespace SpringSoftware.Core.DbModel
 {
     public class Comment:BaseTable
     {
-        [DisplayName("电话")]
+        [DisplayName("手机号码")]
         [Required]
         public virtual string Phone { get; set; }
 

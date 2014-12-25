@@ -1,12 +1,19 @@
-﻿@model IEnumerable< SpringSoftware.Web.Models.ApplicationUser>
-
+﻿@model PagedList.IPagedList<SpringSoftware.Web.Models.ApplicationUser>
+@using PagedList.Mvc;
 <p>
     @Html.ActionLink("新建", "Create")
 </p>
+@using (Html.BeginForm("Index", "UsersAdmin", FormMethod.Get))
+{
+    <p>
+        输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.ActionLink("用户名", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
     </tr>
 
@@ -25,3 +32,9 @@
     }
 
 </table>
+
+<br />
+页数 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 总数 @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

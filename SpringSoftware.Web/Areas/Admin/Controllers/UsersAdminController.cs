@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.Models;
+using PagedList;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
@@ -36,9 +37,44 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
 
         //
         // GET: /Users/
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(await UserManager.Users.ToListAsync());
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+         
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            IEnumerable<ApplicationUser> students = await UserManager.Users.ToListAsync();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.UserName.Contains(searchString)
+                                       || s.Email.Contains(searchString)
+                                       || s.PhoneNumber.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    students = students.OrderByDescending(s => s.UserName);
+                    break;
+                default:  // Name ascending 
+                    students = students.OrderBy(s => s.UserName);
+                    break;
+            }
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(students.ToPagedList(pageNumber, pageSize));
         }
 
         //
