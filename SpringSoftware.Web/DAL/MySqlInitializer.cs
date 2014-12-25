@@ -14,7 +14,6 @@ namespace SpringSoftware.Web.DAL
         {
             try
             {
-
                 if (!context.Database.Exists())
                 {
                     // if database did not exist before - create it
@@ -40,7 +39,6 @@ namespace SpringSoftware.Web.DAL
             catch (Exception ex)
             {
 
-    
             }
         }
     }
