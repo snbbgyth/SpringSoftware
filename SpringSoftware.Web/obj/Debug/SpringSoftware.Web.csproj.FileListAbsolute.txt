@@ -394,3 +394,7 @@ H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.xml
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.xml
+D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\bin\PagedList.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\bin\PagedList.xml
+D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.xml

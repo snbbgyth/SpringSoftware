@@ -5,12 +5,12 @@
 @using System.Web.Mvc.Html
 @using System.Web.Optimization
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "新建新闻";
     
 }
 
 
-<h2>Create</h2>
+<h2>新建新闻</h2>
 
 
 @using (Html.BeginForm())
@@ -19,7 +19,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>News</h4>
+        <h4>新闻</h4>
         <hr />
         @Html.ValidationSummary(true)
 
@@ -84,7 +84,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("返回列表", "Index")
 </div>
 
 @section Scripts {
