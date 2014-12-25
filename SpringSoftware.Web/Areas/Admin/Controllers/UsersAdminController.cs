@@ -9,12 +9,13 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SpringSoftware.Web.Areas.Admin.Models;
+using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.Models;
 using PagedList;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [MyAuthorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
 

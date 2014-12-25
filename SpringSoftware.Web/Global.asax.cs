@@ -33,7 +33,7 @@ namespace SpringSoftware.Web
         private static IContainer BuildContainer()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired();
+            builder.RegisterControllers(Assembly.GetExecutingAssembly());
             // FunnelWeb Database
             builder.RegisterModule(new CoreModule());
             return builder.Build();

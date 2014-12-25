@@ -12,18 +12,18 @@
 
 tinymce.PluginManager.add('save', function(editor) {
 	function save() {
-		var formObj, os;
+		var formObj;
 
 		formObj = tinymce.DOM.getParent(editor.id, 'form');
 
-		if (editor.getParam("save_enablewhendirty") && !editor.isDirty()) {
+		if (editor.getParam("save_enablewhendirty", true) && !editor.isDirty()) {
 			return;
 		}
 
 		tinymce.triggerSave();
 
 		// Use callback instead
-		if ((os = editor.getParam("save_onsavecallback"))) {
+		if (editor.getParam("save_onsavecallback")) {
 			if (editor.execCallback('save_onsavecallback', editor)) {
 				editor.startContent = tinymce.trim(editor.getContent({format: 'raw'}));
 				editor.nodeChanged();
@@ -50,10 +50,10 @@ tinymce.PluginManager.add('save', function(editor) {
 	}
 
 	function cancel() {
-		var os, h = tinymce.trim(editor.startContent);
+		var h = tinymce.trim(editor.startContent);
 
 		// Use callback instead
-		if ((os = editor.getParam("save_oncancelcallback"))) {
+		if (editor.getParam("save_oncancelcallback")) {
 			editor.execCallback('save_oncancelcallback', editor);
 			return;
 		}
@@ -67,7 +67,7 @@ tinymce.PluginManager.add('save', function(editor) {
 		var self = this;
 
 		editor.on('nodeChange', function() {
-			self.disabled(!editor.isDirty());
+			self.disabled(editor.getParam("save_enablewhendirty", true) && !editor.isDirty());
 		});
 	}
 
@@ -75,6 +75,7 @@ tinymce.PluginManager.add('save', function(editor) {
 	editor.addCommand('mceCancel', cancel);
 
 	editor.addButton('save', {
+		icon: 'save',
 		text: 'Save',
 		cmd: 'mceSave',
 		disabled: true,

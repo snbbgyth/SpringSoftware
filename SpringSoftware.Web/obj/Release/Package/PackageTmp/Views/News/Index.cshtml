@@ -1,9 +1,15 @@
 ﻿@using SpringSoftware.Web.Help
-@model IEnumerable<SpringSoftware.Core.DbModel.News>
-
+@model PagedList.IPagedList<SpringSoftware.Core.DbModel.News>
+@using PagedList.Mvc;
 
 <h2>最近新闻</h2>
-
+@using (Html.BeginForm("Index", "News", FormMethod.Get))
+{
+    <p>
+        输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
 
 @foreach (var item in Model)
 {
@@ -27,4 +33,9 @@
     </div>
 }
 
+<br />
+页数 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 总数 @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 

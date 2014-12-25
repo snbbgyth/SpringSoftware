@@ -1,11 +1,19 @@
 ﻿@using System.Web.Mvc.Html
 @using SpringSoftware.Web.Help
-@model IEnumerable<SpringSoftware.Core.DbModel.News>
-
+@model PagedList.IPagedList<SpringSoftware.Core.DbModel.News>
+@using PagedList.Mvc;
  
 <p>
     @Html.ActionLink("新建", "Create")
 </p>
+@using (Html.BeginForm("Index", "News", FormMethod.Get))
+{
+    <p>
+        输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 @foreach (var item in Model)
 {
     <div>
@@ -38,67 +46,8 @@
     </div>
 }
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsPublish)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifyDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Creater)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifier)
-        </th>
-        <th></th>
-    </tr>
+<br />
+页数 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 总数 @Model.PageCount
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsPublish)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifyDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDelete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Creater)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifier)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>*@
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

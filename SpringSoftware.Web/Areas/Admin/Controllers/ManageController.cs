@@ -7,11 +7,12 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
-    [Authorize]
+    [MyAuthorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

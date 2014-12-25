@@ -41,9 +41,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Configuration">
       <HintPath>..\packages\Autofac.Configuration.3.3.0\lib\net40\Autofac.Configuration.dll</HintPath>
@@ -63,6 +67,10 @@
     <Reference Include="MySql.Web, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ShareDll\MySQL Connector Net 6.9.5\MySql.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -123,19 +131,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -214,6 +215,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="DAL\Configuration.cs" />
+    <Compile Include="DAL\MyAuthorizeAttribute.cs" />
     <Compile Include="DAL\MySqlConfiguration.cs" />
     <Compile Include="DAL\MySqlHistoryContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -229,6 +231,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -244,8 +248,6 @@
     <Content Include="Images\Product\Web\5.jpg" />
     <Content Include="Images\Product\Web\6.jpg" />
     <Content Include="Images\Product\Web\7.jpg" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\News\Create.cshtml" />
@@ -292,17 +294,28 @@
     <Content Include="Areas\Admin\Views\Comments\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Comments\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Comments\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
     <Content Include="Scripts\tinymce\langs\zh_CN.js" />
@@ -323,11 +336,23 @@
     <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\code\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\editable_selects.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\form_utils.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\mctabs.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\css\dialog.css" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\buttons.png" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\icons.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\items.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\menu_arrow.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\menu_check.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\progress.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\img\tabs.gif" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\compat3x\tiny_mce_popup.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\validate.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\editable_selects.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\form_utils.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\mctabs.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\utils\validate.js" />
     <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\directionality\plugin.js" />
@@ -350,6 +375,7 @@
     <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-yell.gif" />
     <Content Include="Scripts\tinymce\plugins\emoticons\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\example\dialog.html" />
     <Content Include="Scripts\tinymce\plugins\example\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\example\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\example_dependency\plugin.js" />
@@ -362,6 +388,8 @@
     <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\image\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\layer\plugin.js" />
@@ -381,11 +409,6 @@
     <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\Clipboard.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\Plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\Quirks.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\WordFilter.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\plugin.dev.js" />
     <Content Include="Scripts\tinymce\plugins\paste\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\preview\plugin.js" />
@@ -396,30 +419,25 @@
     <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\classes\DomTextMatcher.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\classes\Plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.dev.js" />
     <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\table\classes\CellSelection.js" />
-    <Content Include="Scripts\tinymce\plugins\table\classes\Plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\table\classes\Quirks.js" />
-    <Content Include="Scripts\tinymce\plugins\table\classes\TableGrid.js" />
-    <Content Include="Scripts\tinymce\plugins\table\plugin.dev.js" />
     <Content Include="Scripts\tinymce\plugins\table\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\template\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\template\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\textcolor\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\address.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\article.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\aside.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\blockquote.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\div.gif" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\img\dl.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\figure.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\h1.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\h2.gif" />
@@ -428,9 +446,11 @@
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\h5.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\h6.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\hgroup.gif" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\img\ol.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\p.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\pre.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\section.gif" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\img\ul.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\visualchars\plugin.js" />
@@ -439,13 +459,12 @@
     <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js" />
     <Content Include="Scripts\tinymce\skins\lightgray\content.inline.min.css" />
     <Content Include="Scripts\tinymce\skins\lightgray\content.min.css" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon-small.svg" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.svg" />
     <Content Include="Scripts\tinymce\skins\lightgray\img\anchor.gif" />
     <Content Include="Scripts\tinymce\skins\lightgray\img\loader.gif" />
     <Content Include="Scripts\tinymce\skins\lightgray\img\object.gif" />
     <Content Include="Scripts\tinymce\skins\lightgray\img\trans.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\wline.gif" />
     <Content Include="Scripts\tinymce\skins\lightgray\skin.ie7.min.css" />
     <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
     <Content Include="Scripts\tinymce\themes\modern\theme.js" />
@@ -467,19 +486,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon-small.woff" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon-small.ttf" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon-small.eot" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon.woff" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon.ttf" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon.eot" />
-    <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full_compressed.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_classic_compressed.cshtml" />
@@ -492,14 +502,21 @@
     <Content Include="Views\Home\TrainProductIntro.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
     <Content Include="Views\Comments\Successful.cshtml" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.json" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.json" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
+    <Content Include="Scripts\tinymce\langs\readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

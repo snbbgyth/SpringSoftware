@@ -9,12 +9,13 @@ using System.Web;
 using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
+using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.Models;
 using PagedList;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [MyAuthorize(Roles = "Admin")]
     public class NewsTypesController : Controller
     {
         private INewsTypeDal _newsTypeDal;

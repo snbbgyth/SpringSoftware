@@ -9,11 +9,13 @@ using System.Web;
 using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
+using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.Models;
 using PagedList;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
+    [MyAuthorize]
     public class CommentsController : Controller
     {
         private ICommentDal _commentDal;
@@ -42,12 +44,16 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            IEnumerable<Comment> entityList = await _commentDal.QueryAllAsync();
+            IEnumerable<Comment> entityList = null;
+            if (User.IsInRole("Admin"))
+                entityList = await _commentDal.QueryAllAsync();
+            else
+                entityList = await _commentDal.QueryByFunAsync(t => t.Creater == User.Identity.Name || t.LastModifier == User.Identity.Name);
             if (!String.IsNullOrEmpty(searchString))
             {
                 entityList = entityList.Where(s => s.UserName.Contains(searchString)
                                        || s.Content.Contains(searchString)
-                                       ||s.Phone.Contains(searchString));
+                                       || s.Phone.Contains(searchString));
             }
             switch (sortOrder)
             {

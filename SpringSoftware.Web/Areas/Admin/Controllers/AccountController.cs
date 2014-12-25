@@ -7,11 +7,12 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
-    [Authorize]
+    [MyAuthorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -79,7 +80,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index", "News");
+                    return RedirectToAction("Index", "Comments");
                 //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -280,7 +281,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // 请求重定向到外部登录提供程序
-            return new AccountController.ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            return new AccountController.ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl,Area="Admin" }));
         }
 
         //
