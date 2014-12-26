@@ -19,13 +19,11 @@
     <div class="form-horizontal">
         <legend>编辑用户</legend>
         <div class="form-group">
-            @* @Html.LabelFor(m => m.UserName, new { @class = "control-label" })*@
             <label class="col-md-2">用户名</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.UserName)
             </div>
         </div>
-
         <legend>修改权限</legend>
 
         <div class="form-group">
@@ -37,7 +35,6 @@
         </div>
 
         <table class="table table-striped">
-
             @foreach (var item in ViewBag.UserRoleList as List<UserRoleViewModel>)
             {
                 <tr>
@@ -48,7 +45,6 @@
                         @Html.ActionLink("删除", "DeleteRole", new { roleName = item.RoleName, userId = item.UserId })
                     </td>
                 </tr>
-
             }
         </table>
         <div class="form-group">

@@ -56,26 +56,28 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            IEnumerable<ApplicationUser> students = await UserManager.Users.ToListAsync();
-            if (!String.IsNullOrEmpty(searchString))
+            IEnumerable<ApplicationUser> entityList = await UserManager.Users.ToListAsync();
+            if (entityList.Any())
             {
-                students = students.Where(s => s.UserName.Contains(searchString)
-                                       || s.Email.Contains(searchString)
-                                       || s.PhoneNumber.Contains(searchString));
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    entityList = entityList.Where(s => s.UserName.Contains(searchString)
+                                                   || s.Email.Contains(searchString)
+                                                   || s.PhoneNumber.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        entityList = entityList.OrderByDescending(s => s.UserName);
+                        break;
+                    default: // Name ascending 
+                        entityList = entityList.OrderBy(s => s.UserName);
+                        break;
+                }
             }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    students = students.OrderByDescending(s => s.UserName);
-                    break;
-                default:  // Name ascending 
-                    students = students.OrderBy(s => s.UserName);
-                    break;
-            }
-
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            return View(students.ToPagedList(pageNumber, pageSize));
+            return View(entityList.ToPagedList(pageNumber, pageSize));
         }
 
         //
@@ -208,9 +210,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 //Update the user details
                 await UserManager.UpdateAsync(user);
-
-   
-
                 if (!String.IsNullOrEmpty(RoleId))
                 {
                     //Find Role

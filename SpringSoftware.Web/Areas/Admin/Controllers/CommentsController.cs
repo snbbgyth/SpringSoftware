@@ -28,11 +28,9 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         // GET: Comments
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-
             if (searchString != null)
             {
                 page = 1;
@@ -41,36 +39,36 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
-
             IEnumerable<Comment> entityList = null;
             if (User.IsInRole("Admin"))
                 entityList = await _commentDal.QueryAllAsync();
             else
                 entityList = await _commentDal.QueryByFunAsync(t => t.Creater == User.Identity.Name || t.LastModifier == User.Identity.Name);
-            if (!String.IsNullOrEmpty(searchString))
+            if (entityList.Any())
             {
-                entityList = entityList.Where(s => s.UserName.Contains(searchString)
-                                       || s.Content.Contains(searchString)
-                                       || s.Phone.Contains(searchString));
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    entityList = entityList.Where(s => s.UserName.Contains(searchString)
+                                                       || s.Content.Contains(searchString)
+                                                       || s.Phone.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        entityList = entityList.OrderByDescending(s => s.UserName);
+                        break;
+                    case "Date":
+                        entityList = entityList.OrderBy(s => s.LastModifyDate);
+                        break;
+                    case "date_desc":
+                        entityList = entityList.OrderByDescending(s => s.LastModifyDate);
+                        break;
+                    default: // Name ascending 
+                        entityList = entityList.OrderBy(s => s.UserName);
+                        break;
+                }
             }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    entityList = entityList.OrderByDescending(s => s.UserName);
-                    break;
-                case "Date":
-                    entityList = entityList.OrderBy(s => s.LastModifyDate);
-                    break;
-                case "date_desc":
-                    entityList = entityList.OrderByDescending(s => s.LastModifyDate);
-                    break;
-                default:  // Name ascending 
-                    entityList = entityList.OrderBy(s => s.UserName);
-                    break;
-            }
-
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             return View(entityList.ToPagedList(pageNumber, pageSize));

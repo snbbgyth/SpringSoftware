@@ -2,6 +2,7 @@
      ViewBag.Title = "联系我们";
 }
 
+
 <h2>联系我们</h2>
 
 <address>
@@ -33,15 +34,19 @@
         // 创建地址解析器实例
         var myGeo = new BMap.Geocoder();
         // 将地址解析结果显示在地图上,并调整地图视野
-        myGeo.getPoint("江西省赣州市南康区东山公园", function(point) {
+        myGeo.getPoint("春天软件有限公司", function (point) {
             if (point) {
                 map.centerAndZoom(point, 100);
                 map.addOverlay(new BMap.Marker(point));
             }
         }, "江西省赣州市");
         map.enableScrollWheelZoom(true);
-        map.addControl(new BMap.MapTypeControl());
-     
+ 
+        var marker = new BMap.Marker(point);  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        var label = new BMap.Label("春天软件有限公司");
+        marker.setLabel(label);
+
     }
     window.onload = loadJScript;  //异步加载地图
 </script>

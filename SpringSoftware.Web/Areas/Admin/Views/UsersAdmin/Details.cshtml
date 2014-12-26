@@ -13,14 +13,7 @@
     </dl>
  
     <h4>所属权限</h4>
-    @*<div class="form-group">
-            <label class="col-md-2">所属权限</label>
-            <div class="col-md-10">
-                @Html.DropDownList("RoleId", "No Roles")
-            </div>
-        </div>*@
     <table class="table table-striped">
-
         @foreach (var item in ViewBag.RoleNameList)
         {
             <tr>
@@ -29,8 +22,6 @@
                 </td>
             </tr>
         }
-
-
     </table>
     <h4>登陆列表</h4>
     <table class="table table-striped">

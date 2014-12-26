@@ -76,16 +76,16 @@
       <publishTime>12/24/2014 17:30:44</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Create.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/26/2014 08:58:35</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Delete.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/26/2014 08:58:35</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Details.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/26/2014 10:12:04</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Edit.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/26/2014 10:04:11</publishTime>
     </File>
     <File Include="Areas/Admin/Views/News/Index.cshtml">
       <publishTime>12/25/2014 13:42:21</publishTime>
@@ -100,7 +100,7 @@
       <publishTime>12/24/2014 17:30:44</publishTime>
     </File>
     <File Include="Areas/Admin/Views/NewsTypes/Edit.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/26/2014 10:04:45</publishTime>
     </File>
     <File Include="Areas/Admin/Views/NewsTypes/Index.cshtml">
       <publishTime>12/25/2014 14:21:14</publishTime>
@@ -133,10 +133,10 @@
       <publishTime>12/24/2014 17:30:44</publishTime>
     </File>
     <File Include="Areas/Admin/Views/UsersAdmin/Details.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/26/2014 10:06:04</publishTime>
     </File>
     <File Include="Areas/Admin/Views/UsersAdmin/Edit.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/26/2014 10:06:46</publishTime>
     </File>
     <File Include="Areas/Admin/Views/UsersAdmin/Index.cshtml">
       <publishTime>12/25/2014 16:01:41</publishTime>
@@ -235,10 +235,10 @@
       <publishTime>12/24/2014 17:36:27</publishTime>
     </File>
     <File Include="bin/SpringSoftware.Core.dll">
-      <publishTime>12/25/2014 16:52:15</publishTime>
+      <publishTime>12/26/2014 17:03:13</publishTime>
     </File>
     <File Include="bin/SpringSoftware.Web.dll">
-      <publishTime>12/25/2014 16:52:17</publishTime>
+      <publishTime>12/26/2014 17:03:15</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.dll">
       <publishTime>12/15/2014 16:13:12</publishTime>
@@ -1117,13 +1117,13 @@
       <publishTime>12/25/2014 16:00:03</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/25/2014 18:10:59</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>12/24/2014 17:30:44</publishTime>
     </File>
     <File Include="Views/Home/SoftwareProductIntro.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/25/2014 17:23:07</publishTime>
     </File>
     <File Include="Views/Home/TrainProductIntro.cshtml">
       <publishTime>12/24/2014 17:30:44</publishTime>
@@ -1149,6 +1149,9 @@
     <File Include="Views/Manage/VerifyPhoneNumber.cshtml">
       <publishTime>12/15/2014 16:13:12</publishTime>
     </File>
+    <File Include="Views/News/CompanyIndex.cshtml">
+      <publishTime>12/26/2014 11:12:17</publishTime>
+    </File>
     <File Include="Views/News/Create.cshtml">
       <publishTime>12/20/2014 15:08:31</publishTime>
     </File>
@@ -1163,6 +1166,9 @@
     </File>
     <File Include="Views/News/Index.cshtml">
       <publishTime>12/25/2014 13:35:08</publishTime>
+    </File>
+    <File Include="Views/News/IndustryIndex.cshtml">
+      <publishTime>12/26/2014 11:12:12</publishTime>
     </File>
     <File Include="Views/NewsTypes/Create.cshtml">
       <publishTime>12/16/2014 09:37:08</publishTime>
@@ -1204,7 +1210,7 @@
       <publishTime>12/24/2014 17:30:44</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/24/2014 17:30:44</publishTime>
+      <publishTime>12/26/2014 10:58:03</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>12/24/2014 17:30:44</publishTime>

@@ -9,7 +9,6 @@ namespace SpringSoftware.Core.DbModel
 {
     public class OtherLogInfo:BaseTable
     {
-     
         public virtual string ClientName { get; set; }
         public virtual string UniqueName { get; set; }
         public virtual string TableName { get; set; }
@@ -18,6 +17,5 @@ namespace SpringSoftware.Core.DbModel
         public virtual string LogType { get; set; }
         public virtual string Message { get; set; }
         public virtual string StackTrace { get; set; }
-        //public virtual DateTime CreateTime { get; set; }
     }
 }

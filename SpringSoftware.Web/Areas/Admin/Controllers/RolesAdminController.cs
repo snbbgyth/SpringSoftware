@@ -53,21 +53,23 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
 
             IEnumerable<IdentityRole> entityList =   RoleManager.Roles.ToList();
-            if (!String.IsNullOrEmpty(searchString))
+            if (entityList.Any())
             {
-                entityList = entityList.Where(s => s.Name.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    entityList = entityList.OrderByDescending(s => s.Name);
-                    break;
-  
-                default:  // Name ascending 
-                    entityList = entityList.OrderBy(s => s.Name);
-                    break;
-            }
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    entityList = entityList.Where(s => s.Name.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        entityList = entityList.OrderByDescending(s => s.Name);
+                        break;
 
+                    default: // Name ascending 
+                        entityList = entityList.OrderBy(s => s.Name);
+                        break;
+                }
+            }
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             return View(entityList.ToPagedList(pageNumber, pageSize));

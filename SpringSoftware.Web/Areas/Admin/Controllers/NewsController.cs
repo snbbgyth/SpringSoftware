@@ -40,20 +40,22 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            IEnumerable<News> students = await _newsDal.QueryAllAsync();
-            if (!String.IsNullOrEmpty(searchString))
+            IEnumerable<News> entityList = await _newsDal.QueryAllAsync();
+            if (entityList.Any())
             {
-                students = students.Where(s => s.Content.Contains(searchString)
-                                       || s.Title.Contains(searchString)
-                                       || s.Creater.Contains(searchString)
-                                       || s.LastModifier.Contains(searchString));
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    entityList = entityList.Where(s => s.Content.Contains(searchString)
+                                                   || s.Title.Contains(searchString)
+                                                   || s.Creater.Contains(searchString)
+                                                   || s.LastModifier.Contains(searchString));
+                }
+
+                entityList = entityList.OrderByDescending(s => s.LastModifyDate);
             }
-
-            students = students.OrderByDescending(s => s.LastModifyDate);
-
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            return View(students.ToPagedList(pageNumber, pageSize));
+            return View(entityList.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: /News/Details/5

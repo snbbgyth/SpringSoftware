@@ -7,7 +7,7 @@ using SpringSoftware.Core.DbModel;
 
 namespace SpringSoftware.Core.IDAL
 {
-   public interface INewsDal:IDataOperationActivity<News>
-   {
+    public interface INewsDal : IDataOperationActivity<News>
+    {
     }
 }

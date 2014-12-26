@@ -2,13 +2,9 @@
 @model SpringSoftware.Core.DbModel.News
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "祥细";
 }
-
-
-
 <body>
-
     <div id="layout-wrapper">
         <div id="content">
             <div>
@@ -26,7 +22,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="CompanyIntroBody">
                     @Html.Raw(Model.Content)
                 </div>
@@ -45,5 +40,4 @@
             </div>
         </div>
     </div>
-
 </body>

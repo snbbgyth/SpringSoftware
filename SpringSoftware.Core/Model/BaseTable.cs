@@ -9,7 +9,6 @@ namespace SpringSoftware.Core.Model
 {
     public class BaseTable
     {
-
         public virtual int Id { get; set; }
 
         [DisplayName("创建时间")]

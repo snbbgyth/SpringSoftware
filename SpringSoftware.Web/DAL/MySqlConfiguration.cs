@@ -12,7 +12,6 @@ namespace SpringSoftware.Web.DAL
         {
             SetHistoryContext(
             "MySql.Data.MySqlClient", (conn, schema) => new MySqlHistoryContext(conn, schema));
-            
         }
     }
 }

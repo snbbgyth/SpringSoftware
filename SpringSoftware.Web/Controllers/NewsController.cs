@@ -24,7 +24,7 @@ namespace SpringSoftware.Web.Controllers
         }
 
         // GET: /News/
-        public async Task<ActionResult> Index(string currentFilter, string searchString, int? page)
+        public async Task<ActionResult> CompanyIndex(string currentFilter, string searchString, int? page)
         {
  
             if (searchString != null)
@@ -37,22 +37,49 @@ namespace SpringSoftware.Web.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-
-            IEnumerable<News> entityList = await _newsDal.QueryAllAsync();
-            if (!String.IsNullOrEmpty(searchString))
+            IEnumerable<News> entityList = await _newsDal.QueryByFunAsync(t => t.NewsType.Id == 1);
+            if (entityList.Any())
             {
-                entityList = entityList.Where(s => s.Content.Contains(searchString)
-                                       || s.Title.Contains(searchString)
-                                       || s.Creater.Contains(searchString)
-                                       || s.LastModifier.Contains(searchString));
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    entityList = entityList.Where(s => s.Content.Contains(searchString)
+                                                       || s.Title.Contains(searchString)
+                                                       || s.Creater.Contains(searchString)
+                                                       || s.LastModifier.Contains(searchString));
+                }
+                    entityList = entityList.OrderByDescending(s => s.LastModifyDate);
             }
-         
-           entityList = entityList.OrderByDescending(s => s.LastModifyDate);
-    
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             return View(entityList.ToPagedList(pageNumber, pageSize));
-        
+        }
+
+        public async Task<ActionResult> IndustryIndex(string currentFilter, string searchString, int? page)
+        {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            IEnumerable<News> entityList = await _newsDal.QueryByFunAsync(t=>t.NewsType.Id==2);
+            if (entityList.Any())
+            {
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    entityList = entityList.Where(s => s.Content.Contains(searchString)
+                                                       || s.Title.Contains(searchString)
+                                                       || s.Creater.Contains(searchString)
+                                                       || s.LastModifier.Contains(searchString));
+                }
+                entityList = entityList.OrderByDescending(s => s.LastModifyDate);
+            }
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(entityList.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: /News/Details/5

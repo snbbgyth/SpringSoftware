@@ -15,38 +15,38 @@ namespace SpringSoftware.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "关于我们";
+            ViewBag.Title = "关于我们";
             return View();
         }
 
         public ActionResult WebSiteProductIntro()
         {
-            ViewBag.Message = "企业简介.";
+            ViewBag.Title = "企业简介.";
             return View();
         }
 
         public ActionResult SoftwareProductIntro()
         {
-            ViewBag.Message = "企业简介.";
+            ViewBag.Title = "企业简介.";
             return View();
         }
 
         public ActionResult TrainProductIntro()
         {
-            ViewBag.Message = "企业简介.";
+            ViewBag.Title = "企业简介.";
             return View();
         }
 
         public ActionResult CompanyIntro()
         {
-            ViewBag.Message = "企业简介.";
+            ViewBag.Title = "企业简介.";
             return View();
         }
 
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "联系我们.";
             return View();
         }
     }

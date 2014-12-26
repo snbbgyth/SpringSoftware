@@ -29,11 +29,11 @@ namespace SpringSoftware.Core.IDAL
 
         T FirstOrDefault(Expression<Func<T, bool>> fun);
 
-         Task<int> InsertAsync(T entity);
+        Task<int> InsertAsync(T entity);
 
-         Task<int> SaveOrUpdateAsync(T entity);
+        Task<int> SaveOrUpdateAsync(T entity);
 
-         Task<int> ModifyAsync(T entity);
+        Task<int> ModifyAsync(T entity);
 
         Task<IList<T>> QueryByFunAsync(Expression<Func<T, bool>> fun);
 

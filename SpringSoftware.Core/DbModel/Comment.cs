@@ -10,10 +10,12 @@ using SpringSoftware.Core.Model;
 
 namespace SpringSoftware.Core.DbModel
 {
-    public class Comment:BaseTable
+    public class Comment : BaseTable
     {
         [DisplayName("手机号码")]
         [Required]
+        [Phone]
+        [StringLength(100, ErrorMessage = "{0} 必须至少包含 {2} 个字符。", MinimumLength = 11)]
         public virtual string Phone { get; set; }
 
         [DisplayName("姓名")]
