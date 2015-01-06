@@ -149,7 +149,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-
             await _commentDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }

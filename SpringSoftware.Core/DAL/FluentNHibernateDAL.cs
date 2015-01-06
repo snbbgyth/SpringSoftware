@@ -102,10 +102,8 @@ namespace SpringSoftware.Core.DAL
                 if (_fluentConfig == null)
                 {
                     _fluentConfig = Fluently.Configure()
-                        .Database((MySQLConfiguration.Standard.ConnectionString(c => c.FromConnectionStringWithKey("DefaultConnection")
-        ))
-    )
-                                            //.Database(SQLiteConfiguration.Standard.UsingFile(UtilHelper.SqliteFilePath))
+                        .Database((MySQLConfiguration.Standard.ConnectionString(c => c.FromConnectionStringWithKey("DefaultConnection"))))
+                        //.Database(SQLiteConfiguration.Standard.UsingFile(UtilHelper.SqliteFilePath))
                                             .Mappings(m => m.FluentMappings.AddFromAssemblyOf<News>());
                     //m.AutoMappings.Add(CreateAutomappings));
                     BuildSchema(_fluentConfig.BuildConfiguration());
@@ -161,9 +159,9 @@ namespace SpringSoftware.Core.DAL
             // specify the criteria that types must meet in order to be mapped
             // any type for which this method returns false will not be mapped.
 
-            return type.Namespace == "SpringSoftware.Core.DbModel" ;
+            return type.Namespace == "SpringSoftware.Core.DbModel";
         }
- 
+
 
         public override bool IsComponent(Type type)
         {
@@ -173,6 +171,6 @@ namespace SpringSoftware.Core.DAL
             return false;
         }
 
-    
+
     }
 }
