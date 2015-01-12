@@ -26,7 +26,7 @@ namespace SpringSoftware.Core.DbModel
  
        public  virtual NewsType NewsType { get; set; }
 
-       public  virtual IList<NewsType> NewsTypeList { get; set; }
+       public virtual IEnumerable<NewsType> NewsTypeList { get; set; }
 
        public News()
        {

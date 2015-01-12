@@ -35,5 +35,14 @@ namespace SpringSoftware.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.Product> Products { get; set; }
+
+        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.ShopCartItem> ShopCartItems { get; set; }
+
+        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.Picture> Pictures { get; set; }
+
     }
 }

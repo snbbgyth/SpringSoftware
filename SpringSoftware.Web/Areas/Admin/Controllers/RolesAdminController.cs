@@ -199,7 +199,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
        
             foreach (var user in UserManager.Users.ToList())
             {
-
                 foreach (var userRole in user.Roles)
                 {
                     if (userRole.RoleId == role.Id)

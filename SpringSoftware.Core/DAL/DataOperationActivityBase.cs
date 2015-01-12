@@ -72,11 +72,10 @@ namespace SpringSoftware.Core.DAL
 
         private void InitModifyBaseTable(T entity)
         {
-            //entity.CreateDate = DateTime.Now;
             entity.LastModifyDate = DateTime.Now;
         }
 
-        public virtual int  Modify(T entity)
+        public virtual int Modify(T entity)
         {
             try
             {
@@ -95,15 +94,16 @@ namespace SpringSoftware.Core.DAL
             }
         }
 
-        public virtual IList<T> QueryByFun(Expression<Func<T, bool>> fun)
+        public virtual IEnumerable<T> QueryByFun(Expression<Func<T, bool>> fun)
         {
+            var entityList = new List<T>();
             try
             {
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
                     if (fun != null)
                     {
-                        return session.QueryOver<T>().Where(fun).List();
+                        entityList = session.QueryOver<T>().Where(fun).List().ToList();
                     }
                 }
             }
@@ -111,7 +111,7 @@ namespace SpringSoftware.Core.DAL
             {
                 LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
             }
-            return null;
+            return entityList;
         }
 
         public virtual int Delete(dynamic entity)
@@ -122,8 +122,7 @@ namespace SpringSoftware.Core.DAL
             {
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
-                    var queryString = string.Format("delete {0} where Id = :id",
-                                                    typeof(T).Name);
+                    var queryString = string.Format("delete {0} where Id = :id", typeof(T).Name);
                     result = session.CreateQuery(queryString).SetParameter("id", entity.Id).ExecuteUpdate();
                 }
             }
@@ -142,8 +141,7 @@ namespace SpringSoftware.Core.DAL
             {
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
-                    var queryString = string.Format("delete {0} where Id = :id",
-                                                    typeof(T).Name);
+                    var queryString = string.Format("delete {0} where Id = :id", typeof(T).Name);
                     reslut = session.CreateQuery(queryString)
                                     .SetParameter("id", id)
                                     .ExecuteUpdate();
@@ -156,9 +154,9 @@ namespace SpringSoftware.Core.DAL
             return reslut;
         }
 
-        public virtual List<T> QueryAll()
+        public virtual IEnumerable<T> QueryAll()
         {
-            List<T> entityList = null;
+            var entityList = new List<T>();
 
             try
             {
@@ -170,6 +168,27 @@ namespace SpringSoftware.Core.DAL
             catch (Exception ex)
             {
                 LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
+            }
+            return entityList;
+        }
+
+        public virtual IEnumerable<T> QueryByIds(IEnumerable<dynamic> ids)
+        {
+            var entityList = new List<T>();
+            try
+            {
+                using (var session = FluentNHibernateDal.Instance.GetSession())
+                {
+                    var queryString = string.Format("select * from {0} where Id in(:ids)", typeof(T).Name);
+                    entityList = session.CreateQuery(queryString)
+                                    .SetParameter("ids", string.Join(",", ids))
+                                    .Future<T>().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
+                //return  new List<T>();
             }
             return entityList;
         }
@@ -220,7 +239,6 @@ namespace SpringSoftware.Core.DAL
                 {
                     return session.QueryOver<T>().SingleOrDefault();
                 }
-
             }
             catch (Exception ex)
             {
@@ -253,26 +271,26 @@ namespace SpringSoftware.Core.DAL
         public async Task<int> InsertAsync(T entity)
         {
             var task = Task.Factory.StartNew(() => Insert(entity));
-           return  await task;
-           
+            return await task;
+
         }
 
         public async Task<int> SaveOrUpdateAsync(T entity)
         {
             var task = Task.Factory.StartNew(() => SaveOrUpdate(entity));
-           return  await task;
+            return await task;
         }
 
         public async Task<int> ModifyAsync(T entity)
         {
             var task = Task.Factory.StartNew(() => Modify(entity));
-            return  await task;
+            return await task;
         }
 
-        public async Task<IList<T>> QueryByFunAsync(Expression<Func<T, bool>> fun)
+        public async Task<IEnumerable<T>> QueryByFunAsync(Expression<Func<T, bool>> fun)
         {
             var task = Task.Factory.StartNew(() => QueryByFun(fun));
-            return  await task;
+            return await task;
         }
 
         public async Task<int> DeleteByIdAsync(dynamic id)
@@ -281,7 +299,7 @@ namespace SpringSoftware.Core.DAL
             return await task;
         }
 
-        public async Task<List<T>> QueryAllAsync()
+        public async Task<IEnumerable<T>> QueryAllAsync()
         {
             var task = Task.Factory.StartNew(() => QueryAll());
             return await task;
@@ -296,6 +314,12 @@ namespace SpringSoftware.Core.DAL
         public async Task<int> DeleteAllAsync()
         {
             var task = Task.Factory.StartNew(() => DeleteAll());
+            return await task;
+        }
+
+        public async Task<IEnumerable<T>> QueryByIdsAsync(IEnumerable<dynamic> ids)
+        {
+            var task = Task.Factory.StartNew(() => QueryByIds(ids));
             return await task;
         }
 

@@ -15,11 +15,13 @@ namespace SpringSoftware.Core.IDAL
 
         int Modify(T entity);
 
-        IList<T> QueryByFun(Expression<Func<T, bool>> fun);
+        IEnumerable<T> QueryByFun(Expression<Func<T, bool>> fun);
+
+        IEnumerable<T> QueryByIds(IEnumerable<dynamic> ids);
 
         int DeleteById(dynamic id);
 
-        List<T> QueryAll();
+        IEnumerable<T> QueryAll();
 
         T QueryById(dynamic id);
 
@@ -35,11 +37,11 @@ namespace SpringSoftware.Core.IDAL
 
         Task<int> ModifyAsync(T entity);
 
-        Task<IList<T>> QueryByFunAsync(Expression<Func<T, bool>> fun);
+        Task<IEnumerable<T>> QueryByFunAsync(Expression<Func<T, bool>> fun);
 
         Task<int> DeleteByIdAsync(dynamic id);
 
-        Task<List<T>> QueryAllAsync();
+        Task<IEnumerable<T>> QueryAllAsync();
 
         Task<T> QueryByIdAsync(dynamic id);
 
@@ -48,6 +50,8 @@ namespace SpringSoftware.Core.IDAL
         Task<T> FirstOrDefaultAsync();
 
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> fun);
+
+        Task<IEnumerable<T>> QueryByIdsAsync(IEnumerable<dynamic> ids);
 
     }
 }

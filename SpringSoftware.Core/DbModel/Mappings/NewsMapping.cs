@@ -21,7 +21,6 @@ namespace SpringSoftware.Core.DbModel.Mappings
 
             Map(x => x.IsPublish);
             Map(x => x.Content);
-            //Map(x => x.NewsTypeId);
             Map(x => x.Title);
             References(x => x.NewsType, "NewsTypeId").Not.LazyLoad();
 

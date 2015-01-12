@@ -206,15 +206,23 @@
     <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsTypesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PicturesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersAdminController.cs" />
+    <Compile Include="Areas\Admin\Models\ProductViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\UploadFileViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UserRoleViewModel.cs" />
     <Compile Include="Areas\Admin\RouteConfig.cs" />
     <Compile Include="Areas\Admin\ViewBundleRegistrar.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ShopCartItemsController.cs" />
     <Compile Include="DAL\Configuration.cs" />
+    <Compile Include="DAL\Manage\ProductManage.cs" />
     <Compile Include="DAL\MyAuthorizeAttribute.cs" />
     <Compile Include="DAL\MySqlConfiguration.cs" />
     <Compile Include="DAL\MySqlHistoryContext.cs" />
@@ -299,6 +307,18 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Pictures\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Pictures\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Pictures\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Pictures\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Pictures\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Pictures\Upload.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\_CreateOrUpdate.Pictures.cshtml" />
     <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -513,9 +533,26 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\News\IndustryIndex.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\ShopCartItems\Create.cshtml" />
+    <Content Include="Views\ShopCartItems\Delete.cshtml" />
+    <Content Include="Views\ShopCartItems\Details.cshtml" />
+    <Content Include="Views\ShopCartItems\Edit.cshtml" />
+    <Content Include="Views\ShopCartItems\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\_Create.UploadFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\SaveUpload\Product\Thumbnails\Temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
