@@ -9,7 +9,7 @@ namespace SpringSoftware.Core.DbModel
 {
    public class ProductPicture:BaseTable
     {
-        public int DisplayOrder { get; set; }
+        public virtual int DisplayOrder { get; set; }
 
         /// <summary>
         /// Gets the picture

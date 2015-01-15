@@ -33,9 +33,10 @@ namespace SpringSoftware.Core.DAL
                 InitInsertBaseTable(entity);
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
-                    session.Save(entity);
+                    //need test
+                   var result= session.Save(entity);
                     session.Flush();
-                    return 1;
+                    return Convert.ToInt32(result);
                 }
             }
             catch (Exception ex)

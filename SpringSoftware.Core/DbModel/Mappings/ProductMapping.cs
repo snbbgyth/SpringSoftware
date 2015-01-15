@@ -17,6 +17,7 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.IsDelete);
             Map(x => x.LastModifier);
             Map(x => x.LastModifyDate);
+
             Map(x => x.Name);
             Map(x => x.Discrption).Length(5000);
             Map(x => x.Price);

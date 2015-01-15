@@ -17,6 +17,7 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.IsDelete);
             Map(x => x.LastModifier);
             Map(x => x.LastModifyDate);
+
             Map(x => x.MimeType);
             Map(x => x.PictureBinary).Length(int.MaxValue);
             Map(x => x.FileName);

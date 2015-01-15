@@ -18,7 +18,6 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.LastModifier);
             Map(x => x.LastModifyDate);
 
-
             Map(x => x.IsPublish);
             Map(x => x.Content);
             Map(x => x.Title);

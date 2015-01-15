@@ -6,10 +6,12 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ImageResizer;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Areas.Admin.Models;
@@ -55,7 +57,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
 
         public ActionResult Upload()
         {
-
             return View();
         }
 
@@ -108,19 +109,110 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             return contentType;
         }
 
-        private void GenerateTempThumbnail(HttpPostedFileBase file,int productId=0)
+        private void GenerateThumbnail(Picture picture)
         {
-            // create an image object, using the filename we just retrieved
-            var image = Image.FromStream(file.InputStream);
-            // create the actual thumbnail image
-            var thumbnailImage = image.GetThumbnailImage(280, 280, ThumbnailCallback, IntPtr.Zero);
-            string imageSavePath;
-            if(productId>0)
-                  imageSavePath = Path.Combine("~/Images/SaveUpload/Product/Thumbnails/",productId.ToString(),file.FileName);
-            else
-              imageSavePath = Path.Combine("~/Images/SaveUpload/Product/Thumbnails/Temp/",file.FileName);
-            thumbnailImage.Save(imageSavePath,ImageFormat.Jpeg);
-             
+            try
+            {
+ 
+                //var image = Image.FromStream(file.InputStream);
+          
+                //using (var thumbnailImage = image.GetThumbnailImage(280, 280, ThumbnailCallback, IntPtr.Zero))
+                //{
+                //    var imageSavePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\Images\\SaveUpload\\Product\\Thumbnails\\", pictureId.ToString() + ".jpg");
+                //    thumbnailImage.Save(imageSavePath, ImageFormat.Jpeg);
+                //}
+                var thumbFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\Images\\SaveUpload\\Product\\Thumbnails\\", picture.Id + ".jpg");
+                if (!System.IO.File.Exists(thumbFilePath))
+                {
+                    using (var stream = new MemoryStream(picture.PictureBinary))
+                    {
+                        Bitmap b = null;
+                        try
+                        {
+                            //try-catch to ensure that picture binary is really OK. Otherwise, we can get "Parameter is not valid" exception if binary is corrupted for some reasons
+                            b = new Bitmap(stream);
+                        }
+                        catch (ArgumentException exc)
+                        {
+                           // _logger.Error(string.Format("Error generating picture thumb. ID={0}", picture.Id), exc);
+                        }
+                        if (b == null)
+                        {
+                            //bitmap could not be loaded for some reasons
+                           // return url;
+                        }
+
+                        var newSize = CalculateDimensions(b.Size, 0);// targetSize);
+
+                        var destStream = new MemoryStream();
+                        ImageBuilder.Current.Build(b, destStream, new ResizeSettings()
+                        {
+                            Width = newSize.Width,
+                            Height = newSize.Height,
+                            Scale = ScaleMode.Both,
+                            Quality = 0
+                        });
+                        var destBinary = destStream.ToArray();
+                        System.IO.File.WriteAllBytes(thumbFilePath, destBinary);
+
+                        b.Dispose();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        protected virtual Size CalculateDimensions(Size originalSize, int targetSize,
+           ResizeType resizeType = ResizeType.LongestSide, bool ensureSizePositive = true)
+        {
+            var newSize = new Size();
+            switch (resizeType)
+            {
+                case ResizeType.LongestSide:
+                    if (originalSize.Height > originalSize.Width)
+                    {
+                        // portrait 
+                        newSize.Width = (int)(originalSize.Width * (float)(targetSize / (float)originalSize.Height));
+                        newSize.Height = targetSize;
+                    }
+                    else
+                    {
+                        // landscape or square
+                        newSize.Height = (int)(originalSize.Height * (float)(targetSize / (float)originalSize.Width));
+                        newSize.Width = targetSize;
+                    }
+                    break;
+                case ResizeType.Width:
+                    newSize.Height = (int)(originalSize.Height * (float)(targetSize / (float)originalSize.Width));
+                    newSize.Width = targetSize;
+                    break;
+                case ResizeType.Height:
+                    newSize.Width = (int)(originalSize.Width * (float)(targetSize / (float)originalSize.Height));
+                    newSize.Height = targetSize;
+                    break;
+                default:
+                    throw new Exception("Not supported ResizeType");
+            }
+
+            if (ensureSizePositive)
+            {
+                if (newSize.Width < 1)
+                    newSize.Width = 1;
+                if (newSize.Height < 1)
+                    newSize.Height = 1;
+            }
+
+            return newSize;
+        }
+
+        public enum ResizeType
+        {
+            LongestSide,
+            Width,
+            Height
         }
 
         public bool ThumbnailCallback()
@@ -138,12 +230,13 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
 
             if (uploadFileModel.File == null)
                 throw new ArgumentException("No file uploaded");
-           
+
             var picture = new Picture();
             picture.FileName = uploadFileModel.File.FileName;
             picture.MimeType = GetContentType(uploadFileModel.File);
             picture.PictureBinary = GetBytes(uploadFileModel.File);
-            GenerateTempThumbnail(uploadFileModel.File);
+            picture.Id = _pictureDal.Insert(picture);
+            GenerateThumbnail(picture);
 
             //return Content("File Uploaded.");
 
