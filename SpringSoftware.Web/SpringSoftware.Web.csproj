@@ -225,6 +225,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShopCartItemsController.cs" />
     <Compile Include="DAL\Configuration.cs" />
+    <Compile Include="DAL\HandleQueue.cs" />
     <Compile Include="DAL\Manage\ProductManage.cs" />
     <Compile Include="DAL\MyAuthorizeAttribute.cs" />
     <Compile Include="DAL\MySqlConfiguration.cs" />
@@ -233,6 +234,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Help\Extentions.cs" />
+    <Compile Include="Help\ImageHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

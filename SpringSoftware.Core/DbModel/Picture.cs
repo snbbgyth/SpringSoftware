@@ -14,5 +14,7 @@ namespace SpringSoftware.Core.DbModel
         public virtual byte[] PictureBinary { get; set; }
 
         public virtual string FileName { get; set; }
+
+        //public virtual string FileExtension { get; set; }
     }
 }

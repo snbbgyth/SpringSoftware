@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -15,6 +16,8 @@ using ImageResizer;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Areas.Admin.Models;
+using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.Help;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
@@ -60,166 +63,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             return View();
         }
 
-        private byte[] GetBytes(HttpPostedFileBase file)
-        {
-            var stream = file.InputStream;
-            var fileBinary = new byte[stream.Length];
-            stream.Read(fileBinary, 0, fileBinary.Length);
-            return fileBinary;
-        }
-
-        private string GetContentType(HttpPostedFileBase file)
-        {
-            var contentType = file.ContentType;
-            var fileExtension = Path.GetExtension(file.FileName);
-            if (!String.IsNullOrEmpty(fileExtension))
-                fileExtension = fileExtension.ToLowerInvariant();
-            //contentType is not always available 
-            //that's why we manually update it here
-            //http://www.sfsu.edu/training/mimetype.htm
-            if (String.IsNullOrEmpty(contentType))
-            {
-                switch (fileExtension)
-                {
-                    case ".bmp":
-                        contentType = "image/bmp";
-                        break;
-                    case ".gif":
-                        contentType = "image/gif";
-                        break;
-                    case ".jpeg":
-                    case ".jpg":
-                    case ".jpe":
-                    case ".jfif":
-                    case ".pjpeg":
-                    case ".pjp":
-                        contentType = "image/jpeg";
-                        break;
-                    case ".png":
-                        contentType = "image/png";
-                        break;
-                    case ".tiff":
-                    case ".tif":
-                        contentType = "image/tiff";
-                        break;
-                    default:
-                        break;
-                }
-            }
-            return contentType;
-        }
-
-        private void GenerateThumbnail(Picture picture)
-        {
-            try
-            {
- 
-                //var image = Image.FromStream(file.InputStream);
-          
-                //using (var thumbnailImage = image.GetThumbnailImage(280, 280, ThumbnailCallback, IntPtr.Zero))
-                //{
-                //    var imageSavePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\Images\\SaveUpload\\Product\\Thumbnails\\", pictureId.ToString() + ".jpg");
-                //    thumbnailImage.Save(imageSavePath, ImageFormat.Jpeg);
-                //}
-                var thumbFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "\\Images\\SaveUpload\\Product\\Thumbnails\\", picture.Id + ".jpg");
-                if (!System.IO.File.Exists(thumbFilePath))
-                {
-                    using (var stream = new MemoryStream(picture.PictureBinary))
-                    {
-                        Bitmap b = null;
-                        try
-                        {
-                            //try-catch to ensure that picture binary is really OK. Otherwise, we can get "Parameter is not valid" exception if binary is corrupted for some reasons
-                            b = new Bitmap(stream);
-                        }
-                        catch (ArgumentException exc)
-                        {
-                           // _logger.Error(string.Format("Error generating picture thumb. ID={0}", picture.Id), exc);
-                        }
-                        if (b == null)
-                        {
-                            //bitmap could not be loaded for some reasons
-                           // return url;
-                        }
-
-                        var newSize = CalculateDimensions(b.Size, 0);// targetSize);
-
-                        var destStream = new MemoryStream();
-                        ImageBuilder.Current.Build(b, destStream, new ResizeSettings()
-                        {
-                            Width = newSize.Width,
-                            Height = newSize.Height,
-                            Scale = ScaleMode.Both,
-                            Quality = 0
-                        });
-                        var destBinary = destStream.ToArray();
-                        System.IO.File.WriteAllBytes(thumbFilePath, destBinary);
-
-                        b.Dispose();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        protected virtual Size CalculateDimensions(Size originalSize, int targetSize,
-           ResizeType resizeType = ResizeType.LongestSide, bool ensureSizePositive = true)
-        {
-            var newSize = new Size();
-            switch (resizeType)
-            {
-                case ResizeType.LongestSide:
-                    if (originalSize.Height > originalSize.Width)
-                    {
-                        // portrait 
-                        newSize.Width = (int)(originalSize.Width * (float)(targetSize / (float)originalSize.Height));
-                        newSize.Height = targetSize;
-                    }
-                    else
-                    {
-                        // landscape or square
-                        newSize.Height = (int)(originalSize.Height * (float)(targetSize / (float)originalSize.Width));
-                        newSize.Width = targetSize;
-                    }
-                    break;
-                case ResizeType.Width:
-                    newSize.Height = (int)(originalSize.Height * (float)(targetSize / (float)originalSize.Width));
-                    newSize.Width = targetSize;
-                    break;
-                case ResizeType.Height:
-                    newSize.Width = (int)(originalSize.Width * (float)(targetSize / (float)originalSize.Height));
-                    newSize.Height = targetSize;
-                    break;
-                default:
-                    throw new Exception("Not supported ResizeType");
-            }
-
-            if (ensureSizePositive)
-            {
-                if (newSize.Width < 1)
-                    newSize.Width = 1;
-                if (newSize.Height < 1)
-                    newSize.Height = 1;
-            }
-
-            return newSize;
-        }
-
-        public enum ResizeType
-        {
-            LongestSide,
-            Width,
-            Height
-        }
-
-        public bool ThumbnailCallback()
-        {
-            return true;
-        }
-
         [HttpPost]
         public async Task<ActionResult> Upload(UploadFileViewModel uploadFileModel)
         {
@@ -227,19 +70,15 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return View(uploadFileModel);
             }
-
             if (uploadFileModel.File == null)
                 throw new ArgumentException("No file uploaded");
-
             var picture = new Picture();
             picture.FileName = uploadFileModel.File.FileName;
-            picture.MimeType = GetContentType(uploadFileModel.File);
-            picture.PictureBinary = GetBytes(uploadFileModel.File);
+            picture.MimeType =ImageHelper.GetContentType(uploadFileModel.File);
+            picture.PictureBinary = ImageHelper.GetBytes(uploadFileModel.File);
             picture.Id = _pictureDal.Insert(picture);
-            GenerateThumbnail(picture);
-
-            //return Content("File Uploaded.");
-
+            uploadFileModel.File.SaveAs(ImageHelper.GetOriginalImagePath(picture));
+            HandleQueue.Instance.Add(picture);
             return View();
         }
 
@@ -252,11 +91,9 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 await _pictureDal.InsertAsync(picture);
                 return RedirectToAction("Index");
             }
-
             return View(picture);
         }
 
@@ -284,7 +121,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 await _pictureDal.ModifyAsync(picture);
                 return RedirectToAction("Index");
             }
@@ -311,7 +147,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-
             await _pictureDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }

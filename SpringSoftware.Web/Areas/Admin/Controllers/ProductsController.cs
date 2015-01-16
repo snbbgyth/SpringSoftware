@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Areas.Admin.Models;
+using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.Help;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
@@ -17,10 +19,11 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private IProductDal _productDal;
-
+        private IPictureDal _pictureDal;
         public ProductsController()
         {
             _productDal = DependencyResolver.Current.GetService<IProductDal>();
+            _pictureDal = DependencyResolver.Current.GetService<IPictureDal>();
         }
 
         // GET: Products
@@ -57,12 +60,27 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ProductViewModel productView)
         {
+            if (productView.UploadFile.File != null)
+            {
+                AddUploadFile(productView);
+            }
             if (ModelState.IsValid)
             {
                 await _productDal.InsertAsync(productView.Product);
                 return RedirectToAction("Index");
             }
             return View(productView);
+        }
+
+        private void AddUploadFile(ProductViewModel productView)
+        {
+            var picture = new Picture();
+            picture.FileName = productView.UploadFile.File.FileName;
+            picture.MimeType = ImageHelper.GetContentType(productView.UploadFile.File);
+            picture.PictureBinary = ImageHelper.GetBytes(productView.UploadFile.File);
+            picture.Id = _pictureDal.Insert(picture);
+            productView.UploadFile.File.SaveAs(ImageHelper.GetOriginalImagePath(picture));
+            HandleQueue.Instance.Add(picture);
         }
 
         // GET: Products/Edit/5
