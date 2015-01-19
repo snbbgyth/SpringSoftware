@@ -189,7 +189,6 @@ namespace SpringSoftware.Core.DAL
             catch (Exception ex)
             {
                 LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
-                //return  new List<T>();
             }
             return entityList;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using SpringSoftware.Core.DbModel;
@@ -8,12 +9,12 @@ namespace SpringSoftware.Web.Areas.Admin.Models
 {
     public class ProductViewModel
     {
-        public ProductViewModel()
+        public    ProductViewModel()
         {
             Product = new Product();
             PictureList = new List<Picture>();
-            Picture = new Picture();
-            ProductPicture = new ProductPicture();
+ 
+            ProductPictureList = new List<ProductPicture>();
             UploadFile = new UploadFileViewModel();
         }
 
@@ -21,11 +22,11 @@ namespace SpringSoftware.Web.Areas.Admin.Models
 
         public List<Picture> PictureList { get; set; }
 
-        public Picture Picture { get; set; }
 
-        public ProductPicture ProductPicture { get; set; }
+        public List<ProductPicture> ProductPictureList { get; set; }
 
         public UploadFileViewModel UploadFile { get; set; }
+
 
     }
 }

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
+using SpringSoftware.Core.Model;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.Help;
@@ -16,14 +17,17 @@ using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private IProductDal _productDal;
         private IPictureDal _pictureDal;
+        private IProductPictureDal _productPictureDal;
+
         public ProductsController()
         {
             _productDal = DependencyResolver.Current.GetService<IProductDal>();
             _pictureDal = DependencyResolver.Current.GetService<IPictureDal>();
+            _productPictureDal = DependencyResolver.Current.GetService<IProductPictureDal>();
         }
 
         // GET: Products
@@ -50,7 +54,8 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new ProductViewModel();
+            return View(model);
         }
 
         // POST: Products/Create
@@ -60,27 +65,42 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ProductViewModel productView)
         {
-            if (productView.UploadFile.File != null)
-            {
-                AddUploadFile(productView);
-            }
             if (ModelState.IsValid)
             {
-                await _productDal.InsertAsync(productView.Product);
+                InitInsert(productView.Product);
+                productView.Product.Id = await _productDal.InsertAsync(productView.Product);
+                if (productView.UploadFile.File != null)
+                {
+                   AddPictureToProduct(productView);
+                }
                 return RedirectToAction("Index");
             }
             return View(productView);
         }
 
-        private void AddUploadFile(ProductViewModel productView)
+        private async void AddPictureToProduct(ProductViewModel productView)
+        {
+            var picture = await AddUploadFile(productView);
+            var productPicture = new ProductPicture();
+            productPicture.Picture.Id = picture.Id;
+            productPicture.Product.Id = productView.Product.Id;
+            InitInsert(productPicture);
+            await _productPictureDal.InsertAsync(productPicture);
+            productView.PictureList.Add(picture);
+            productPicture.Product.Id = productView.Product.Id;
+            productView.ProductPictureList.Add(productPicture);
+        }
+
+        private async Task<Picture> AddUploadFile(ProductViewModel productView)
         {
             var picture = new Picture();
             picture.FileName = productView.UploadFile.File.FileName;
             picture.MimeType = ImageHelper.GetContentType(productView.UploadFile.File);
-            picture.PictureBinary = ImageHelper.GetBytes(productView.UploadFile.File);
-            picture.Id = _pictureDal.Insert(picture);
+            InitInsert(picture);
+            picture.Id = await _pictureDal.InsertAsync(picture);
             productView.UploadFile.File.SaveAs(ImageHelper.GetOriginalImagePath(picture));
             HandleQueue.Instance.Add(picture);
+            return picture;
         }
 
         // GET: Products/Edit/5

@@ -4,12 +4,21 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
+using SpringSoftware.Core.IDAL;
 
 namespace SpringSoftware.Web.Help
 {
     public class ImageHelper
     {
+        private static IPictureDal _pictureDal;
+
+        static ImageHelper()
+        {
+            _pictureDal = DependencyResolver.Current.GetService<IPictureDal>();
+        }
+
         public static byte[] GetBytes(HttpPostedFileBase file)
         {
             var stream = file.InputStream;
@@ -77,6 +86,17 @@ namespace SpringSoftware.Web.Help
         private static string GetThumbnailPath(Picture picture, int size)
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Images\\SaveUpload\\Product\\Thumbnails",picture.Id + "_" + size + Path.GetExtension(picture.FileName));
+        }
+
+        public static string Get280PathByPicture(Picture picture)
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
+        }
+
+        public static string Get280PathByPictureId(int pictureId)
+        {
+            var picture = _pictureDal.QueryById(pictureId);
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
         }
 
         private static void SaveImage(Picture picture, int size)

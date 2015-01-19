@@ -9,6 +9,12 @@ namespace SpringSoftware.Core.DbModel
 {
    public class ProductPicture:BaseTable
     {
+       public ProductPicture()
+       {
+           Picture=new Picture();
+           Product=new Product();
+       }
+
         public virtual int DisplayOrder { get; set; }
 
         /// <summary>

@@ -1,8 +1,32 @@
-﻿@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
+﻿@using SpringSoftware.Web.Help
+@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 
-<div>
-    @foreach (var item in Model.PictureList)
-    {
-        
-    }
-</div>
+<table role="grid">
+    <colgroup>
+        <col style="width:200px">
+        <col style="width:150px">
+        <col style="width:200px">
+    </colgroup>
+    <thead  role="rowgroup">
+        <tr role="row">
+            <th role="columnheader" data-field="PictureUrl" data-title="图片" >图片</th>
+            <th role="columnheader" data-field="DisplayOrder" data-title="显示顺序" >显示顺序</th>
+            <th ></th>
+        </tr>
+    </thead>
+    <tbody role="rowgroup">
+        @foreach (var item in Model.ProductPictureList)
+        {
+            <tr  role="row">
+                <td role="gridcell">
+                    <a href=@ImageHelper.Get280PathByPictureId(item.Picture.Id) target="_blank"><img alt="21" src=@ImageHelper.Get280PathByPictureId(item.Picture.Id) width="150"></a>
+                    <a></a>
+                </td>
+                <td role="gridcell">@item.DisplayOrder </td>
+                <td role="gridcell">
+                    <a  href="#">编辑</a><a  href="#">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

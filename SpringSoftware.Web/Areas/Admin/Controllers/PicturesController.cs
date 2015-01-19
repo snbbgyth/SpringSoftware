@@ -22,6 +22,7 @@ using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
+    [MyAuthorize(Roles = "Admin")]
     public class PicturesController : Controller
     {
         private IPictureDal _pictureDal;

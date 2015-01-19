@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using SpringSoftware.Core.Model;
 
 namespace SpringSoftware.Web.Help
 {
@@ -64,6 +66,8 @@ namespace SpringSoftware.Web.Help
             }
             return new string(array, 0, arrayIndex);
         }
+
+
 
     }
 }
