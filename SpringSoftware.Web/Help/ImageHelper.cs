@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
@@ -93,11 +94,30 @@ namespace SpringSoftware.Web.Help
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
         }
 
-        public static string Get280PathByPictureId(int pictureId)
+        public static string Get280PathByPictureId(int pictureId,IEnumerable<Picture> pictureList=null)
         {
-            var picture = _pictureDal.QueryById(pictureId);
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
+            Picture picture = null;
+            if (pictureList != null && pictureList.Any())
+            {
+                picture = pictureList.FirstOrDefault(t => t.Id == pictureId);
+            }
+            if(picture==null)
+              picture = _pictureDal.QueryById(pictureId);
+            var path = Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/Thumbnails/"),  picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
+            return ResolveServerUrl(path, false);
         }
+
+        public static string ResolveServerUrl(string serverUrl, bool forceHttps)
+        {
+            if (serverUrl.IndexOf("://") > -1)
+                return serverUrl;
+
+            string newUrl = serverUrl;
+            Uri originalUri = HttpContext.Current.Request.Url;
+            newUrl = (forceHttps ? "https" : originalUri.Scheme) +
+                "://" + originalUri.Authority + newUrl;
+            return newUrl;
+        } 
 
         private static void SaveImage(Picture picture, int size)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using SpringSoftware.Core.Model;
 
@@ -67,7 +68,14 @@ namespace SpringSoftware.Web.Help
             return new string(array, 0, arrayIndex);
         }
 
-
+        public static IHtmlString MyImage(this HtmlHelper htmlHelper, string url)
+        {
+            var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
+            var img = new TagBuilder("img");
+            img.Attributes["alt"] = "[IMAGE]";
+            img.Attributes["src"] = UrlHelper.GenerateContentUrl(url, htmlHelper.ViewContext.HttpContext);
+            return MvcHtmlString.Create(img.ToString(TagRenderMode.SelfClosing));
+        }
 
     }
 }

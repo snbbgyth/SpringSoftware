@@ -44,5 +44,7 @@ namespace SpringSoftware.Web.Models
 
         public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.Picture> Pictures { get; set; }
 
+        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.ProductType> ProductTypes { get; set; }
+
     }
 }

@@ -43,12 +43,32 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await _productDal.QueryByIdAsync(id);
-            if (product == null)
+            return View(await GetByProductId(id));
+        }
+
+        private async Task<ProductViewModel> GetByProductId(int? id)
+        {
+            var productView = new ProductViewModel();
+            if (id == null)
             {
-                return HttpNotFound();
+                return productView;
             }
-            return View(product);
+            productView.Product = await _productDal.QueryByIdAsync(id);
+            if (productView.Product == null)
+            {
+                return productView;
+            }
+            productView.ProductPictureList = new List<ProductPicture>(await _productPictureDal.QueryByFunAsync(t => t.Product.Id == id));
+            if (productView.ProductPictureList.Any())
+            {
+                foreach (var productPicture in productView.ProductPictureList)
+                {
+                    var picture = await _pictureDal.QueryByIdAsync(productPicture.Picture.Id);
+                    if (picture != null)
+                        productView.PictureList.Add(picture);
+                }
+            }
+            return productView;
         }
 
         // GET: Products/Create
@@ -57,6 +77,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             var model = new ProductViewModel();
             return View(model);
         }
+
 
         // POST: Products/Create
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
@@ -71,14 +92,14 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 productView.Product.Id = await _productDal.InsertAsync(productView.Product);
                 if (productView.UploadFile.File != null)
                 {
-                   AddPictureToProduct(productView);
+                   await  AddPictureToProduct(productView);
                 }
                 return RedirectToAction("Index");
             }
             return View(productView);
         }
 
-        private async void AddPictureToProduct(ProductViewModel productView)
+        private async Task<int> AddPictureToProduct(ProductViewModel productView)
         {
             var picture = await AddUploadFile(productView);
             var productPicture = new ProductPicture();
@@ -89,6 +110,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             productView.PictureList.Add(picture);
             productPicture.Product.Id = productView.Product.Id;
             productView.ProductPictureList.Add(productPicture);
+            return 1;
         }
 
         private async Task<Picture> AddUploadFile(ProductViewModel productView)
@@ -110,12 +132,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await _productDal.QueryByIdAsync(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
+            return View(await GetByProductId(id));
         }
 
         // POST: Products/Edit/5
@@ -123,14 +140,15 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Discrption,Price,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] Product product)
+        public async Task<ActionResult> Edit(ProductViewModel productView)
         {
-            if (ModelState.IsValid)
+            InitModify(productView.Product);
+            await _productDal.ModifyAsync(productView.Product);
+            if (productView.UploadFile.File != null)
             {
-                await _productDal.ModifyAsync(product);
-                return RedirectToAction("Index");
+                await AddPictureToProduct(productView);
             }
-            return View(product);
+            return View(productView);
         }
 
         // GET: Products/Delete/5

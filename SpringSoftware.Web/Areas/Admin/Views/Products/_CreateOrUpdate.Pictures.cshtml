@@ -19,7 +19,9 @@
         {
             <tr  role="row">
                 <td role="gridcell">
-                    <a href=@ImageHelper.Get280PathByPictureId(item.Picture.Id) target="_blank"><img alt="21" src=@ImageHelper.Get280PathByPictureId(item.Picture.Id) width="150"></a>
+                    <a href=@ImageHelper.Get280PathByPictureId(item.Picture.Id,Model.PictureList) target="_blank">
+                        <img alt="21" src=@ImageHelper.Get280PathByPictureId(item.Picture.Id, Model.PictureList) width="150">
+                    </a>
                     <a></a>
                 </td>
                 <td role="gridcell">@item.DisplayOrder </td>

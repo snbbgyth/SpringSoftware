@@ -1,10 +1,5 @@
 ﻿@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -57,7 +52,3 @@
 {
     @Html.Partial("_CreateOrUpdate.Pictures", Model)
 }
- 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

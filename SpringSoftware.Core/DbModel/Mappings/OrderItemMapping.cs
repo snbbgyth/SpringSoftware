@@ -23,7 +23,8 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.OrderId);
             Map(x => x.Total);
 
-            References(x => x.Product, "ProductId").Not.LazyLoad();
+            //HasOne<Product>(x => x.Product).ForeignKey("ProductId").Cascade.All();
+            References(x => x.Product, "ProductId").Cascade.None();
 
 
         }

@@ -21,8 +21,8 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.LastModifyDate);
 
             Map(x => x.DisplayOrder);
-            References(x => x.Picture, "PictureId").Not.LazyLoad();
-            References(x => x.Product, "ProductId").Not.LazyLoad();
+            References(x => x.Picture, "PictureId").Cascade.None();
+            References(x => x.Product, "ProductId").Cascade.None();
 
         }
     }

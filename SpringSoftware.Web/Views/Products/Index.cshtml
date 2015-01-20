@@ -14,9 +14,13 @@
 
 @foreach (var item in Model)
 {
+    string picturePath = "#";
     var picture = ProductManage.Current.GetFirstPictureById(item.Id);
-    var picturePath = Path.Combine(Constants.ProductThumbnailPathTags, picture.FileName);
-    
+    if (picture != null)
+    {
+        picturePath = Path.Combine(Constants.ProductThumbnailPathTags, picture.FileName);
+    }
+
     <div class="item-box">
 
         <div class="product-item" data-productid="16">

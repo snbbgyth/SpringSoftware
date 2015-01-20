@@ -211,6 +211,7 @@
     <Compile Include="Areas\Admin\Controllers\NewsTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PicturesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersAdminController.cs" />
     <Compile Include="Areas\Admin\Models\ProductViewModel.cs" />
@@ -391,6 +392,12 @@
     <Content Include="Areas\Admin\Views\Pictures\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Pictures\Upload.cshtml" />
     <Content Include="Areas\Admin\Views\Products\_CreateOrUpdate.Pictures.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\_CreateOrUpdate.cshtml" />
     <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -634,7 +641,7 @@
     <Content Include="Views\ShopCartItems\Details.cshtml" />
     <Content Include="Views\ShopCartItems\Edit.cshtml" />
     <Content Include="Views\ShopCartItems\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\_Create.UploadFile.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\_CreateOrUpdate.UploadFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
