@@ -103,6 +103,7 @@ namespace SpringSoftware.Web.Help
             }
             if(picture==null)
               picture = _pictureDal.QueryById(pictureId);
+            if (picture == null) return "";
             var path = Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/Thumbnails/"),  picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
             return ResolveServerUrl(path, false);
         }

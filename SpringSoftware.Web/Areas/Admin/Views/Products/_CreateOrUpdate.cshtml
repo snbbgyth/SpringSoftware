@@ -1,19 +1,17 @@
 ﻿@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @ShowPictureList()
+          @Html.Partial("_CreateOrUpdate.Pictures", Model)
         </div>
-
         <div class="form-group">
-            @UpdatePictures()
+            @Html.Partial("_CreateOrUpdate.UploadFile", Model)
         </div>
+       
         <div class="form-group">
             @Html.LabelFor(model => model.Product.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -35,20 +33,10 @@
                 @Html.ValidationMessageFor(model => model.Product.Price, "", new { @class = "text-danger" })
             </div>
         </div>
+        @Html.HiddenFor(model => model.Product.Id)
+        @Html.HiddenFor(model => model.Product.Creater)
+        @Html.HiddenFor(model => model.Product.CreateDate)
+        @Html.HiddenFor(model => model.Product.IsDelete)
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
-@helper UpdatePictures()
-{
-    @Html.Partial("_CreateOrUpdate.UploadFile", Model)
-}
-
-@helper ShowPictureList()
-{
-    @Html.Partial("_CreateOrUpdate.Pictures", Model)
-}
+ 

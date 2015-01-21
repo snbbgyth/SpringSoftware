@@ -19,14 +19,21 @@
         {
             <tr  role="row">
                 <td role="gridcell">
-                    <a href=@ImageHelper.Get280PathByPictureId(item.Picture.Id,Model.PictureList) target="_blank">
-                        <img alt="21" src=@ImageHelper.Get280PathByPictureId(item.Picture.Id, Model.PictureList) width="150">
+                    <a href=@ImageHelper.Get280PathByPictureId(item.PictureId,Model.PictureList) target="_blank">
+                        <img alt="21" src=@ImageHelper.Get280PathByPictureId(item.PictureId, Model.PictureList) width="150">
                     </a>
                     <a></a>
                 </td>
-                <td role="gridcell">@item.DisplayOrder </td>
+                @Html.HiddenFor(model=>item.Id)
+      
                 <td role="gridcell">
-                    <a  href="#">编辑</a><a  href="#">删除</a>
+                    @Html.EditorFor(model=> item.DisplayOrder)
+                </td>
+
+                <td role="gridcell">
+                    @Html.ActionLink("编辑", "EditPicture", new { id = item.Id, displayOrder = Html.FieldIdFor(model => item.DisplayOrder) })
+                    @*<a  href="#">编辑</a>*@
+                    <a  href="#">删除</a>
                 </td>
             </tr>
         }

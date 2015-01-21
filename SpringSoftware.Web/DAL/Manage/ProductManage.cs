@@ -28,13 +28,13 @@ namespace SpringSoftware.Web.DAL.Manage
 
         public IEnumerable<Picture> GetPicturesById(int productId)
         {
-            var mapList = _productPictureDal.QueryByFun(t => t.Product.Id == productId);
-            return _pictureDal.QueryByIds(mapList.Select(x => x.Picture.Id as dynamic ));
+            var mapList = _productPictureDal.QueryByFun(t => t.ProductId== productId);
+            return _pictureDal.QueryByIds(mapList.Select(x => x.ProductId as dynamic));
         }
 
         public Picture GetFirstPictureById(int productId)
         {
-            var mapList = _productPictureDal.QueryByFun(t => t.Product.Id == productId);
+            var mapList = _productPictureDal.QueryByFun(t => t.ProductId == productId);
             return _pictureDal.QueryById(mapList.FirstOrDefault(t=>t.DisplayOrder==mapList.Min(x => x.DisplayOrder)));
         }
     }

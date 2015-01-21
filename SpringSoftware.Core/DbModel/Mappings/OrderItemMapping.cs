@@ -22,9 +22,9 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.Price);
             Map(x => x.OrderId);
             Map(x => x.Total);
-
-            //HasOne<Product>(x => x.Product).ForeignKey("ProductId").Cascade.All();
-            References(x => x.Product, "ProductId").Cascade.None();
+            Map(x => x.ProductId);
+  
+            //References(x => x.Product, "ProductId").Not.ForeignKey();
 
 
         }

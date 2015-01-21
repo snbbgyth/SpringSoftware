@@ -1,7 +1,6 @@
 ﻿@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 @Html.ValidationSummary(false)
-@using (Html.BeginForm(null, null, FormMethod.Post, new {enctype = "multipart/form-data"}))
-{
+
     <div>
         @Html.LabelFor(x => x.UploadFile.File)
         @Html.TextBoxFor(x => x.UploadFile.File, new {type = "file"})
@@ -9,6 +8,6 @@
     </div>
 
     @*<button type="submit" id="uploadFile">上传文件</button>*@
-}
+
 
 

@@ -11,20 +11,26 @@ namespace SpringSoftware.Core.DbModel
     {
        public ProductPicture()
        {
-           Picture=new Picture();
-           Product=new Product();
+           //Picture=new Picture();
+           //Product=new Product();
        }
 
         public virtual int DisplayOrder { get; set; }
 
+
+        public virtual int PictureId { get; set; }
+
+
+        public virtual int ProductId { get; set; }
+
         /// <summary>
         /// Gets the picture
         /// </summary>
-        public virtual Picture Picture { get; set; }
+        //public virtual Picture Picture { get; set; }
 
         /// <summary>
         /// Gets the product
         /// </summary>
-        public virtual Product Product { get; set; }
+        //public virtual Product Product { get; set; }
     }
 }

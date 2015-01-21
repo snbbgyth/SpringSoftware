@@ -16,7 +16,7 @@ using PagedList;
 namespace SpringSoftware.Web.Areas.Admin.Controllers
 {
     [MyAuthorize(Roles = "Admin,Edit")]
-    public class NewsController : Controller
+    public class NewsController : BaseController
     {
         private INewsDal _newsDal;
         private INewsTypeDal _newsTypeDal;
@@ -92,8 +92,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                news.Creater = User.Identity.Name;
-                news.LastModifier = User.Identity.Name;
+                InitInsert(news);
                 await _newsDal.InsertAsync(news);
                 return RedirectToAction("Index");
             }

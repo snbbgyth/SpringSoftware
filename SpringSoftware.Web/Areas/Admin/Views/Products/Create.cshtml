@@ -1,11 +1,17 @@
 ﻿@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "创建";
 }
-<h2>Create</h2>
- 
-
- @Html.Partial("_CreateOrUpdate", Model)
+<h2>创建</h2>
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Partial("_CreateOrUpdate", Model)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="创建" class="btn btn-default" />
+        </div>
+    </div>
+}
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("返回列表", "Index")
 </div>

@@ -58,12 +58,12 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return productView;
             }
-            productView.ProductPictureList = new List<ProductPicture>(await _productPictureDal.QueryByFunAsync(t => t.Product.Id == id));
+            productView.ProductPictureList = new List<ProductPicture>(await _productPictureDal.QueryByFunAsync(t => t.ProductId == id));
             if (productView.ProductPictureList.Any())
             {
                 foreach (var productPicture in productView.ProductPictureList)
                 {
-                    var picture = await _pictureDal.QueryByIdAsync(productPicture.Picture.Id);
+                    var picture = await _pictureDal.QueryByIdAsync(productPicture.PictureId);
                     if (picture != null)
                         productView.PictureList.Add(picture);
                 }
@@ -92,7 +92,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 productView.Product.Id = await _productDal.InsertAsync(productView.Product);
                 if (productView.UploadFile.File != null)
                 {
-                   await  AddPictureToProduct(productView);
+                    await AddPictureToProduct(productView);
                 }
                 return RedirectToAction("Index");
             }
@@ -103,12 +103,11 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             var picture = await AddUploadFile(productView);
             var productPicture = new ProductPicture();
-            productPicture.Picture.Id = picture.Id;
-            productPicture.Product.Id = productView.Product.Id;
+            productPicture.PictureId = picture.Id;
+            productPicture.ProductId = productView.Product.Id;
             InitInsert(productPicture);
             await _productPictureDal.InsertAsync(productPicture);
             productView.PictureList.Add(picture);
-            productPicture.Product.Id = productView.Product.Id;
             productView.ProductPictureList.Add(productPicture);
             return 1;
         }
@@ -140,7 +139,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ProductViewModel productView)
+        public async Task<ActionResult> Edit([Bind(Include = "Product,PictureList,ProductPictureList,UploadFile")] ProductViewModel productView)
         {
             InitModify(productView.Product);
             await _productDal.ModifyAsync(productView.Product);
@@ -149,6 +148,17 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 await AddPictureToProduct(productView);
             }
             return View(productView);
+        }
+
+
+        public async Task<ActionResult> EditPicture(int id, int displayOrder)
+        {
+            var entity = _productPictureDal.QueryById(id);
+            entity.DisplayOrder = displayOrder;
+            InitModify(entity);
+            _productPictureDal.Modify(entity);
+
+            return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Products/Delete/5

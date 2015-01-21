@@ -21,8 +21,11 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.LastModifyDate);
 
             Map(x => x.DisplayOrder);
-            References(x => x.Picture, "PictureId").Cascade.None();
-            References(x => x.Product, "ProductId").Cascade.None();
+            Map(x => x.PictureId);
+            Map(x => x.ProductId);
+
+            //References(x => x.Picture, "PictureId").Not.ForeignKey();
+            //References(x => x.Product, "ProductId").Not.ForeignKey();
 
         }
     }

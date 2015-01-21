@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -68,13 +69,13 @@ namespace SpringSoftware.Web.Help
             return new string(array, 0, arrayIndex);
         }
 
-        public static IHtmlString MyImage(this HtmlHelper htmlHelper, string url)
+  
+
+        public static string FieldIdFor<T, TResult>(this HtmlHelper<T> html, Expression<Func<T, TResult>> expression)
         {
-            var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
-            var img = new TagBuilder("img");
-            img.Attributes["alt"] = "[IMAGE]";
-            img.Attributes["src"] = UrlHelper.GenerateContentUrl(url, htmlHelper.ViewContext.HttpContext);
-            return MvcHtmlString.Create(img.ToString(TagRenderMode.SelfClosing));
+            var id = html.ViewData.TemplateInfo.GetFullHtmlFieldId(ExpressionHelper.GetExpressionText(expression));
+            // because "[" and "]" aren't replaced with "_" in GetFullHtmlFieldId
+            return id.Replace('[', '_').Replace(']', '_');
         }
 
     }

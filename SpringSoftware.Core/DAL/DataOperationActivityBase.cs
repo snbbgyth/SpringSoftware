@@ -83,6 +83,7 @@ namespace SpringSoftware.Core.DAL
                 InitModifyBaseTable(entity);
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
+                  //var t=  session.Get<T>(entity.Id);
                     session.Update(entity);
                     session.Flush();
                     return 1;
@@ -142,10 +143,15 @@ namespace SpringSoftware.Core.DAL
             {
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
-                    var queryString = string.Format("delete {0} where Id = :id", typeof(T).Name);
+
+                    var queryString = string.Format(" delete {0} where Id = :id ", typeof(T).Name);
                     reslut = session.CreateQuery(queryString)
                                     .SetParameter("id", id)
                                     .ExecuteUpdate();
+                 
+                    //var entity = session.Load<T>(id);
+                    //session.Delete(entity);
+                    //session.Flush();
                 }
             }
             catch (Exception ex)

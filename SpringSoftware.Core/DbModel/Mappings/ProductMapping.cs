@@ -21,7 +21,10 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.Name);
             Map(x => x.Discrption).Length(5000);
             Map(x => x.Price);
-            References(x => x.ProductType, "ProductTypeId").Not.LazyLoad();
+            Map(x => x.ProductTypeId);
+
+            //References(x => x.ProductType, "ProductTypeId").Not.ForeignKey();
+ 
         }
     }
 }

@@ -91,16 +91,16 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] NewsType newsType)
+        public async Task<ActionResult> Create(NewsType newsType)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 newsType.Creater = User.Identity.Name;
                 newsType.LastModifier = User.Identity.Name;
                 await _newsTypeDal.InsertAsync(newsType);
                 return RedirectToAction("Index");
-            }
-            return View(newsType);
+            //}
+            //return View(newsType);
         }
 
         // GET: NewsTypes/Edit/5

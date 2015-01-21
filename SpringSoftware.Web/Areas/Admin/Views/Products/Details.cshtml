@@ -1,22 +1,44 @@
-﻿@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
-
+﻿@using SpringSoftware.Web.Help
+@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "祥细";
 }
-
-<h2>Details</h2>
-
+<h2>祥细</h2>
 <div>
     <h4>Product</h4>
     <hr />
     <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
- 
         <div class="form-group">
-            @ShowPictureList()
+            <table role="grid">
+                <colgroup>
+                    <col style="width:200px">
+                    <col style="width:150px">
+                    <col style="width:200px">
+                </colgroup>
+                <thead role="rowgroup">
+                    <tr role="row">
+                        <th role="columnheader" data-field="PictureUrl" data-title="图片">图片</th>
+                        <th role="columnheader" data-field="DisplayOrder" data-title="显示顺序">显示顺序</th>
+                    </tr>
+                </thead>
+                <tbody role="rowgroup">
+                    @foreach (var item in Model.ProductPictureList)
+                    {
+                        <tr role="row">
+                            <td role="gridcell">
+                                <a href=@ImageHelper.Get280PathByPictureId(item.PictureId,Model.PictureList) target="_blank">
+                                    <img alt="21" src=@ImageHelper.Get280PathByPictureId(item.PictureId, Model.PictureList) width="150">
+                                </a>
+                                <a></a>
+                            </td>
+                            <td role="gridcell">@item.DisplayOrder </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Product.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -27,7 +49,6 @@
             @Html.LabelFor(model => model.Product.Discrption, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.Raw(Model.Product.Discrption)
-                
             </div>
         </div>
         <div class="form-group">
@@ -38,11 +59,8 @@
         </div>
     </div>
 </div>
-@helper ShowPictureList()
-{
-    @Html.Partial("_CreateOrUpdate.Pictures", Model)
-}
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Product.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("编辑", "Edit", new { id = Model.Product.Id }) |
+    @Html.ActionLink("返回列表", "Index")
 </p>
