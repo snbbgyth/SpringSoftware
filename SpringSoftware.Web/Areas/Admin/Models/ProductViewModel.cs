@@ -22,6 +22,8 @@ namespace SpringSoftware.Web.Areas.Admin.Models
 
         public List<Picture> PictureList { get; set; }
 
+        public ProductPicture AddPictureModel { get; set; }
+
 
         public List<ProductPicture> ProductPictureList { get; set; }
 
