@@ -37,9 +37,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
-
             IEnumerable<News> entityList = await _newsDal.QueryAllAsync();
             if (entityList.Any())
             {
@@ -50,7 +48,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                                                    || s.Creater.Contains(searchString)
                                                    || s.LastModifier.Contains(searchString));
                 }
-
                 entityList = entityList.OrderByDescending(s => s.LastModifyDate);
             }
             int pageSize = 20;
@@ -78,8 +75,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             var news = new News();
             news.NewsTypeList = await _newsTypeDal.QueryAllAsync();
-           
-            //news.NewsType=new NewsType();
             return View(news);
         }
 
@@ -96,7 +91,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 await _newsDal.InsertAsync(news);
                 return RedirectToAction("Index");
             }
-
             return View(news);
         }
 
@@ -107,12 +101,12 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            News news = await _newsDal.QueryByIdAsync(id);
+            var news = await _newsDal.QueryByIdAsync(id);
             if (news == null)
             {
                 return HttpNotFound();
             }
+            news.NewsTypeList = await _newsTypeDal.QueryAllAsync();
             return View(news);
         }
 

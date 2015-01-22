@@ -2,7 +2,6 @@
      ViewBag.Title = "联系我们";
 }
 
-
 <h2>联系我们</h2>
 
 <address>
@@ -15,8 +14,6 @@
     <strong>联系销售:</strong> <a href="mailto:snbbdx@sina.com">snbbdx@sina.com</a>
 </address>
 <div id="allmap" style="width: 800px;height: 600px;"></div>
-
-
 
 <script type="text/javascript">
     function loadJScript() {
@@ -34,19 +31,17 @@
         // 创建地址解析器实例
         var myGeo = new BMap.Geocoder();
         // 将地址解析结果显示在地图上,并调整地图视野
-        myGeo.getPoint("春天软件有限公司", function (point) {
+        myGeo.getPoint("春天软件工作室", function (point) {
             if (point) {
                 map.centerAndZoom(point, 100);
                 map.addOverlay(new BMap.Marker(point));
             }
         }, "江西省赣州市");
         map.enableScrollWheelZoom(true);
- 
         var marker = new BMap.Marker(point);  // 创建标注
         map.addOverlay(marker);              // 将标注添加到地图中
-        var label = new BMap.Label("春天软件有限公司");
+        var label = new BMap.Label("春天软件工作室");
         marker.setLabel(label);
-
     }
     window.onload = loadJScript;  //异步加载地图
 </script>

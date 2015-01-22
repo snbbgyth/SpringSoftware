@@ -12,6 +12,7 @@ using SpringSoftware.Core.IDAL;
 using SpringSoftware.Core.Model;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.DAL.Manage;
 using SpringSoftware.Web.Help;
 using SpringSoftware.Web.Models;
 
@@ -22,12 +23,14 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         private IProductDal _productDal;
         private IPictureDal _pictureDal;
         private IProductPictureDal _productPictureDal;
+        private IProductTypeDal _productTypeDal;
 
         public ProductsController()
         {
             _productDal = DependencyResolver.Current.GetService<IProductDal>();
             _pictureDal = DependencyResolver.Current.GetService<IPictureDal>();
             _productPictureDal = DependencyResolver.Current.GetService<IProductPictureDal>();
+            _productTypeDal = DependencyResolver.Current.GetService<IProductTypeDal>();
         }
 
         // GET: Products
@@ -43,38 +46,40 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(await GetByProductId(id));
+            return View(await ProductManage.GetByProductId(id));
         }
 
-        private async Task<ProductViewModel> GetByProductId(int? id)
-        {
-            var productView = new ProductViewModel();
-            if (id == null)
-            {
-                return productView;
-            }
-            productView.Product = await _productDal.QueryByIdAsync(id);
-            if (productView.Product == null)
-            {
-                return productView;
-            }
-            productView.ProductPictureList = new List<ProductPicture>(await _productPictureDal.QueryByFunAsync(t => t.ProductId == id));
-            if (productView.ProductPictureList.Any())
-            {
-                foreach (var productPicture in productView.ProductPictureList)
-                {
-                    var picture = await _pictureDal.QueryByIdAsync(productPicture.PictureId);
-                    if (picture != null)
-                        productView.PictureList.Add(picture);
-                }
-            }
-            return productView;
-        }
+        //private async Task<ProductViewModel> GetByProductId(int? id)
+        //{
+        //    var productView = new ProductViewModel();
+        //    if (id == null)
+        //    {
+        //        return productView;
+        //    }
+        //    productView.Product = await _productDal.QueryByIdAsync(id);
+        //    if (productView.Product == null)
+        //    {
+        //        return productView;
+        //    }
+        //    productView.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
+        //    productView.ProductPictureList = new List<ProductPicture>(await _productPictureDal.QueryByFunAsync(t => t.ProductId == id));
+        //    if (productView.ProductPictureList.Any())
+        //    {
+        //        foreach (var productPicture in productView.ProductPictureList)
+        //        {
+        //            var picture = await _pictureDal.QueryByIdAsync(productPicture.PictureId);
+        //            if (picture != null)
+        //                productView.PictureList.Add(picture);
+        //        }
+        //    }
+        //    return productView;
+        //}
 
         // GET: Products/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             var model = new ProductViewModel();
+            model.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
             return View(model);
         }
 
@@ -131,7 +136,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(await GetByProductId(id));
+            return View(await ProductManage.GetByProductId(id));
         }
 
         // POST: Products/Edit/5
@@ -147,9 +152,9 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 await AddPictureToProduct(productView);
             }
-            return View(productView);
+            productView.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
+            return RedirectToAction("Index");
         }
-
 
         public async Task<ActionResult> EditPicture(int id, int displayOrder)
         {
@@ -157,7 +162,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             entity.DisplayOrder = displayOrder;
             InitModify(entity);
             _productPictureDal.Modify(entity);
-
             return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
         }
 

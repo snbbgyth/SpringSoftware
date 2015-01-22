@@ -93,3 +93,4 @@ H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\MySql.Data.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\MySql.Data.Entity.EF6.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\MySql.Web.dll
 D:\OpenSource\Github\SpringSoftware\SpringSoftware\SpringSoftware.Core\bin\Debug\MySql.Data.Entity.EF6.dll
+H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.csprojResolveAssemblyReference.cache

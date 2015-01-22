@@ -25,11 +25,9 @@
                     <a></a>
                 </td>
                 @Html.HiddenFor(model=>item.Id)
-      
                 <td role="gridcell">
                     @Html.EditorFor(model=> item.DisplayOrder)
                 </td>
-
                 <td role="gridcell">
                     @Html.ActionLink("编辑", "EditPicture", new { id = item.Id, displayOrder = Html.FieldIdFor(model => item.DisplayOrder) })
               

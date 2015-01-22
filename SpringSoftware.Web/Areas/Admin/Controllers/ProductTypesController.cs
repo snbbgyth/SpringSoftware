@@ -58,13 +58,16 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Name,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] ProductType productType)
         {
-            if (ModelState.IsValid)
+            try
             {
                 InitInsert(productType);
                 await _productTypeDal.InsertAsync(productType);
                 return RedirectToAction("Index");
             }
-            return View(productType);
+            catch (Exception ex)
+            {
+                return View(productType);
+            }
         }
 
         // GET: Admin/ProductTypes/Edit/5
@@ -89,13 +92,16 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Name,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] ProductType productType)
         {
-            if (ModelState.IsValid)
+            try
             {
                 InitModify(productType);
                 await _productTypeDal.ModifyAsync(productType);
                 return RedirectToAction("Index");
             }
-            return View(productType);
+            catch (Exception ex)
+            {
+                return View(productType);
+            }
         }
 
         // GET: Admin/ProductTypes/Delete/5
@@ -118,7 +124,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-
             await _productTypeDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }

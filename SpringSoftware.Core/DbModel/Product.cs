@@ -25,5 +25,7 @@ namespace SpringSoftware.Core.DbModel
         [DisplayName("价格")]
         public virtual double Price { get; set; }
 
+        public virtual IEnumerable<ProductType> ProductTypeList { get; set; }
+
     }
 }
