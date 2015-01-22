@@ -78,5 +78,13 @@ namespace SpringSoftware.Web.Help
             return id.Replace('[', '_').Replace(']', '_');
         }
 
+        public static string FieldNameFor<T>(this HtmlHelper<T> html, string filedName)
+        {
+            var id = html.ViewData.TemplateInfo.GetFullHtmlFieldName(filedName);
+            
+            // because "[" and "]" aren't replaced with "_" in GetFullHtmlFieldId
+            return id.Replace('[', '_').Replace(']', '_');
+        }
+
     }
 }

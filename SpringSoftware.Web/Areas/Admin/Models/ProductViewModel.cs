@@ -9,11 +9,10 @@ namespace SpringSoftware.Web.Areas.Admin.Models
 {
     public class ProductViewModel
     {
-        public    ProductViewModel()
+        public ProductViewModel()
         {
             Product = new Product();
             PictureList = new List<Picture>();
- 
             ProductPictureList = new List<ProductPicture>();
             UploadFile = new UploadFileViewModel();
         }
@@ -23,7 +22,6 @@ namespace SpringSoftware.Web.Areas.Admin.Models
         public List<Picture> PictureList { get; set; }
 
         public ProductPicture AddPictureModel { get; set; }
-
 
         public List<ProductPicture> ProductPictureList { get; set; }
 

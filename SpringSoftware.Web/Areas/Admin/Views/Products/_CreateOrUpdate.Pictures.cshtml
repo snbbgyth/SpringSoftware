@@ -1,6 +1,24 @@
 ﻿@using SpringSoftware.Web.Help
 @model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#EditPicture").click(function (e) {
+            var id = $("#ProductPictureId").val();
+            var displayOrder = $("#DisplayOrder").val();
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify({ id: id, displayOrder: displayOrder }),
+                url: '@Url.Action("EditPicture", "Products")',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#SuccesDiv").html("<b>Your message has been succesfully sent</b>");
+                }
+            });
+        });
+    });
+</script>
+
 <table role="grid">
     <colgroup>
         <col style="width:200px">
@@ -24,19 +42,21 @@
                     </a>
                     <a></a>
                 </td>
-                @Html.HiddenFor(model=>item.Id)
+                @Html.HiddenFor(model=>item.Id,new {id="ProductPictureId"})
                 <td role="gridcell">
-                    @Html.EditorFor(model=> item.DisplayOrder)
+                    @Html.EditorFor(model => item.DisplayOrder)
                 </td>
                 <td role="gridcell">
-                    @Html.ActionLink("编辑", "EditPicture", new { id = item.Id, displayOrder = Html.FieldIdFor(model => item.DisplayOrder) })
-              
+                    @*@Html.ActionLink("编辑", "EditPicture", new { id = item.Id, displayOrder = "DisplayOrder" })*@
+                    <input id="EditPicture" type="submit" value="编辑" class="btn btn-default" />
                     <a  href="#">删除</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+ 
 
  
  
