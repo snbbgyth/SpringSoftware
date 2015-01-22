@@ -41,6 +41,11 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+# =========================
 bin/
+# =========================
 obj/
+# =========================
 SpringSoftware.v12.suo
