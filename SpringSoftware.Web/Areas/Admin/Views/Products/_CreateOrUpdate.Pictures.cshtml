@@ -2,7 +2,7 @@
 @using SpringSoftware.Web.Help
 @model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     $(document).ready(function () {
         $("#EditPicture").on("click", function () {
             var id = $("#item_Id").val();
@@ -16,7 +16,6 @@
                 }
             });
         });
-
         $("#DeletePicture").on("click", function () {
             var id = $("#item_Id").val();
             $.ajax({
@@ -31,7 +30,6 @@
         });
     });
 </script>
-
 <table role="grid">
     <colgroup>
         <col style="width:200px">
@@ -67,11 +65,13 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
 
-    @*<div>
+
+
+<div>
         <div id="productpictures-grid"></div>
-        <script>
+       <script type="text/javascript">
             $(document).ready(function () {
                 $("#productpictures-grid").kendoGrid({
                     dataSource: {
@@ -162,8 +162,8 @@
 
         $(document).ready(function () {
             $('#addProductPicture').click(function () {
-                var pictureId = $("#@Html.FieldIdFor(model => model.AddPictureModel.PictureId)").val();
-                var displayOrder = $("#@Html.FieldIdFor(model => model.AddPictureModel.DisplayOrder)").val();
+                var pictureId = $("#@Html.FieldIdFor(model => model.AddPictureModel.ProductPicture.PictureId)").val();
+                var displayOrder = $("#@Html.FieldIdFor(model => model.AddPictureModel.ProductPicture.DisplayOrder)").val();
 
                 if (pictureId == 0) {
                     alert('Upload picture first');
@@ -192,20 +192,20 @@
     <table class="adminContent">
         <tr>
             <td class="adminTitle">
-                @Html.LabelFor(model => model.AddPictureModel.PictureId):
+                @Html.LabelFor(model => model.AddPictureModel.ProductPicture.PictureId):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.AddPictureModel.PictureId)
-                @Html.ValidationMessageFor(model => model.AddPictureModel.PictureId)
+                @Html.EditorFor(model => model.AddPictureModel.ProductPicture.PictureId)
+                @Html.ValidationMessageFor(model => model.AddPictureModel.ProductPicture.PictureId)
             </td>
         </tr>
         <tr>
             <td class="adminTitle">
-                @Html.LabelFor(model => model.AddPictureModel.DisplayOrder):
+                @Html.LabelFor(model => model.AddPictureModel.ProductPicture.DisplayOrder):
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.AddPictureModel.DisplayOrder)
-                @Html.ValidationMessageFor(model => model.AddPictureModel.DisplayOrder)
+                @Html.EditorFor(model => model.AddPictureModel.ProductPicture.DisplayOrder)
+                @Html.ValidationMessageFor(model => model.AddPictureModel.ProductPicture.DisplayOrder)
             </td>
         </tr>
         <tr>
@@ -213,7 +213,7 @@
                 <input type="button" id="addProductPicture" class="k-button" value="Admin.Catalog.Products.Pictures.AddButton" />
             </td>
         </tr>
-    </table>*@
+    </table>
 
 
  

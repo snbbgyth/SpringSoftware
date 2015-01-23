@@ -4,7 +4,6 @@
     $(document).ready(function () {
         $("#uploadFile").on("click", function () {
             var uploadFile = $("#UploadFile_File").val();
-
             $.ajax({
                 type: "POST",
                 data: { id: uploadFile, displayOrder: displayOrder },

@@ -13,6 +13,7 @@ using SpringSoftware.Core.IDAL;
 using SpringSoftware.Core.Model;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.DAL.Kendoui;
 using SpringSoftware.Web.DAL.Manage;
 using SpringSoftware.Web.Help;
 using SpringSoftware.Web.Models;
@@ -213,11 +214,10 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProductPictureList(int productId)
+        public async Task<ActionResult> ProductPictureList(int productId)
         {
             //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
             //    return AccessDeniedView();
-
             ////a vendor should have access only to his products
             //if (_workContext.CurrentVendor != null)
             //{
@@ -227,7 +227,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             //        return Content("This is not your product");
             //    }
             //}
-
             //var productPictures = _productService.GetProductPicturesByProductId(productId);
             //var productPicturesModel = productPictures
             //    .Select(x =>
@@ -243,15 +242,26 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             //    })
             //    .ToList();
 
-            //var gridModel = new DataSourceResult
-            //{
-            //    Data = productPicturesModel,
-            //    Total = productPicturesModel.Count
-            //};
+            var productPictures = await _productPictureDal.QueryByFunAsync(t => t.ProductId == productId);
 
-            //return Json(gridModel);
+            var productPicturesModel = productPictures.Select(x =>
+            {
+                return new ProductPictureViewModel
+                {
+                    ProductPicture = x,
+                    PictureUrl = ImageManage.GetOriginalImagePath(x.PictureId)
 
-            return new NullJsonResult();
+                };
+            });
+            var gridModel = new DataSourceResult
+            {
+                Data = productPicturesModel,
+                Total = productPicturesModel.Count()
+            };
+
+            return Json(gridModel);
+
+            //return new NullJsonResult();
         }
 
         [HttpPost]

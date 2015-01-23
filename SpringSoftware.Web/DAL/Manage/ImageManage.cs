@@ -84,6 +84,12 @@ namespace SpringSoftware.Web.DAL.Manage
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\", picture.Id + Path.GetExtension(picture.FileName));
         }
 
+        public static string GetOriginalImagePath(int pictureId)
+        {
+            var picture = _pictureDal.QueryById(pictureId);
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\", picture.Id + Path.GetExtension(picture.FileName));
+        }
+
         private static string GetThumbnailPath(Picture picture, int size)
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + size + Path.GetExtension(picture.FileName));
