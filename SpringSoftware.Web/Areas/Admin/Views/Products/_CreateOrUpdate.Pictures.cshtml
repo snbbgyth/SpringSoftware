@@ -1,18 +1,31 @@
-﻿@using SpringSoftware.Web.Help
+﻿@using SpringSoftware.Web.DAL.Manage
+@using SpringSoftware.Web.Help
 @model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#EditPicture").on("click", function() {
-            var id = $("#ProductPictureId").val();
-            var displayOrder = $("#DisplayOrder").val();
+        $("#EditPicture").on("click", function () {
+            var id = $("#item_Id").val();
+            var displayOrder = $("#item_DisplayOrder").val();
             $.ajax({
                 type: "POST",
                 data: { id: id, displayOrder: displayOrder },
                 url: '@Url.Action("EditPicture", "Products")',
-                contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    $("#SuccesDiv").html("<b>Your message has been succesfully sent</b>");
+                    $("#SuccesDiv").html("<b>修改成功!</b>");
+                }
+            });
+        });
+
+        $("#DeletePicture").on("click", function () {
+            var id = $("#item_Id").val();
+            $.ajax({
+                type: "POST",
+                data: { id: id},
+                url: '@Url.Action("DeletePicture", "Products")',
+                success: function (data) {
+                    $("#SuccesDiv").html("<b>删除成功!</b>");
+                    $('#PictureRow ' + id).remove();
                 }
             });
         });
@@ -35,31 +48,29 @@
     <tbody role="rowgroup">
         @foreach (var item in Model.ProductPictureList)
         {
-            <tr  role="row">
+            <tr role="row" id="PictureRow @item.Id">
                 <td role="gridcell">
-                    <a href=@ImageHelper.Get280PathByPictureId(item.PictureId,Model.PictureList) target="_blank">
-                        <img alt="21" src=@ImageHelper.Get280PathByPictureId(item.PictureId, Model.PictureList) width="150">
+                    <a href=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) target="_blank">
+                        <img alt="21" src=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) width="150">
                     </a>
                     <a></a>
                 </td>
-                @Html.HiddenFor(model=>item.Id,new {id="ProductPictureId"})
+                @Html.HiddenFor(model => item.Id)
                 <td role="gridcell">
                     @Html.EditorFor(model => item.DisplayOrder)
                 </td>
                 <td role="gridcell">
                     <input id="EditPicture" type="button" value="编辑" class="btn btn-default" />
-                    <a  href="#">删除</a>
+                    <input id="DeletePicture" type="button" value="删除" class="btn btn-default" />
                 </td>
+                <td><div id="SuccesDiv" style="color:red"></div></td>
             </tr>
         }
     </tbody>
 </table>
 
-
-
     @*<div>
         <div id="productpictures-grid"></div>
-
         <script>
             $(document).ready(function () {
                 $("#productpictures-grid").kendoGrid({

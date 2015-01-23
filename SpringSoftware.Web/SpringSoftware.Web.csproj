@@ -242,7 +242,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Help\Extentions.cs" />
-    <Compile Include="Help\ImageHelper.cs" />
+    <Compile Include="DAL\Manage\ImageManage.cs" />
     <Compile Include="Help\NullJsonResult.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />

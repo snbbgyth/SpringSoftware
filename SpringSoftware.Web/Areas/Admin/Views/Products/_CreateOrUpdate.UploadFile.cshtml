@@ -1,13 +1,28 @@
 ﻿@model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 @Html.ValidationSummary(false)
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#uploadFile").on("click", function () {
+            var uploadFile = $("#UploadFile_File").val();
 
-    <div>
-        @Html.LabelFor(x => x.UploadFile.File)
-        @Html.TextBoxFor(x => x.UploadFile.File, new {type = "file"})
-        @Html.ValidationMessageFor(x => x.UploadFile.File)
-    </div>
+            $.ajax({
+                type: "POST",
+                data: { id: uploadFile, displayOrder: displayOrder },
+                url: '@Url.Action("UploadFile", "Products")',
+                success: function (data) {
+                    $("#SuccesDiv").html("<b>上传成功!</b>");
+                }
+            });
+        });
+    });
+</script>
+<div>
+    @Html.LabelFor(x => x.UploadFile.File)
+    @Html.TextBoxFor(x => x.UploadFile.File, new { type = "file" })
+    @Html.ValidationMessageFor(x => x.UploadFile.File)
+</div>
+<input id="uploadFile" type="button" value="上传文件" class="btn btn-default" />
 
-    @*<button type="submit" id="uploadFile">上传文件</button>*@
 
 
 

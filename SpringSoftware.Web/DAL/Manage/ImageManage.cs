@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 
-namespace SpringSoftware.Web.Help
+namespace SpringSoftware.Web.DAL.Manage
 {
-    public class ImageHelper
+    public class ImageManage
     {
         private static IPictureDal _pictureDal;
 
-        static ImageHelper()
+        static ImageManage()
         {
             _pictureDal = DependencyResolver.Current.GetService<IPictureDal>();
         }
@@ -28,7 +28,7 @@ namespace SpringSoftware.Web.Help
             return fileBinary;
         }
 
-        public static  string GetContentType(HttpPostedFileBase file)
+        public static string GetContentType(HttpPostedFileBase file)
         {
             var contentType = file.ContentType;
             var fileExtension = Path.GetExtension(file.FileName);
@@ -79,14 +79,14 @@ namespace SpringSoftware.Web.Help
             }
         }
 
-        public static  string GetOriginalImagePath(Picture picture)
+        public static string GetOriginalImagePath(Picture picture)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Images\\SaveUpload\\Product\\",picture.Id + Path.GetExtension(picture.FileName));
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\", picture.Id + Path.GetExtension(picture.FileName));
         }
 
         private static string GetThumbnailPath(Picture picture, int size)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Images\\SaveUpload\\Product\\Thumbnails",picture.Id + "_" + size + Path.GetExtension(picture.FileName));
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + size + Path.GetExtension(picture.FileName));
         }
 
         public static string Get280PathByPicture(Picture picture)
@@ -94,17 +94,17 @@ namespace SpringSoftware.Web.Help
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
         }
 
-        public static string Get280PathByPictureId(int pictureId,IEnumerable<Picture> pictureList=null)
+        public static string Get280PathByPictureId(int pictureId, IEnumerable<Picture> pictureList = null)
         {
             Picture picture = null;
             if (pictureList != null && pictureList.Any())
             {
                 picture = pictureList.FirstOrDefault(t => t.Id == pictureId);
             }
-            if(picture==null)
-              picture = _pictureDal.QueryById(pictureId);
+            if (picture == null)
+                picture = _pictureDal.QueryById(pictureId);
             if (picture == null) return "";
-            var path = Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/Thumbnails/"),  picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
+            var path = Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/Thumbnails/"), picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
             return ResolveServerUrl(path, false);
         }
 
@@ -118,20 +118,39 @@ namespace SpringSoftware.Web.Help
             newUrl = (forceHttps ? "https" : originalUri.Scheme) +
                 "://" + originalUri.Authority + newUrl;
             return newUrl;
-        } 
+        }
 
         private static void SaveImage(Picture picture, int size)
         {
             try
             {
                 using (Image image = new Bitmap(GetOriginalImagePath(picture)))
-                using(Image pThumbnail = image.GetThumbnailImage(size, size, ThumbnailCallback, IntPtr.Zero))
-                pThumbnail.Save(GetThumbnailPath(picture, size));
+                using (Image pThumbnail = image.GetThumbnailImage(size, size, ThumbnailCallback, IntPtr.Zero))
+                    pThumbnail.Save(GetThumbnailPath(picture, size));
             }
             catch (Exception ex)
             {
 
             }
+        }
+
+        public static async Task<int> DeleteImage(int pictureId)
+        {
+            var picture = await _pictureDal.QueryByIdAsync(pictureId);
+            var orginalImagePath = GetOriginalImagePath(picture);
+            if (File.Exists(orginalImagePath))
+                File.Delete(orginalImagePath);
+            var image280Path = GetThumbnailPath(picture, 280);
+            if (File.Exists(image280Path))
+                File.Delete(image280Path);
+            var image100Path = GetThumbnailPath(picture, 100);
+            if (File.Exists(image100Path))
+                File.Delete(image100Path);
+            var image125Path = GetThumbnailPath(picture, 125);
+            if (File.Exists(image125Path))
+                File.Delete(image125Path);
+            await _pictureDal.QueryByIdAsync(pictureId);
+            return 1;
         }
 
         public static bool ThumbnailCallback()

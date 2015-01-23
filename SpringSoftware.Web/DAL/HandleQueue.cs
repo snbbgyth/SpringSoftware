@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using SpringSoftware.Core.DAL;
 using SpringSoftware.Core.DbModel;
+using SpringSoftware.Web.DAL.Manage;
 using SpringSoftware.Web.Help;
 
 namespace SpringSoftware.Web.DAL
@@ -42,7 +43,7 @@ namespace SpringSoftware.Web.DAL
 
         public void HandlePicture(Picture picture)
         {
-            ImageHelper.GenerateThumbnail(picture);
+            ImageManage.GenerateThumbnail(picture);
         }
     }
 }

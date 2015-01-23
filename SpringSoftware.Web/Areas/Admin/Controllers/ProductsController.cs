@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
@@ -49,32 +50,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             return View(await ProductManage.GetByProductId(id));
         }
 
-        //private async Task<ProductViewModel> GetByProductId(int? id)
-        //{
-        //    var productView = new ProductViewModel();
-        //    if (id == null)
-        //    {
-        //        return productView;
-        //    }
-        //    productView.Product = await _productDal.QueryByIdAsync(id);
-        //    if (productView.Product == null)
-        //    {
-        //        return productView;
-        //    }
-        //    productView.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
-        //    productView.ProductPictureList = new List<ProductPicture>(await _productPictureDal.QueryByFunAsync(t => t.ProductId == id));
-        //    if (productView.ProductPictureList.Any())
-        //    {
-        //        foreach (var productPicture in productView.ProductPictureList)
-        //        {
-        //            var picture = await _pictureDal.QueryByIdAsync(productPicture.PictureId);
-        //            if (picture != null)
-        //                productView.PictureList.Add(picture);
-        //        }
-        //    }
-        //    return productView;
-        //}
-
         // GET: Products/Create
         public async Task<ActionResult> Create()
         {
@@ -82,7 +57,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             model.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
             return View(model);
         }
-
 
         // POST: Products/Create
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
@@ -104,9 +78,17 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             return View(productView);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> UploadFile(HttpPostedFileBase file)
+        {
+            var picture = await AddUploadFile(file);
+
+            return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
+        }
+
         private async Task<int> AddPictureToProduct(ProductViewModel productView)
         {
-            var picture = await AddUploadFile(productView);
+            var picture = await AddUploadFile(productView.UploadFile.File);
             var productPicture = new ProductPicture();
             productPicture.PictureId = picture.Id;
             productPicture.ProductId = productView.Product.Id;
@@ -117,14 +99,14 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             return 1;
         }
 
-        private async Task<Picture> AddUploadFile(ProductViewModel productView)
+        private async Task<Picture> AddUploadFile(HttpPostedFileBase file)
         {
             var picture = new Picture();
-            picture.FileName = productView.UploadFile.File.FileName;
-            picture.MimeType = ImageHelper.GetContentType(productView.UploadFile.File);
+            picture.FileName = file.FileName;
+            picture.MimeType = ImageManage.GetContentType(file);
             InitInsert(picture);
             picture.Id = await _pictureDal.InsertAsync(picture);
-            productView.UploadFile.File.SaveAs(ImageHelper.GetOriginalImagePath(picture));
+            file.SaveAs(ImageManage.GetOriginalImagePath(picture));
             HandleQueue.Instance.Add(picture);
             return picture;
         }
@@ -156,13 +138,23 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-       [HttpPost]
+        [HttpPost]
         public async Task<ActionResult> EditPicture(int? id, int? displayOrder)
         {
+            if (id == null || displayOrder == null) return Json(new { Result = true }, JsonRequestBehavior.AllowGet); ;
             var entity = _productPictureDal.QueryById(id);
-            entity.DisplayOrder = displayOrder??0;
+            entity.DisplayOrder = displayOrder ?? 0;
             InitModify(entity);
             _productPictureDal.Modify(entity);
+            return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeletePicture(int? id)
+        {
+            var productPricture = await _productPictureDal.QueryByIdAsync(id);
+            await _productPictureDal.DeleteByIdAsync(id);
+            await ImageManage.DeleteImage(productPricture.PictureId);
             return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
         }
 
@@ -327,6 +319,5 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
- 
     }
 }

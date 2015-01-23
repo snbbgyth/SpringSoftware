@@ -17,6 +17,7 @@ using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.DAL.Manage;
 using SpringSoftware.Web.Help;
 using SpringSoftware.Web.Models;
 
@@ -75,10 +76,10 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 throw new ArgumentException("No file uploaded");
             var picture = new Picture();
             picture.FileName = uploadFileModel.File.FileName;
-            picture.MimeType =ImageHelper.GetContentType(uploadFileModel.File);
-            picture.PictureBinary = ImageHelper.GetBytes(uploadFileModel.File);
+            picture.MimeType =ImageManage.GetContentType(uploadFileModel.File);
+            picture.PictureBinary = ImageManage.GetBytes(uploadFileModel.File);
             picture.Id = _pictureDal.Insert(picture);
-            uploadFileModel.File.SaveAs(ImageHelper.GetOriginalImagePath(picture));
+            uploadFileModel.File.SaveAs(ImageManage.GetOriginalImagePath(picture));
             HandleQueue.Instance.Add(picture);
             return View();
         }
