@@ -49,3 +49,4 @@ bin/
 obj/
 # =========================
 SpringSoftware.v12.suo
+*.suo
