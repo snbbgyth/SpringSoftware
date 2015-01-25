@@ -403,3 +403,16 @@ H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\ImageResizer.xml
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\Microsoft.WindowsAzure.Diagnostics.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\Microsoft.WindowsAzure.Diagnostics.StorageUtility.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Web\bin\Microsoft.WindowsAzure.Diagnostics.xml
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\Autofac.Configuration.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\Autofac.Integration.Mvc.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\ImageResizer.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\MySql.Data.Entity.EF6.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\Microsoft.WindowsAzure.Diagnostics.StorageUtility.dll
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\Autofac.Configuration.xml
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\Autofac.Integration.Mvc.xml
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\ImageResizer.xml
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\Microsoft.WindowsAzure.Diagnostics.xml
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.xml
+D:\OpenSource\Github\SpringSoftware\SpringSoftware.Web\bin\PagedList.Mvc.xml
