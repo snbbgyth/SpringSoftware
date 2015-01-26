@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
@@ -80,9 +81,13 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UploadFile(HttpPostedFileBase file)
+        public async Task<ActionResult> UploadFile()
         {
-            var picture = await AddUploadFile(file);
+            foreach (string file in Request.Files)
+            {
+            }
+            HttpPostedFileBase postedFile = Request.Files[0];
+            //var picture = await AddUploadFile(file);
 
             return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
         }
@@ -98,6 +103,19 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             productView.PictureList.Add(picture);
             productView.ProductPictureList.Add(productPicture);
             return 1;
+        }
+        private async Task<Picture> AddUploadFileByPath(string filePath)
+        {
+            
+            var picture = new Picture();
+            picture.FileName = Path.GetFileName(filePath);
+            picture.MimeType = ImageManage.GetContentType(filePath);
+            InitInsert(picture);
+            picture.Id = await _pictureDal.InsertAsync(picture);
+            System.IO.File.Copy(filePath, ImageManage.GetOriginalImagePath(picture));
+            //file.SaveAs(ImageManage.GetOriginalImagePath(picture));
+            HandleQueue.Instance.Add(picture);
+            return picture;
         }
 
         private async Task<Picture> AddUploadFile(HttpPostedFileBase file)

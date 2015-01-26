@@ -2,7 +2,7 @@
 @using SpringSoftware.Web.Help
 @model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 
-@*<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $("#EditPicture").on("click", function () {
             var id = $("#item_Id").val();
@@ -24,7 +24,7 @@
                 url: '@Url.Action("DeletePicture", "Products")',
                 success: function (data) {
                     $("#SuccesDiv").html("<b>删除成功!</b>");
-                    $('#PictureRow ' + id).remove();
+                    $("#PictureRow" + id).remove();
                 }
             });
         });
@@ -46,7 +46,8 @@
     <tbody role="rowgroup">
         @foreach (var item in Model.ProductPictureList)
         {
-            <tr role="row" id="PictureRow @item.Id">
+            string pictureRowId = "PictureRow" + @item.Id;
+            <tr role="row" id=@pictureRowId>
                 <td role="gridcell">
                     <a href=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) target="_blank">
                         <img alt="21" src=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) width="150">
@@ -65,15 +66,16 @@
             </tr>
         }
     </tbody>
-</table>*@
+</table>
 
 
 
-<div>
-        <div id="productpictures-grid"></div>
+@*<div>
+    <div id="productpictures-grid"></div>
        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#productpictures-grid").kendoGrid({
+           $(document).ready(function () {
+            
+               $("#productpictures-grid").kendoGrid({
                     dataSource: {
                         type: "json",
                         transport: {
@@ -138,7 +140,6 @@
                     }, {
                         field: "DisplayOrder",
                         title: "Admin.Catalog.Products.Pictures.Fields.DisplayOrder",
-                        //integer format
                         format: "{0:0}",
                         width: 150
                     }, {
@@ -152,6 +153,7 @@
                         width: 200
                     }]
                 });
+                
             });
         </script>
     </div>
@@ -213,7 +215,7 @@
                 <input type="button" id="addProductPicture" class="k-button" value="Admin.Catalog.Products.Pictures.AddButton" />
             </td>
         </tr>
-    </table>
+    </table>*@
 
 
  

@@ -66,6 +66,44 @@ namespace SpringSoftware.Web.DAL.Manage
             return contentType;
         }
 
+        public static string GetContentType(string  filePath)
+        {
+            string  contentType =string.Empty ;
+            var fileExtension = Path.GetExtension(filePath);
+            if (!String.IsNullOrEmpty(fileExtension))
+                fileExtension = fileExtension.ToLowerInvariant();
+            if (String.IsNullOrEmpty(contentType))
+            {
+                switch (fileExtension)
+                {
+                    case ".bmp":
+                        contentType = "image/bmp";
+                        break;
+                    case ".gif":
+                        contentType = "image/gif";
+                        break;
+                    case ".jpeg":
+                    case ".jpg":
+                    case ".jpe":
+                    case ".jfif":
+                    case ".pjpeg":
+                    case ".pjp":
+                        contentType = "image/jpeg";
+                        break;
+                    case ".png":
+                        contentType = "image/png";
+                        break;
+                    case ".tiff":
+                    case ".tif":
+                        contentType = "image/tiff";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return contentType;
+        }
+
         public static void GenerateThumbnail(Picture picture)
         {
             try
