@@ -66,9 +66,9 @@ namespace SpringSoftware.Web.DAL.Manage
             return contentType;
         }
 
-        public static string GetContentType(string  filePath)
+        public static string GetContentType(string filePath)
         {
-            string  contentType =string.Empty ;
+            string contentType = string.Empty;
             var fileExtension = Path.GetExtension(filePath);
             if (!String.IsNullOrEmpty(fileExtension))
                 fileExtension = fileExtension.ToLowerInvariant();
@@ -156,11 +156,9 @@ namespace SpringSoftware.Web.DAL.Manage
         {
             if (serverUrl.IndexOf("://") > -1)
                 return serverUrl;
-
             string newUrl = serverUrl;
             Uri originalUri = HttpContext.Current.Request.Url;
-            newUrl = (forceHttps ? "https" : originalUri.Scheme) +
-                "://" + originalUri.Authority + newUrl;
+            newUrl = (forceHttps ? "https" : originalUri.Scheme) + "://" + originalUri.Authority + newUrl;
             return newUrl;
         }
 

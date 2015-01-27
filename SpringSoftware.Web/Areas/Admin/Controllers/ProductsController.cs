@@ -104,9 +104,9 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             productView.ProductPictureList.Add(productPicture);
             return 1;
         }
+
         private async Task<Picture> AddUploadFileByPath(string filePath)
         {
-            
             var picture = new Picture();
             picture.FileName = Path.GetFileName(filePath);
             picture.MimeType = ImageManage.GetContentType(filePath);

@@ -39,10 +39,8 @@ namespace SpringSoftware.Web.Controllers
             {
                 InitAuthor(comment);
                 await _commentDal.InsertAsync(comment);
-
                 return RedirectToAction("Successful");
             }
-
             return View(comment);
         }
 
@@ -61,12 +59,10 @@ namespace SpringSoftware.Web.Controllers
             }
         }
 
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                //_commentDal.Dispose();
             }
             base.Dispose(disposing);
         }

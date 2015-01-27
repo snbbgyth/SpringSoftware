@@ -12,12 +12,12 @@ namespace SpringSoftware.Web.DAL.Manage
 {
     public class ProductManage
     {
-        private static  IProductPictureDal _productPictureDal;
+        private static IProductPictureDal _productPictureDal;
         private static IPictureDal _pictureDal;
         private static IProductDal _productDal;
         private static IProductTypeDal _productTypeDal;
 
-        static  ProductManage()
+        static ProductManage()
         {
             _pictureDal = DependencyResolver.Current.GetService<IPictureDal>();
             _productDal = DependencyResolver.Current.GetService<IProductDal>();
@@ -27,24 +27,24 @@ namespace SpringSoftware.Web.DAL.Manage
 
         public static ProductManage Current
         {
-            get { return new ProductManage();}
+            get { return new ProductManage(); }
         }
 
         public IEnumerable<Picture> GetPicturesById(int productId)
         {
-            var mapList = _productPictureDal.QueryByFun(t => t.ProductId== productId);
+            var mapList = _productPictureDal.QueryByFun(t => t.ProductId == productId);
             return _pictureDal.QueryByIds(mapList.Select(x => x.ProductId as dynamic));
         }
 
-        public static  Picture GetFirstPictureById(int productId)
+        public static Picture GetFirstPictureById(int productId)
         {
             var mapList = _productPictureDal.QueryByFun(t => t.ProductId == productId);
-            if(mapList.Any())
-            return _pictureDal.QueryById(mapList.FirstOrDefault(t=>t.DisplayOrder==mapList.Min(x => x.DisplayOrder)).PictureId);
+            if (mapList.Any())
+                return _pictureDal.QueryById(mapList.FirstOrDefault(t => t.DisplayOrder == mapList.Min(x => x.DisplayOrder)).PictureId);
             return null;
         }
 
-        public static  async Task<ProductViewModel> GetByProductId(int? id)
+        public static async Task<ProductViewModel> GetByProductId(int? id)
         {
             var productView = new ProductViewModel();
             if (id == null)

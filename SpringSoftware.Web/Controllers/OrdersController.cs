@@ -61,7 +61,6 @@ namespace SpringSoftware.Web.Controllers
                 await _orderDal.InsertAsync(order);
                 return RedirectToAction("Index");
             }
-
             return View(order);
         }
 
@@ -116,7 +115,6 @@ namespace SpringSoftware.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            
             await _orderDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }
@@ -125,7 +123,6 @@ namespace SpringSoftware.Web.Controllers
         {
             if (disposing)
             {
-                
             }
             base.Dispose(disposing);
         }

@@ -10,7 +10,6 @@ using SpringSoftware.Web.Help;
 namespace SpringSoftware.Web.DAL
 {
 
-
     public class HandleQueue : BaseQueueDal<dynamic>
     {
         private static readonly object SyncObj = new object();

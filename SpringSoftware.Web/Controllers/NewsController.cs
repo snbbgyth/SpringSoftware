@@ -26,7 +26,6 @@ namespace SpringSoftware.Web.Controllers
         // GET: /News/
         public async Task<ActionResult> CompanyIndex(string currentFilter, string searchString, int? page)
         {
- 
             if (searchString != null)
             {
                 page = 1;
@@ -35,7 +34,6 @@ namespace SpringSoftware.Web.Controllers
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
             IEnumerable<News> entityList = await _newsDal.QueryByFunAsync(t => t.NewsType.Id == 1);
             if (entityList.Any())

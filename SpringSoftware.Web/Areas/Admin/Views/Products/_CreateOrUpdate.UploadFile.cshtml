@@ -4,7 +4,27 @@
     $(document).ready(function () {
  
 
-            $('#fileupload').fileupload({
+
+       
+          
+       
+        $('#fileuploadId').fileupload({
+            url:'@Url.Action("UploadFile", "Products")',
+                dataType: 'json',
+                done: function (e, data) {
+                    $('.file_name').html(data.result.name);
+                    $('.file_type').html(data.result.type);
+                    $('.file_size').html(data.result.size);
+                },
+                progressall: function (e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('.progress .progress-bar').css('width', progress + '%');
+                }
+            }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        });
+
+        @*$('#fileuploadId').fileupload({
                 dataType: 'json',
                 url: '@Url.Action("UploadFile", "Products")',
                 autoUpload: true,
@@ -16,7 +36,7 @@
             }).on('fileuploadprogressall', function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 $('.progress .progress-bar').css('width', progress + '%');
-            });
+            });*@
 
 
         @*$("#uploadFile").on("click", function () {
@@ -31,7 +51,7 @@
                 }
             });
         });*@
-    });
+    //});
 </script>
 <div>
     <span>上传文件</span>
@@ -44,7 +64,7 @@
     <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
         <span>Add files...</span>
-        <input id="fileupload" type="file" name="files[]" multiple>
+        <input id="fileuploadId" type="file" name="files[]" multiple>
     </span>
     <br />
     <div class="progress">

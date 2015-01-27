@@ -69,8 +69,6 @@ namespace SpringSoftware.Web.Help
             return new string(array, 0, arrayIndex);
         }
 
-  
-
         public static string FieldIdFor<T, TResult>(this HtmlHelper<T> html, Expression<Func<T, TResult>> expression)
         {
             var id = html.ViewData.TemplateInfo.GetFullHtmlFieldId(ExpressionHelper.GetExpressionText(expression));
@@ -81,7 +79,6 @@ namespace SpringSoftware.Web.Help
         public static string FieldNameFor<T>(this HtmlHelper<T> html, string filedName)
         {
             var id = html.ViewData.TemplateInfo.GetFullHtmlFieldName(filedName);
-            
             // because "[" and "]" aren't replaced with "_" in GetFullHtmlFieldId
             return id.Replace('[', '_').Replace(']', '_');
         }

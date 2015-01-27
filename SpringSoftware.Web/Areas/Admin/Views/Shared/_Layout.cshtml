@@ -10,9 +10,9 @@
     @{
     //var kendoVersion = "2014.2.716";//      2014.1.318
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/jQuery.FileUpload/css/jquery.fileupload.css")
-    @Styles.Render("~/Content/bootstrap-theme.min.css")
-    @Styles.Render("~/Content/bootstrap.min.css")
+        @Styles.Render("~/Content/jQuery.FileUpload/css/jquery.fileupload.css")
+        @Styles.Render("~/Content/bootstrap-theme.min.css")
+        @Styles.Render("~/Content/bootstrap.min.css")
         @*@Styles.Render(string.Format("~/Content/kendo/{0}/kendo.rtl.min.css", kendoVersion))*@
         @*@Styles.Render(string.Format("~/Content/kendo/{0}/kendo.default.min.css@*", kendoVersion))*@
         @*@Styles.Render(string.Format("~/Content/kendo/{0}/kendo.common.min.css", kendoVersion))*@
@@ -25,7 +25,10 @@
         @Scripts.Render("~/Scripts/jquery-ui-1.11.2.min.js")
         @Scripts.Render("~/Scripts/bootstrap.min.js")
         @Scripts.Render("~/Scripts/tinymce/tinymce.js")
+        @Scripts.Render("~/Scripts/jquery.ui.widget.js")
+        @Scripts.Render("~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js")
         @Scripts.Render("~/Scripts/jQuery.FileUpload/jquery.fileupload.js")
+
         @*@Scripts.Render(string.Format("~/Scripts/kendo/{0}/jquery.min.js", kendoVersion))*@
         @*@Scripts.Render(string.Format("~/Scripts/kendo/{0}/kendo.all.min.js", kendoVersion))*@
     }
