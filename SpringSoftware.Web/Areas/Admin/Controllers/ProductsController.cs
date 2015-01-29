@@ -67,31 +67,24 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ProductViewModel productView)
         {
-            if (ModelState.IsValid)
+            InitInsert(productView.Product);
+            productView.Product.Id = await _productDal.InsertAsync(productView.Product);
+            if (productView.UploadFile.File != null)
             {
-                InitInsert(productView.Product);
-                productView.Product.Id = await _productDal.InsertAsync(productView.Product);
-                if (productView.UploadFile.File != null)
-                {
-                    await AddPictureToProduct(productView);
-                }
-                return RedirectToAction("Index");
+                await AddPictureToProduct(productView);
             }
-            return View(productView);
+            return await Edit(productView.Product.Id);
         }
 
         [HttpPost]
-        public async Task<ActionResult> UploadFile(string fileName)
+        public async Task<ActionResult> UploadFile(HttpPostedFileBase fileName)
         {
-            if (Request.Files.Count > 0)
+            if (fileName != null)
             {
-                foreach (string file in Request.Files)
-                {
-                }
-                HttpPostedFileBase postedFile = Request.Files[0];
-                //var picture = await AddUploadFile(file);
+                var picture = await AddUploadFile(fileName);
+                return Json(new { Result = true, PitureId = picture.Id }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
+            return Json(new { Result = false }, JsonRequestBehavior.AllowGet);
         }
 
         private async Task<int> AddPictureToProduct(ProductViewModel productView)
@@ -115,7 +108,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             InitInsert(picture);
             picture.Id = await _pictureDal.InsertAsync(picture);
             System.IO.File.Copy(filePath, ImageManage.GetOriginalImagePath(picture));
-            //file.SaveAs(ImageManage.GetOriginalImagePath(picture));
             HandleQueue.Instance.Add(picture);
             return picture;
         }
@@ -127,7 +119,14 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             picture.MimeType = ImageManage.GetContentType(file);
             InitInsert(picture);
             picture.Id = await _pictureDal.InsertAsync(picture);
-            file.SaveAs(ImageManage.GetOriginalImagePath(picture));
+            var path = ImageManage.GetOriginalImagePath(picture);
+            try
+            {
+                file.SaveAs(path);
+            }
+            catch (Exception ex)
+            {
+            }
             HandleQueue.Instance.Add(picture);
             return picture;
         }
@@ -156,7 +155,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 await AddPictureToProduct(productView);
             }
             productView.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
-            return RedirectToAction("Index");
+            return await Edit(productView.Product.Id);
         }
 
         [HttpPost]
@@ -202,144 +201,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             await _productDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }
-
-        #region Product pictures
-
-        public ActionResult ProductPictureAdd(int pictureId, int displayOrder, int productId)
-        {
-            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
-            //    return AccessDeniedView();
-
-            //if (pictureId == 0)
-            //    throw new ArgumentException();
-
-            //var product = _productService.GetProductById(productId);
-            //if (product == null)
-            //    throw new ArgumentException("No product found with the specified id");
-
-            ////a vendor should have access only to his products
-            //if (_workContext.CurrentVendor != null && product.VendorId != _workContext.CurrentVendor.Id)
-            //    return RedirectToAction("List");
-
-            //_productService.InsertProductPicture(new ProductPicture()
-            //{
-            //    PictureId = pictureId,
-            //    ProductId = productId,
-            //    DisplayOrder = displayOrder,
-            //});
-
-            //_pictureService.SetSeoFilename(pictureId, _pictureService.GetPictureSeName(product.Name));
-
-            return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> ProductPictureList(int productId)
-        {
-            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
-            //    return AccessDeniedView();
-            ////a vendor should have access only to his products
-            //if (_workContext.CurrentVendor != null)
-            //{
-            //    var product = _productService.GetProductById(productId);
-            //    if (product != null && product.VendorId != _workContext.CurrentVendor.Id)
-            //    {
-            //        return Content("This is not your product");
-            //    }
-            //}
-            //var productPictures = _productService.GetProductPicturesByProductId(productId);
-            //var productPicturesModel = productPictures
-            //    .Select(x =>
-            //    {
-            //        return new ProductModel.ProductPictureModel()
-            //        {
-            //            Id = x.Id,
-            //            ProductId = x.ProductId,
-            //            PictureId = x.PictureId,
-            //            PictureUrl = _pictureService.GetPictureUrl(x.PictureId),
-            //            DisplayOrder = x.DisplayOrder
-            //        };
-            //    })
-            //    .ToList();
-
-            var productPictures = await _productPictureDal.QueryByFunAsync(t => t.ProductId == productId);
-
-            var productPicturesModel = productPictures.Select(x =>
-            {
-                return new ProductPictureViewModel
-                {
-                    ProductPicture = x,
-                    PictureUrl = ImageManage.GetOriginalImagePath(x.PictureId)
-
-                };
-            });
-            var gridModel = new DataSourceResult
-            {
-                Data = productPicturesModel,
-                Total = productPicturesModel.Count()
-            };
-
-            return Json(gridModel);
-
-            //return new NullJsonResult();
-        }
-
-        [HttpPost]
-        public ActionResult ProductPictureUpdate(ProductPicture model)
-        {
-            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
-            //    return AccessDeniedView();
-
-            //var productPicture = _productService.GetProductPictureById(model.Id);
-            //if (productPicture == null)
-            //    throw new ArgumentException("No product picture found with the specified id");
-
-            ////a vendor should have access only to his products
-            //if (_workContext.CurrentVendor != null)
-            //{
-            //    var product = _productService.GetProductById(productPicture.ProductId);
-            //    if (product != null && product.VendorId != _workContext.CurrentVendor.Id)
-            //    {
-            //        return Content("This is not your product");
-            //    }
-            //}
-
-            //productPicture.DisplayOrder = model.DisplayOrder;
-            //_productService.UpdateProductPicture(productPicture);
-
-            return new NullJsonResult();
-        }
-
-        [HttpPost]
-        public ActionResult ProductPictureDelete(int id)
-        {
-            //if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
-            //    return AccessDeniedView();
-
-            //var productPicture = _productService.GetProductPictureById(id);
-            //if (productPicture == null)
-            //    throw new ArgumentException("No product picture found with the specified id");
-
-            //var productId = productPicture.ProductId;
-
-            ////a vendor should have access only to his products
-            //if (_workContext.CurrentVendor != null)
-            //{
-            //    var product = _productService.GetProductById(productId);
-            //    if (product != null && product.VendorId != _workContext.CurrentVendor.Id)
-            //    {
-            //        return Content("This is not your product");
-            //    }
-            //}
-            //var pictureId = productPicture.PictureId;
-            //_productService.DeleteProductPicture(productPicture);
-            //var picture = _pictureService.GetPictureById(pictureId);
-            //_pictureService.DeletePicture(picture);
-
-            return new NullJsonResult();
-        }
-
-        #endregion
 
         protected override void Dispose(bool disposing)
         {

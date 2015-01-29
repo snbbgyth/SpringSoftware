@@ -16,5 +16,7 @@ namespace SpringSoftware.Web.Areas.Admin.Models
         public ProductPicture ProductPicture { get; set; }
 
         public string PictureUrl { get; set; }
+
+        public string PictureId { get; set; }
     }
 }

@@ -119,7 +119,8 @@ namespace SpringSoftware.Web.DAL.Manage
 
         public static string GetOriginalImagePath(Picture picture)
         {
-            return Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/"), picture.Id + Path.GetExtension(picture.FileName));
+            return  Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Images\\SaveUpload\\Product\\", picture.Id + Path.GetExtension(picture.FileName));
+          
         }
 
         public static string GetOriginalImagePath(int pictureId)
@@ -130,17 +131,11 @@ namespace SpringSoftware.Web.DAL.Manage
 
         private static string GetThumbnailPath(Picture picture, int size)
         {
-            return Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/Thumbnails/"),  picture.Id + "_" + size + Path.GetExtension(picture.FileName));
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + size + Path.GetExtension(picture.FileName));
+
         }
 
-        public static string UploadedPath
-        {
-            get
-            {
-                return VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Uploaded/");
-            }
-        }
-
+      
         public static string Get280PathByPictureId(int pictureId, IEnumerable<Picture> pictureList = null)
         {
             Picture picture = null;

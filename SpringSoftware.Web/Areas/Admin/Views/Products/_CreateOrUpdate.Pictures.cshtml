@@ -3,32 +3,45 @@
 @model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#EditPicture").on("click", function () {
-            var id = $("#item_Id").val();
-            var displayOrder = $("#item_DisplayOrder").val();
-            $.ajax({
-                type: "POST",
-                data: { id: id, displayOrder: displayOrder },
-                url: '@Url.Action("EditPicture", "Products")',
-                success: function (data) {
-                    $("#SuccesDiv").html("<b>修改成功!</b>");
-                }
-            });
-        });
-        $("#DeletePicture").on("click", function () {
+    $(document).ready(function() {
+        $("#DeletePicture").on("click", function() {
             var id = $("#item_Id").val();
             $.ajax({
                 type: "POST",
-                data: { id: id},
+                data: { id: id },
                 url: '@Url.Action("DeletePicture", "Products")',
-                success: function (data) {
+                success: function(data) {
                     $("#SuccesDiv").html("<b>删除成功!</b>");
                     $("#PictureRow" + id).remove();
                 }
             });
         });
+
     });
+
+    function EditPicturefun(itemId) {
+        var id =itemId;
+        var displayOrder = $("#item_DisplayOrder" + itemId).val();
+        $.ajax({
+            type: "POST",
+            data: { id: id, displayOrder: displayOrder },
+            url: '@Url.Action("EditPicture", "Products")',
+            success: function(data) {
+                $("#SuccesDiv"+itemId).html("<b>修改成功!</b>");
+            }
+        });
+    }
+    function DeletePicturefun(itemId) {
+        $.ajax({
+            type: "POST",
+            data: { id: itemId },
+            url: '@Url.Action("DeletePicture", "Products")',
+            success: function (data) {
+                $("#SuccesDiv" + itemId).html("<b>删除成功!</b>");
+                $("#PictureRow" + itemId).remove();
+            }
+        });
+    }
 </script>
 <table role="grid">
     <colgroup>
@@ -48,6 +61,7 @@
         @foreach (var item in Model.ProductPictureList)
         {
             string pictureRowId = "PictureRow" + @item.Id;
+            string SuccesDivId = "SuccesDiv" + @item.Id;
             <tr role="row" id=@pictureRowId>
                 <td role="gridcell">
                     <a href=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) target="_blank">
@@ -55,168 +69,19 @@
                     </a>
                     <a></a>
                 </td>
-                @Html.HiddenFor(model => item.Id)
+                @Html.HiddenFor(model => item.Id, new { id = "item_Id"+@item.Id })
                 <td role="gridcell">
-                    @Html.EditorFor(model => item.DisplayOrder)
+                    @Html.EditorFor(model => item.DisplayOrder, null, "item_DisplayOrder"+@item.Id)
                 </td>
                 <td role="gridcell">
-                    <input id="EditPicture" type="button" value="编辑" class="btn btn-default" />
-                    <input id="DeletePicture" type="button" value="删除" class="btn btn-default" />
+                    <input id="EditPicture" type="button" value="编辑" onclick="javascript:EditPicturefun(@item.Id);" class="btn btn-default" />
+                    <input id="DeletePicture" type="button" value="删除" onclick="javascript:DeletePicturefun(@item.Id);" class="btn btn-default" />
                 </td>
-                <td><div id="SuccesDiv" style="color:red"></div></td>
+                <td><div id=@SuccesDivId style="color:red"></div></td>
             </tr>
         }
     </tbody>
 </table>
-
-
-
-@*<div>
-    <div id="productpictures-grid"></div>
-       <script type="text/javascript">
-           $(document).ready(function () {
-            
-               $("#productpictures-grid").kendoGrid({
-                    dataSource: {
-                        type: "json",
-                        transport: {
-                            read: {
-                                url: "@Html.Raw(Url.Action("ProductPictureList", "Products", new { productId = Model.Product.Id }))",
-                                type: "POST",
-                                dataType: "json"
-                            },
-                            update: {
-                                url:"@Html.Raw(Url.Action("ProductPictureUpdate", "Products"))",
-                                type: "POST",
-                                dataType: "json"
-                            },
-                            destroy: {
-                                url: "@Html.Raw(Url.Action("ProductPictureDelete", "Products"))",
-                                type: "POST",
-                                dataType: "json"
-                            }
-                        },
-                        schema: {
-                            data: "Data",
-                            total: "Total",
-                            errors: "Errors",
-                            model: {
-                                id: "Id",
-                                fields: {
-                                    PictureUrl: {editable: false, type: "string" },
-                                    DisplayOrder: {editable: true, type: "number" }
-                                }
-                            }
-                        },
-                        requestEnd: function(e) {
-                            if(e.type=="update") {
-                                this.read();
-                            }
-                        },
-                        error: function(e) {
-                            display_kendoui_grid_error(e);
-                            // Cancel the changes
-                            this.cancelChanges();
-                        },
-                        serverPaging: true,
-                        serverFiltering: true,
-                        serverSorting: true
-                    },
-                    pageable: {
-                        refresh: true,
-                        numeric: false,
-                        previousNext: false,
-                        info: false
-                    },
-                    editable: {
-                        confirmation: false,
-                        mode: "inline"
-                    },
-                    scrollable: false,
-                    columns: [{
-                        field: "PictureUrl",
-                        title: "Admin.Catalog.Products.Pictures.Fields.Picture",
-                        template: '<a href="#=PictureUrl#" target="_blank"><img alt="#=PictureId#" src="#=PictureUrl#" width="150" /><a/>',
-                        width: 200
-                    }, {
-                        field: "DisplayOrder",
-                        title: "Admin.Catalog.Products.Pictures.Fields.DisplayOrder",
-                        format: "{0:0}",
-                        width: 150
-                    }, {
-                        command: [{
-                            name: "edit",
-                            text: "Admin.Common.Edit"
-                        }, {
-                            name: "destroy",
-                            text: "Admin.Common.Delete"
-                        }],
-                        width: 200
-                    }]
-                });
-                
-            });
-        </script>
-    </div>
-    <p>
-        <strong>Admin.Catalog.Products.Pictures.AddNew</strong>
-    </p>
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            $('#addProductPicture').click(function () {
-                var pictureId = $("#@Html.FieldIdFor(model => model.AddPictureModel.ProductPicture.PictureId)").val();
-                var displayOrder = $("#@Html.FieldIdFor(model => model.AddPictureModel.ProductPicture.DisplayOrder)").val();
-
-                if (pictureId == 0) {
-                    alert('Upload picture first');
-                    return;
-                }
-
-                $('#addProductPicture').attr('disabled', true);
-                $.ajax({
-                    cache:false,
-                    type: "POST",
-                    url: "@(Url.Action("ProductPictureAdd", "Product"))",
-                    data: { "pictureId": pictureId, "displayOrder": displayOrder, "productId": @Model.Product.Id },
-                    success: function (data) {
-                        var productpicturesGrid = $("#productpictures-grid");
-                        productpicturesGrid.data('kendoGrid').dataSource.read();
-                        $('#addProductPicture').attr('disabled', false);
-                    },
-                    error:function (xhr, ajaxOptions, thrownError){
-                        alert('Failed to add product picture.');
-                        $('#addProductPicture').attr('disabled', false);
-                    }
-                });
-            });
-        });
-    </script>
-    <table class="adminContent">
-        <tr>
-            <td class="adminTitle">
-                @Html.LabelFor(model => model.AddPictureModel.ProductPicture.PictureId):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.AddPictureModel.ProductPicture.PictureId)
-                @Html.ValidationMessageFor(model => model.AddPictureModel.ProductPicture.PictureId)
-            </td>
-        </tr>
-        <tr>
-            <td class="adminTitle">
-                @Html.LabelFor(model => model.AddPictureModel.ProductPicture.DisplayOrder):
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.AddPictureModel.ProductPicture.DisplayOrder)
-                @Html.ValidationMessageFor(model => model.AddPictureModel.ProductPicture.DisplayOrder)
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="left">
-                <input type="button" id="addProductPicture" class="k-button" value="Admin.Catalog.Products.Pictures.AddButton" />
-            </td>
-        </tr>
-    </table>*@
 
 
  

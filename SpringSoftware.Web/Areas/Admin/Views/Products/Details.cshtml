@@ -2,14 +2,12 @@
 @using SpringSoftware.Web.Help
 @model SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
 @{
-    ViewBag.Title = "祥细";
+    ViewBag.Title = @Model.Product.Name;
 }
-<h2>祥细</h2>
 <div>
-    <h4>Product</h4>
-    <hr />
+ <hr />
     <div class="form-horizontal">
-        <h4>Product</h4>
+
         <hr />
         <div class="form-group">
             <table role="grid">
