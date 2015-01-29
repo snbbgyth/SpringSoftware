@@ -88,7 +88,6 @@ namespace SpringSoftware.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                 await _orderDal.ModifyAsync(order);
                 return RedirectToAction("Index");
             }

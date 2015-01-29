@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -46,7 +47,6 @@ namespace SpringSoftware.Web.Help
             char[] array = new char[source.Length];
             int arrayIndex = 0;
             bool inside = false;
-
             for (int i = 0; i < source.Length; i++)
             {
                 char let = source[i];
@@ -81,6 +81,13 @@ namespace SpringSoftware.Web.Help
             var id = html.ViewData.TemplateInfo.GetFullHtmlFieldName(filedName);
             // because "[" and "]" aren't replaced with "_" in GetFullHtmlFieldId
             return id.Replace('[', '_').Replace(']', '_');
+        }
+
+        public static int GenerateRandomInteger(int min = 0, int max = int.MaxValue)
+        {
+            var randomNumberBuffer = new byte[10];
+            new RNGCryptoServiceProvider().GetBytes(randomNumberBuffer);
+            return new Random(BitConverter.ToInt32(randomNumberBuffer, 0)).Next(min, max);
         }
 
     }

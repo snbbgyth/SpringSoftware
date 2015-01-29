@@ -119,23 +119,26 @@ namespace SpringSoftware.Web.DAL.Manage
 
         public static string GetOriginalImagePath(Picture picture)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\", picture.Id + Path.GetExtension(picture.FileName));
+            return Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/"), picture.Id + Path.GetExtension(picture.FileName));
         }
 
         public static string GetOriginalImagePath(int pictureId)
         {
             var picture = _pictureDal.QueryById(pictureId);
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\", picture.Id + Path.GetExtension(picture.FileName));
+            return GetOriginalImagePath(picture);
         }
 
         private static string GetThumbnailPath(Picture picture, int size)
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + size + Path.GetExtension(picture.FileName));
+            return Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/Thumbnails/"),  picture.Id + "_" + size + Path.GetExtension(picture.FileName));
         }
 
-        public static string Get280PathByPicture(Picture picture)
+        public static string UploadedPath
         {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
+            get
+            {
+                return VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Uploaded/");
+            }
         }
 
         public static string Get280PathByPictureId(int pictureId, IEnumerable<Picture> pictureList = null)
@@ -191,7 +194,7 @@ namespace SpringSoftware.Web.DAL.Manage
             var image125Path = GetThumbnailPath(picture, 125);
             if (File.Exists(image125Path))
                 File.Delete(image125Path);
-            await _pictureDal.QueryByIdAsync(pictureId);
+            await _pictureDal.DeleteByIdAsync(pictureId);
             return 1;
         }
 

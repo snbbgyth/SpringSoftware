@@ -56,6 +56,7 @@ namespace SpringSoftware.Web.DAL.Manage
             {
                 return productView;
             }
+            productView.Product.ProductType = await _productTypeDal.QueryByIdAsync(productView.Product.ProductTypeId);
             productView.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
             productView.ProductPictureList = new List<ProductPicture>(await _productPictureDal.QueryByFunAsync(t => t.ProductId == id));
             if (productView.ProductPictureList.Any())

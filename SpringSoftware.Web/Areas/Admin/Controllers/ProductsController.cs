@@ -83,12 +83,14 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> UploadFile()
         {
-            foreach (string file in Request.Files)
+            if (Request.Files.Count > 0)
             {
+                foreach (string file in Request.Files)
+                {
+                }
+                HttpPostedFileBase postedFile = Request.Files[0];
+                //var picture = await AddUploadFile(file);
             }
-            HttpPostedFileBase postedFile = Request.Files[0];
-            //var picture = await AddUploadFile(file);
-
             return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
         }
 

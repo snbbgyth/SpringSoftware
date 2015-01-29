@@ -2,13 +2,8 @@
 @Html.ValidationSummary(false)
 <script type="text/javascript">
     $(document).ready(function () {
- 
 
-
-       
-          
-       
-        $('#fileuploadId').fileupload({
+        @*$('#fileuploadId').fileupload({
             url:'@Url.Action("UploadFile", "Products")',
                 dataType: 'json',
                 done: function (e, data) {
@@ -22,7 +17,7 @@
                 }
             }).prop('disabled', !$.support.fileInput)
                 .parent().addClass($.support.fileInput ? undefined : 'disabled');
-        });
+        });*@
 
         @*$('#fileuploadId').fileupload({
                 dataType: 'json',
@@ -39,7 +34,7 @@
             });*@
 
 
-        @*$("#uploadFile").on("click", function () {
+        $("#uploadFile").on("click", function () {
             var button = $('#UploadFile_File')[0];
             var uploadFile = $("#UploadFile_File").val();
             $.ajax({
@@ -50,17 +45,17 @@
                     $("#SuccesDiv").html("<b>上传成功!</b>");
                 }
             });
-        });*@
-    //});
+        });
+    });
 </script>
 <div>
     <span>上传文件</span>
-    @*@Html.LabelFor(x => x.UploadFile.File)*@
-    @*@Html.TextBoxFor(x => x.UploadFile.File, new { type = "file" })*@
-    @*@Html.ValidationMessageFor(x => x.UploadFile.File)*@
+    @Html.LabelFor(x => x.UploadFile.File)
+    @Html.TextBoxFor(x => x.UploadFile.File, new { type = "file" })
+    @Html.ValidationMessageFor(x => x.UploadFile.File)
 </div>
 
-<div class="container">
+@*<div class="container">
     <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
         <span>Add files...</span>
@@ -84,7 +79,7 @@
     <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
         <span class="sr-only">0% complete</span>
     </div>
-</div>
+</div>*@
 
 
 

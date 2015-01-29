@@ -45,7 +45,7 @@ namespace SpringSoftware.Web.Controllers
                                                        || s.Creater.Contains(searchString)
                                                        || s.LastModifier.Contains(searchString));
                 }
-                    entityList = entityList.OrderByDescending(s => s.LastModifyDate);
+                entityList = entityList.OrderByDescending(s => s.LastModifyDate);
             }
             int pageSize = 20;
             int pageNumber = (page ?? 1);
@@ -63,7 +63,7 @@ namespace SpringSoftware.Web.Controllers
                 searchString = currentFilter;
             }
             ViewBag.CurrentFilter = searchString;
-            IEnumerable<News> entityList = await _newsDal.QueryByFunAsync(t=>t.NewsType.Id==2);
+            IEnumerable<News> entityList = await _newsDal.QueryByFunAsync(t => t.NewsType.Id == 2);
             if (entityList.Any())
             {
                 if (!String.IsNullOrEmpty(searchString))

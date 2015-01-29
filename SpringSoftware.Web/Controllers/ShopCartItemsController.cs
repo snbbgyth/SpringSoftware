@@ -58,11 +58,9 @@ namespace SpringSoftware.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                 await _shopCartItemDal.InsertAsync(shopCartItem);
                 return RedirectToAction("Index");
             }
-
             return View(shopCartItem);
         }
 
@@ -124,7 +122,6 @@ namespace SpringSoftware.Web.Controllers
         {
             if (disposing)
             {
-      
             }
             base.Dispose(disposing);
         }
