@@ -35,11 +35,11 @@
 
 
         $("#uploadFile").on("click", function () {
-            var button = $('#UploadFile_File')[0];
+            //var uploadFile = $('#UploadFile_File')[0];
             var uploadFile = $("#UploadFile_File").val();
             $.ajax({
                 type: "POST",
-                data: { file: button },
+                data: { file: uploadFile },
                 url: '@Url.Action("UploadFile", "Products")',
                 success: function (data) {
                     $("#SuccesDiv").html("<b>上传成功!</b>");
@@ -54,6 +54,7 @@
     @Html.TextBoxFor(x => x.UploadFile.File, new { type = "file" })
     @Html.ValidationMessageFor(x => x.UploadFile.File)
 </div>
+<input id="uploadFile" type="button" value="上传文件" class="btn btn-default" />
 
 @*<div class="container">
     <span class="btn btn-success fileinput-button">

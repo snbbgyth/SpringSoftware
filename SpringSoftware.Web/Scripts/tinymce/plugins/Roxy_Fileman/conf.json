@@ -1,5 +1,5 @@
 {
-"FILES_ROOT":          "",
+"FILES_ROOT":          "~/Images/SaveUpload/Uploaded",
 "RETURN_URL_PREFIX":   "",
 "SESSION_PATH_KEY":    "",
 "THUMBS_VIEW_WIDTH":   "140",
@@ -8,7 +8,7 @@
 "PREVIEW_THUMB_HEIGHT":"200",
 "MAX_IMAGE_WIDTH":     "1000",
 "MAX_IMAGE_HEIGHT":    "1000",
-"INTEGRATION":         "custom",
+"INTEGRATION":         "tinymce4",
 "DIRLIST":             "asp_net/main.ashx?a=DIRLIST",
 "CREATEDIR":           "asp_net/main.ashx?a=CREATEDIR",
 "DELETEDIR":           "asp_net/main.ashx?a=DELETEDIR",

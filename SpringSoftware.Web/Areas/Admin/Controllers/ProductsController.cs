@@ -81,7 +81,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UploadFile()
+        public async Task<ActionResult> UploadFile(string fileName)
         {
             if (Request.Files.Count > 0)
             {
