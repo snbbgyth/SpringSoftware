@@ -24,9 +24,6 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.PictureId);
             Map(x => x.ProductId);
 
-            //References(x => x.Picture, "PictureId").Not.ForeignKey();
-            //References(x => x.Product, "ProductId").Not.ForeignKey();
-
         }
     }
 }

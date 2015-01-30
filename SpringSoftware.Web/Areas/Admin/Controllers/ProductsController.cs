@@ -62,7 +62,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
 
         // POST: Products/Create
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
+        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ProductViewModel productView)
@@ -73,7 +73,8 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 await AddPictureToProduct(productView);
             }
-            return await Edit(productView.Product.Id);
+            return RedirectToAction("Edit", new { id = productView.Product.Id });
+            //return await Edit(productView.Product.Id);
         }
 
         [HttpPost]
@@ -118,7 +119,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             picture.FileName = file.FileName;
             picture.MimeType = ImageManage.GetContentType(file);
             InitInsert(picture);
-            picture.Id = await _pictureDal.InsertAsync(picture);
+            picture.Id = _pictureDal.Insert(picture);
             var path = ImageManage.GetOriginalImagePath(picture);
             try
             {
@@ -141,9 +142,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             return View(await ProductManage.GetByProductId(id));
         }
 
-        // POST: Products/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Product,PictureList,ProductPictureList,UploadFile")] ProductViewModel productView)
@@ -155,26 +153,38 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 await AddPictureToProduct(productView);
             }
             productView.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
-            return await Edit(productView.Product.Id);
+          return   RedirectToAction("Edit", new {id = productView.Product.Id});
         }
 
         [HttpPost]
         public async Task<ActionResult> EditPicture(int? id, int? displayOrder)
         {
             if (id == null || displayOrder == null) return Json(new { Result = true }, JsonRequestBehavior.AllowGet); ;
-            var entity = _productPictureDal.QueryById(id);
-            entity.DisplayOrder = displayOrder ?? 0;
-            InitModify(entity);
-            _productPictureDal.Modify(entity);
+            try
+            {
+                var entity = _productPictureDal.QueryById(id);
+                entity.DisplayOrder = displayOrder ?? 0;
+                InitModify(entity);
+                _productPictureDal.Modify(entity);
+            }
+            catch (Exception ex)
+            {
+            }
             return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public async Task<ActionResult> DeletePicture(int? id)
         {
-            var productPricture = await _productPictureDal.QueryByIdAsync(id);
-            await _productPictureDal.DeleteByIdAsync(id);
-            await ImageManage.DeleteImage(productPricture.PictureId);
+            try
+            {
+                var productPricture = await _productPictureDal.QueryByIdAsync(id);
+                await _productPictureDal.DeleteByIdAsync(id);
+                await ImageManage.DeleteImage(productPricture.PictureId);
+            }
+            catch (Exception ex)
+            {
+            }
             return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
         }
 

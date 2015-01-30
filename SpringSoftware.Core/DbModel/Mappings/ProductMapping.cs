@@ -23,8 +23,6 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.Price);
             Map(x => x.ProductTypeId);
 
-            //References(x => x.ProductType, "ProductTypeId").Not.ForeignKey();
- 
         }
     }
 }

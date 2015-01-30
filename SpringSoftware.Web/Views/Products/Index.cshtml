@@ -7,34 +7,37 @@
     ViewBag.Title = "产品列表";
 }
 <h2>列表</h2>
-@foreach (var item in Model)
-{
-    string picturePath = "#";
-    var picture = ProductManage.GetFirstPictureById(item.Id);
-    if (picture != null)
+
+<div class="product-grid">
+    @foreach (var item in Model)
     {
-        picturePath = @ImageManage.Get280PathByPictureId(picture.Id);
-    }
-    <div>
-        <div data-productid="16">
-            <div>
-                <a href="#" title="@item.Name">
-                    <img alt="21" src=@picturePath title=@item.Name>
-                </a>
-            </div>
-            <div>
-                <h6>
-                    @Html.ActionLink(@item.Name, "Details", new { id = item.Id })
-                </h6>
-                <div>
+        string picturePath = "#";
+        var picture = ProductManage.GetFirstPictureById(item.Id);
+        if (picture != null)
+        {
+            picturePath = @ImageManage.Get280PathByPictureId(picture.Id);
+        }
+        <div class="item-box">
+            <div data-productid="16" class="product-item">
+                <div class="picture">
+                    <a href="#" title="@item.Name">
+                        <img alt="21" src=@picturePath title=@item.Name>
+                    </a>
+                </div>
+                <div class="details">
+                    <h6>
+                        @Html.ActionLink(@item.Name, "Details", new { id = item.Id })
+                    </h6>
                     <div>
-                        <span>¥ @item.Price</span>
-                    </div>
-                    <div>
-                        <input type="button" value="加入购物车">
+                        <div>
+                            <span>¥ @item.Price</span>
+                        </div>
+                        <div>
+                            <input type="button" value="加入购物车">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>

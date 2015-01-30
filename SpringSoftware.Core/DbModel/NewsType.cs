@@ -8,9 +8,9 @@ using SpringSoftware.Core.Model;
 
 namespace SpringSoftware.Core.DbModel
 {
-   public  class NewsType:BaseTable
+    public class NewsType : BaseTable
     {
-       [DisplayName("新闻类型")]
-       public virtual string Name { get; set; }
+        [DisplayName("新闻类型")]
+        public virtual string Name { get; set; }
     }
 }

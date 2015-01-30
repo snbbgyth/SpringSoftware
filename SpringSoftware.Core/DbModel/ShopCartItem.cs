@@ -7,12 +7,12 @@ using SpringSoftware.Core.Model;
 
 namespace SpringSoftware.Core.DbModel
 {
-   public  class ShopCartItem:BaseTable
+    public class ShopCartItem : BaseTable
     {
-       public virtual string CustomerId { get; set; }
+        public virtual string CustomerId { get; set; }
 
-       public virtual int Count { get; set; }
+        public virtual int Count { get; set; }
 
-       public virtual Product Product { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

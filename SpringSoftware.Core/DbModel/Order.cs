@@ -17,10 +17,7 @@ namespace SpringSoftware.Core.DbModel
 
         public virtual double TotalPrice { get; set; }
 
-
         public virtual bool IsPay { get; set; }
-
-
 
     }
 }

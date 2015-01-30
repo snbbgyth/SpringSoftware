@@ -116,10 +116,6 @@ namespace SpringSoftware.Core.DAL
 
         private void BuildSchema(Configuration config)
         {
-            // delete the existing db on each run
-            //if (File.Exists(DbFile))
-            //    File.Delete(DbFile);
-
             // this NHibernate tool takes a configuration (with mapping info in)
             // and exports a database schema from it
             new SchemaUpdate(config).Execute(false, true);
@@ -148,7 +144,6 @@ namespace SpringSoftware.Core.DAL
         {
             instance.Column("Id");
             instance.GeneratedBy.Native();
-
         }
     }
 
@@ -156,21 +151,13 @@ namespace SpringSoftware.Core.DAL
     {
         public override bool ShouldMap(Type type)
         {
-            // specify the criteria that types must meet in order to be mapped
-            // any type for which this method returns false will not be mapped.
-
             return type.Namespace == "SpringSoftware.Core.DbModel";
         }
 
-
         public override bool IsComponent(Type type)
         {
-            // override this method to specify which types should be treated as components
-            // if you have a large list of types, you should consider maintaining a list of them
-            // somewhere or using some form of conventional and/or attribute design
             return false;
         }
-
 
     }
 }

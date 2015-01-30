@@ -23,9 +23,6 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.OrderId);
             Map(x => x.Total);
             Map(x => x.ProductId);
-  
-            //References(x => x.Product, "ProductId").Not.ForeignKey();
-
 
         }
     }

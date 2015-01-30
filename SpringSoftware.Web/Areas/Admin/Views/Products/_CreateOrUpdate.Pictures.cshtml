@@ -16,7 +16,6 @@
                 }
             });
         });
-
     });
 
     function EditPicturefun(itemId) {
@@ -61,7 +60,7 @@
         @foreach (var item in Model.ProductPictureList)
         {
             string pictureRowId = "PictureRow" + @item.Id;
-            string SuccesDivId = "SuccesDiv" + @item.Id;
+            string succesDivId = "SuccesDiv" + @item.Id;
             <tr role="row" id=@pictureRowId>
                 <td role="gridcell">
                     <a href=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) target="_blank">
@@ -77,7 +76,7 @@
                     <input id="EditPicture" type="button" value="编辑" onclick="javascript:EditPicturefun(@item.Id);" class="btn btn-default" />
                     <input id="DeletePicture" type="button" value="删除" onclick="javascript:DeletePicturefun(@item.Id);" class="btn btn-default" />
                 </td>
-                <td><div id=@SuccesDivId style="color:red"></div></td>
+                <td><div id=@succesDivId style="color:red"></div></td>
             </tr>
         }
     </tbody>

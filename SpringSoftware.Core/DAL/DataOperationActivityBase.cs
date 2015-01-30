@@ -33,9 +33,10 @@ namespace SpringSoftware.Core.DAL
                 InitInsertBaseTable(entity);
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
-                    //need test
-                   var result= session.Save(entity);
+                    session.Transaction.Begin();
+                    var result = session.Save(entity);
                     session.Flush();
+                    session.Transaction.Commit();
                     return Convert.ToInt32(result);
                 }
             }
@@ -83,7 +84,6 @@ namespace SpringSoftware.Core.DAL
                 InitModifyBaseTable(entity);
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
-                  //var t=  session.Get<T>(entity.Id);
                     session.Update(entity);
                     session.Flush();
                     return 1;
@@ -148,10 +148,6 @@ namespace SpringSoftware.Core.DAL
                     reslut = session.CreateQuery(queryString)
                                     .SetParameter("id", id)
                                     .ExecuteUpdate();
-                 
-                    //var entity = session.Load<T>(id);
-                    //session.Delete(entity);
-                    //session.Flush();
                 }
             }
             catch (Exception ex)
@@ -278,7 +274,6 @@ namespace SpringSoftware.Core.DAL
         {
             var task = Task.Factory.StartNew(() => Insert(entity));
             return await task;
-
         }
 
         public async Task<int> SaveOrUpdateAsync(T entity)
