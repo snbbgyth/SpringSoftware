@@ -43,7 +43,6 @@ namespace SpringSoftware.Web.Controllers
             return View();
         }
 
-
         public ActionResult Contact()
         {
             ViewBag.Message = "联系我们.";

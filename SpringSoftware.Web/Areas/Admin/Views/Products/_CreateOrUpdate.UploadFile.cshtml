@@ -30,17 +30,20 @@
     </script>
     <div id="divShowUploadImage">
     </div>*@
-<div>
-    <span>上传文件</span>
-    @Html.LabelFor(x => x.UploadFile.File)
-    @Html.TextBoxFor(x => x.UploadFile.File, new { type = "file" })
-    @Html.ValidationMessageFor(x => x.UploadFile.File)
-</div>
 
+    @*<span>上传文件</span>*@
+    @Html.LabelFor(x => x.UploadFile.File, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+    @Html.TextBoxFor(x => x.UploadFile.File, new { type = "file", htmlAttributes = new { @class = "form-control" } })
+
+</div>
+<div class="col-md-offset-2 col-md-10">
+    <input type="submit" value="上传文件" class="btn btn-default" />
+</div>
 @*<input id="uploadFile" type="button" value="上传文件" class="btn btn-default" />*@
-<input type="submit" value="上传文件" class="btn btn-default" />
+
 @*<div id="divFileUploadMessage"></div>
-@Html.HiddenFor(model => model.AddPictureModel.PictureId)*@
+    @Html.HiddenFor(model => model.AddPictureModel.PictureId)*@
 
 
 

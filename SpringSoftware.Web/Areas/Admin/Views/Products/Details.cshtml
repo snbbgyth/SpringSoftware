@@ -7,7 +7,6 @@
 <div>
  <hr />
     <div class="form-horizontal">
-
         <hr />
         <div class="form-group">
             <table role="grid">
@@ -27,8 +26,8 @@
                     {
                         <tr role="row">
                             <td role="gridcell">
-                                <a href=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) target="_blank">
-                                    <img alt="21" src=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) width="150">
+                                <a href=@ImageManage.GetThumbnailUrlByPictureId(item.PictureId, 125, Model.PictureList) target="_blank">
+                                    <img alt="21" src=@ImageManage.GetThumbnailUrlByPictureId(item.PictureId, 125, Model.PictureList) width="150">
                                 </a>
                                 <a></a>
                             </td>

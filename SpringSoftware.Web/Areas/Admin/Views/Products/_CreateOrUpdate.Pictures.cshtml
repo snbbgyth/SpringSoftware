@@ -45,11 +45,13 @@
 <table role="grid">
     <colgroup>
         <col style="width:200px">
+        <col style="width:200px">
         <col style="width:150px">
         <col style="width:200px">
     </colgroup>
     <thead  role="rowgroup">
         <tr role="row">
+            <th></th>
             <th role="columnheader" data-field="PictureUrl" data-title="图片" >图片</th>
             <th role="columnheader" data-field="DisplayOrder" data-title="显示顺序" >显示顺序</th>
             <th ></th>
@@ -62,9 +64,10 @@
             string pictureRowId = "PictureRow" + @item.Id;
             string succesDivId = "SuccesDiv" + @item.Id;
             <tr role="row" id=@pictureRowId>
+                <td role="gridcell" />
                 <td role="gridcell">
-                    <a href=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) target="_blank">
-                        <img alt="21" src=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) width="150">
+                    <a href=@ImageManage.GetThumbnailUrlByPictureId(item.PictureId, 100, Model.PictureList) target="_blank">
+                        <img alt="21" src=@ImageManage.GetThumbnailUrlByPictureId(item.PictureId, 100, Model.PictureList) width="150">
                     </a>
                     <a></a>
                 </td>

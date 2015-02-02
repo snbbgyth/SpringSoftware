@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Web;
+using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.DAL

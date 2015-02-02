@@ -49,7 +49,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(await ProductManage.GetByProductId(id));
+            return View(await ProductManage.GetProductViewById(id));
         }
 
         // GET: Products/Create
@@ -139,7 +139,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(await ProductManage.GetByProductId(id));
+            return View(await ProductManage.GetProductViewById(id));
         }
 
         [HttpPost]

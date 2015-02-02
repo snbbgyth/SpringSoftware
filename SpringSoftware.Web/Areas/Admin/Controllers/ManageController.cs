@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.Models;
 

@@ -10,7 +10,7 @@ namespace SpringSoftware.Core.DbModel
    public  class OrderItem:BaseTable
     {
        
-       //public virtual Product Product { get; set; }
+       public virtual Product Product { get; set; }
 
        public virtual int ProductId { get; set; }
 

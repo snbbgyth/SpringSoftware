@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web

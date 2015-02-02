@@ -36,7 +36,8 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(await ProductManage.GetByProductId(id));
+
+            return View(await ProductManage.QueryProductContentById(id));
         }
 
         protected override void Dispose(bool disposing)

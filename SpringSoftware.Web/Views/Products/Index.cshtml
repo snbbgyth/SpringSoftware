@@ -1,6 +1,4 @@
-﻿@using SpringSoftware.Core.Help
-@using SpringSoftware.Web.DAL.Manage
-@using SpringSoftware.Web.Help
+﻿@using SpringSoftware.Web.DAL.Manage
 @model IEnumerable<SpringSoftware.Core.DbModel.Product>
 
 @{
@@ -15,7 +13,7 @@
         var picture = ProductManage.GetFirstPictureById(item.Id);
         if (picture != null)
         {
-            picturePath = @ImageManage.Get280PathByPictureId(picture.Id);
+            picturePath = @ImageManage.GetThumbnailUrlByPictureId(picture.Id, 125);
         }
         <div class="item-box">
             <div data-productid="16" class="product-item">
@@ -31,9 +29,6 @@
                     <div>
                         <div>
                             <span>¥ @item.Price</span>
-                        </div>
-                        <div>
-                            <input type="button" value="加入购物车">
                         </div>
                     </div>
                 </div>

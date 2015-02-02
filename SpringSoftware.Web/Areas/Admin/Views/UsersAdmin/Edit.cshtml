@@ -1,6 +1,6 @@
 ﻿@using NHibernate.Util
 @using SpringSoftware.Web.Areas.Admin.Models
-@model  SpringSoftware.Web.Models.ApplicationUser
+@model  ApplicationUser
 @{
     ViewBag.Title = "编辑";
 }
@@ -14,8 +14,6 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
     @Html.HiddenFor(model => model.Id)
-
-
     <div class="form-horizontal">
         <legend>编辑用户</legend>
         <div class="form-group">
@@ -30,7 +28,6 @@
             <label class="col-md-2">附加权限</label>
             <div class="col-md-10">
                 @Html.DropDownList("RoleId", "No Roles")
-
             </div>
         </div>
 

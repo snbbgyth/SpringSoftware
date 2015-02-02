@@ -134,7 +134,7 @@ namespace SpringSoftware.Web.DAL.Manage
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images\\SaveUpload\\Product\\Thumbnails", picture.Id + "_" + size + Path.GetExtension(picture.FileName));
         }
 
-        public static string Get280PathByPictureId(int pictureId, IEnumerable<Picture> pictureList = null)
+        public static string GetThumbnailUrlByPictureId(int pictureId, int size, IEnumerable<Picture> pictureList = null)
         {
             Picture picture = null;
             if (pictureList != null && pictureList.Any())
@@ -144,9 +144,25 @@ namespace SpringSoftware.Web.DAL.Manage
             if (picture == null)
                 picture = _pictureDal.QueryById(pictureId);
             if (picture == null) return "";
-            var path = Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/Thumbnails/"), picture.Id + "_" + 280 + Path.GetExtension(picture.FileName));
+            var path = Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/Thumbnails/"), picture.Id + "_" + size + Path.GetExtension(picture.FileName));
             return ResolveServerUrl(path, false);
         }
+
+        public static string GetOriginalUrlByPictureId(int pictureId,  IEnumerable<Picture> pictureList = null)
+        {
+            Picture picture = null;
+            if (pictureList != null && pictureList.Any())
+            {
+                picture = pictureList.FirstOrDefault(t => t.Id == pictureId);
+            }
+            if (picture == null)
+                picture = _pictureDal.QueryById(pictureId);
+            if (picture == null) return "";
+            var path = Path.Combine(VirtualPathUtility.ToAbsolute("~/Images/SaveUpload/Product/"), picture.Id  + Path.GetExtension(picture.FileName));
+            return ResolveServerUrl(path, false);
+        }
+
+
 
         public static string ResolveServerUrl(string serverUrl, bool forceHttps)
         {

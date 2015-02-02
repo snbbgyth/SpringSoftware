@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web

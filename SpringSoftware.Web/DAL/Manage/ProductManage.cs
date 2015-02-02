@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Areas.Admin.Models;
+using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.DAL.Manage
 {
@@ -44,7 +45,7 @@ namespace SpringSoftware.Web.DAL.Manage
             return null;
         }
 
-        public static async Task<ProductViewModel> GetByProductId(int? id)
+        public static async Task<ProductViewModel> GetProductViewById(int? id)
         {
             var productView = new ProductViewModel();
             if (id == null)
@@ -69,6 +70,36 @@ namespace SpringSoftware.Web.DAL.Manage
                 }
             }
             return productView;
+        }
+
+        public static async Task<ProductContentViewModel> QueryProductContentById(int? id)
+        {
+            var productContent = new ProductContentViewModel();
+            if (id == null)
+            {
+                return productContent;
+            }
+            productContent.Product = await _productDal.QueryByIdAsync(id);
+            if (productContent.Product == null)
+            {
+                return productContent;
+            }
+            productContent.Product.ProductType = await _productTypeDal.QueryByIdAsync(productContent.Product.ProductTypeId);
+            productContent.Product.ProductTypeList = await _productTypeDal.QueryAllAsync();
+            productContent.ProductPictureList = new List<ProductPicture>(await _productPictureDal.QueryByFunAsync(t => t.ProductId == id));
+            if (productContent.ProductPictureList.Any())
+            {
+                foreach (var productPicture in productContent.ProductPictureList)
+                {
+                    var picture = await _pictureDal.QueryByIdAsync(productPicture.PictureId);
+                    if (picture != null)
+                        productContent.PictureList.Add(picture);
+                }
+            }
+            productContent.ShopCartItem.Product = productContent.Product;
+            productContent.ShopCartItem.ProductId = productContent.Product.Id;
+
+            return productContent;
         }
     }
 }

@@ -1,60 +1,34 @@
 ﻿@using SpringSoftware.Web.DAL.Manage
-@using SpringSoftware.Web.Help
-@model  SpringSoftware.Web.Areas.Admin.Models.ProductViewModel
-
+@model  SpringSoftware.Web.Models.ProductContentViewModel
 @{
     ViewBag.Title = @Model.Product.Name;
 }
-@*<h2>@Model.Product.Name</h2>*@
-@*<div>
-        <hr />
-        <div class="form-horizontal">
-            <hr />
-            <div class="form-group">
-                <table role="grid">
-                    <colgroup>
-                        <col style="width:200px">
-                    </colgroup>
-                    <thead role="rowgroup">
-                        <tr role="row">
-                            <th role="columnheader" data-field="PictureUrl" data-title="图片">图片</th>
-                        </tr>
-                    </thead>
-                    <tbody role="rowgroup">
-                        @foreach (var item in Model.ProductPictureList)
-                        {
-                            <tr role="row">
-                                <td role="gridcell">
-                                    <a href=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) target="_blank">
-                                        <img alt="21" src=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) width="150">
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Product.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DisplayFor(model => model.Product.Name, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Product.Discrption, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.Raw(Model.Product.Discrption)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Product.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DisplayFor(model => model.Product.Price, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-        </div>
-    </div>*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#AddToShopCart").on("click", function () {
+            var id = $("#ProductId").val();
+            var count = $("#ProductCount").val();
+            if (count == 0) {
+           
+                $("#SuccesDiv").html("<b>添加失败! 请选择数商品数量。</b>");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    data: { productId: id, count: count },
+                    url: '@Url.Action("AddShopCart", "ShopCartItems")',
+                    success: function (data) {
+                        $("#SuccesDiv").html("<b>添加成功!</b>");
 
+                    },
+                    error: function (data) {
+                        var htmlString = String.Format("<b>添加失败! {0}</b>", data.Message);
+                        $("#SuccesDiv").html(htmlString);
+                    }
+                });
+            }
+        });
+    });
+</script>
 <div>
     <div class="breadcrumb">
         <ul>
@@ -73,6 +47,7 @@
             </li>
         </ul>
     </div>
+    @Html.HiddenFor(model => model.Product.Id, new { id = "ProductId" })
     <div>
         <div>
             <form action="#" id="product-details-form" method="post" novalidate="novalidate">
@@ -82,7 +57,7 @@
                             @foreach (var item in Model.ProductPictureList)
                             {
                                 <div>
-                                    <img alt=@Model.Product.Name src=@ImageManage.Get280PathByPictureId(item.PictureId, Model.PictureList) title=@Model.Product.Name itemprop="image" id="main-product-img-2">
+                                    <img alt=@Model.Product.Name src=@ImageManage.GetThumbnailUrlByPictureId(item.PictureId, 125, Model.PictureList) title=@Model.Product.Name itemprop="image" id="main-product-img-2">
                                 </div>
                             }
                         </div>
@@ -95,115 +70,34 @@
                             <div>
                                 @Model.Product.Name
                             </div>
-                            @*<div  itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
-                                    <div>
-                                        <div>
-                                            <div style="width: 80%">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <a href="/productreviews/2">
-                                            1
-                                            评论
-                                        </a> <span>|</span> <a href="/productreviews/2">添加你的评论</a>
-                                    </div>
-                                    <span itemprop="ratingValue" style="display: none;">4.0</span>
-                                    <span itemprop="reviewCount" style="display: none;">1</span>
-                                </div>*@
-                            @*<div>
-                                    <div>
-                                        <label for="giftcard_2_RecipientName">收卡人名称:</label>
-                                        <input  id="giftcard_2_RecipientName" name="giftcard_2.RecipientName" type="text" value="">
-                                    </div>
-                                    <div>
-                                        <label for="giftcard_2_RecipientEmail">收卡人邮箱:</label>
-                                        <input  id="giftcard_2_RecipientEmail" name="giftcard_2.RecipientEmail" type="text" value="">
-                                    </div>
-                                    <div>
-                                        <label for="giftcard_2_SenderName">您的名称:</label>
-                                        <input  id="giftcard_2_SenderName" name="giftcard_2.SenderName" type="text" value="万春 杨">
-                                    </div>
-                                    <div>
-                                        <label for="giftcard_2_SenderEmail">您的邮箱:</label>
-                                        <input  id="giftcard_2_SenderEmail" name="giftcard_2.SenderEmail" type="text" value="snbbdx@sina.com">
-                                    </div>
-                                    <div>
-                                        <label for="giftcard_2_Message">说明:</label>
-                                        <textarea  cols="20" id="giftcard_2_Message" name="giftcard_2.Message" rows="2"></textarea>
-                                    </div>
-                                </div>*@
                             <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                                 <div>
                                     <span itemprop="price">
-                                        ¥ @Model.Product.Price
+                                        价格: ¥ @Model.Product.Price
                                     </span>
                                 </div>
                                 <meta itemprop="priceCurrency" content="CNY">
                             </div>
                             <div>
-                                <div>
-                                    <label for="addtocart_2_EnteredQuantity">数量:</label>
-                                    <input data-val="true" data-val-number="The field 数量 must be a number." id="addtocart_2_EnteredQuantity" name="addtocart_2.EnteredQuantity" type="text" value="1">
-                                    <script type="text/javascript">
-                                        $(document).ready(function () {
-                                            $("#addtocart_2_EnteredQuantity").keydown(function (event) {
-                                                if (event.keyCode == 13) {
-                                                    $("#add-to-cart-button-2").click();
-                                                    return false;
-                                                }
-                                            });
-                                        });
-                                    </script>
-                                    <input type="button" id="add-to-cart-button-2" value="加入购物车" data-productid="2">
-                                    <input type="button" id="add-to-wishlist-button-2" value="加入收藏夹" data-productid="2">
+                                @Html.LabelFor(model => model.ShopCartItem.Count, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ShopCartItem.Count, string.Empty, "ProductCount", new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShopCartItem.Count, "", new { @class = "text-danger" })
                                 </div>
+                                <input type="button" id="AddToShopCart" value="加入购物车" data-productid="2">
                             </div>
-                            <div>
-                                <input type="button" value="邮件给朋友">
-                            </div>
-                            <div>
-                                <input type="button" value="商品比较">
-                            </div>
-                            @*<div>
-                                <div><a title="Facebook" href="#"><span><span>Share on facebook</span></span></a><a title="Tweet" href="#"><span><span>Share on twitter</span></span></a><a target="_blank" title="电子信箱" href="#"><span><span>Share on email</span></span></a><a title="打印" href="#"><span><span>Share on print</span></span></a><a href="#"><span><span>More Sharing Services</span></span></a><a href="#" style="display: inline-block;" tabindex="1000"><a target="_blank" title="更多服务" href="#">0</a><a><span></span></a></a><div></div></div>
-                                <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=nopsolutions"></script> AddThis Button END 
-                            </div>*@
+                            <div id="SuccesDiv" style="color:red"></div>
                         </div>
+                        <h4>祥细信息</h4>
                         <div itemprop="description">
                             <p>@Html.Raw(Model.Product.Discrption)</p>
                         </div>
                     </div>
-                    @*<div  >
-                            <div  >
-                                <div class="title">
-                                    <strong>商品标签</strong>
-                                </div>
-                                <div  >
-                                    <ul>
-                                        <li >
-                                            <a href="/producttag/1/nice" >
-                                                nice
-                                            </a> <span>(5)</span>
-                                        </li>
-                                        <li >,</li>
-                                        <li >
-                                            <a href="/producttag/2/gift" >
-                                                gift
-                                            </a> <span>(2)</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>*@
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 <p>
-
     @Html.ActionLink("返回列表", "Index")
 </p>
