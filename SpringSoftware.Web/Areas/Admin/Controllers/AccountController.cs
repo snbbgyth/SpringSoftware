@@ -71,7 +71,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return View(model);
             }
-
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -248,6 +247,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
+                
                 // 请不要显示该用户不存在
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }

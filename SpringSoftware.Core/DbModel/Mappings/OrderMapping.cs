@@ -18,11 +18,12 @@ namespace SpringSoftware.Core.DbModel.Mappings
             Map(x => x.LastModifier);
             Map(x => x.LastModifyDate);
 
-            Map(x => x.CustomerId);
+            Map(x => x.CustomerName);
             Map(x => x.CustomerPhone);
             Map(x => x.ReceiveAddress);
             Map(x => x.TotalPrice);
             Map(x => x.IsPay);
+            Map(x => x.OrderNumber);
 
         }
     }

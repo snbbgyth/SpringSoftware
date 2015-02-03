@@ -20,22 +20,44 @@ namespace SpringSoftware.Web.Controllers
     {
         private IShopCartItemDal _shopCartItemDal;
         private IProductDal _productDal;
+        private IOrderDal _orderDal;
+        private IOrderItemDal _orderItemDal;
 
         public ShopCartItemsController()
         {
             _shopCartItemDal = DependencyResolver.Current.GetService<IShopCartItemDal>();
             _productDal = DependencyResolver.Current.GetService<IProductDal>();
+            _orderDal = DependencyResolver.Current.GetService<IOrderDal>();
+            _orderItemDal = DependencyResolver.Current.GetService<IOrderItemDal>();
         }
 
         // GET: ShopCartItems
         public async Task<ActionResult> Index()
         {
-            var entityList = await _shopCartItemDal.QueryByFunAsync(t => t.CustomerName == User.Identity.Name);
+            var entityList = await _shopCartItemDal.QueryByFunAsync(t => t.CustomerName == User.Identity.Name && !t.IsSubmit);
             foreach (var entity in entityList)
             {
-                entity.Product =await _productDal.QueryByIdAsync(entity.ProductId);
+                entity.Product = await _productDal.QueryByIdAsync(entity.ProductId);
             }
-            return View(entityList);
+            return View(new List<ShopCartItem>(entityList));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Index(IList<ShopCartItem> entityList)
+        {
+            if (entityList.Count > 0)
+            {
+                var submitList = entityList.Where(t => t.IsSubmit);
+                if (submitList.Any())
+                {
+                    foreach (var shopCartItem in submitList)
+                    {
+                        _shopCartItemDal.SubmitById(shopCartItem.Id);
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: ShopCartItems/Details/5
@@ -57,7 +79,7 @@ namespace SpringSoftware.Web.Controllers
         public async Task<ActionResult> AddShopCart(int productId, int count)
         {
             if (count <= 0)
-                return Json(new { Result = false,Message="请选择数商品数量。" }, JsonRequestBehavior.AllowGet);
+                return Json(new { Result = false, Message = "请选择数商品数量。" }, JsonRequestBehavior.AllowGet);
             try
             {
                 var entity = new ShopCartItem

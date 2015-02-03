@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<SpringSoftware.Core.DbModel.Order>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "我的订单";
 }
 
-<h2>Index</h2>
+<h2>我的订单</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+ 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
+            @Html.DisplayNameFor(model => model.OrderNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CustomerPhone)
@@ -29,25 +27,13 @@
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifyDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Creater)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifier)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
+            <a href="/Orders/Details/@item.Id">@item.OrderNumber</a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CustomerPhone)
@@ -63,18 +49,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifyDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDelete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Creater)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifier)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

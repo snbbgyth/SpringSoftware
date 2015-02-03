@@ -1,69 +1,54 @@
-﻿@model IEnumerable<SpringSoftware.Core.DbModel.ShopCartItem>
+﻿@model IList<SpringSoftware.Core.DbModel.ShopCartItem>
 
 @{
     ViewBag.Title = "购物车";
 }
 
 <h2>购物车</h2>
-@*@{
-    var grid = new WebGrid(Model);
-}
-<div id="gridContent" style=" padding:20px; ">
-    @grid.GetHtml(
-        tableStyle: "webgrid-table",
-        headerStyle: "webgrid-header",
-        footerStyle: "webgrid-footer",
-        alternatingRowStyle: "webgrid-alternating-row",
-        selectedRowStyle: "webgrid-selected-row",
-        rowStyle: "webgrid-row-style",
-        mode: WebGridPagerModes.All,
-        columns:
-            grid.Columns(
-             grid.Column("ID", format: @<text>  <span class="display-mode">@item.ID </span> <label id="UserID" class="edit-mode">@item.ID</label> </text>, style: "col1Width" ),
-             grid.Column("Name", "Name", format: @<text>  <span class="display-mode"> <label id="lblName">@item.Name</label> </span> <input type="text" id="Name" value="@item.Name" class="edit-mode" /></text>, style: "col2Width"),
-             grid.Column("SurName", "Sur Name", format: @<text> <span class="display-mode"> <label id="lblSurName">@item.SurName</label> </span>  <input type="text" id="SurName" value="@item.SurName" class="edit-mode" /> </text>, style: "col2Width"),
-             grid.Column("Action", format: @<text>
-        <button class="edit-user display-mode">Edit</button>
-        <button class="save-user edit-mode">Save</button>
-        <button class="cancel-user edit-mode">Cancel</button>
-            </text>, style: "col3Width", canSort: false)
-               ))*@
-
-
-
+@using (Html.BeginForm())
+{
     <table class="table">
+        <tr>
+            <th>
+               产品名称
+            </th>
+            <th>
+                用户名
+            </th>
+            <th>
+                数量
+            </th>
+            <th>
+                选择
+            </th>
+            <th></th>
+        </tr>
+    
+        @for (var i = 0; i < Model.Count(); i++)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Product.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CustomerName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Count)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsSubmit)
-                </th>
-                <th></th>
-            </tr>
-        @foreach (var item in Model) {
-            <tr>
                 <td>
-                    <a href="/Products/Details/@item.Product.Id">@item.Product.Name</a>
-               </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CustomerName)
+                    <a href="/Products/Details/@Model[i].Product.Id">@Model[i].Product.Name</a>
+                    @Html.HiddenFor(x => x[i].Id)
                 </td>
                 <td>
-                    @Html.EditorFor(modelItem => item.Count)
+                    @Html.DisplayFor(x => x[i].CustomerName)
                 </td>
                 <td>
-                    @Html.CheckBoxFor(modelItem => item.IsSubmit)
+                    @Html.EditorFor(x => x[i].Count)
                 </td>
                 <td>
-                    @Html.ActionLink("删除", "Delete", new { id=item.Id })
+                    @Html.CheckBoxFor(x => x[i].IsSubmit)
+                </td>
+                <td>
+                    @Html.ActionLink("删除", "Delete", new { id = Model[i].Id })
                 </td>
             </tr>
         }
-        </table>
+    </table>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="提交订单" class="btn btn-default" />
+        </div>
+    </div>
+}

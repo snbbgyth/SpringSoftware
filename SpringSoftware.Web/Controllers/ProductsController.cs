@@ -36,7 +36,6 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             return View(await ProductManage.QueryProductContentById(id));
         }
 

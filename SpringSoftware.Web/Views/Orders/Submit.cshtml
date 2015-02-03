@@ -1,25 +1,28 @@
 ﻿@model SpringSoftware.Web.Models.OrderViewModel
 @{
-    ViewBag.Title = "祥细";
+    ViewBag.Title = "Submit";
 }
-<h2>订单祥情</h2>
+<h2>Submit</h2>
+@using (Html.BeginForm())
+{
     <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(model => model.Order.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Order.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.Order.CustomerName)
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Order.CustomerPhone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Order.CustomerPhone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Order.CustomerPhone, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Order.ReceiveAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Order.ReceiveAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Order.ReceiveAddress, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
         <table class="table">
@@ -41,18 +44,21 @@
             {
                 <tr>
                     <td>
-                        <a href="/Products/Details/@Model.OrderItemViewList[i].OrderItem.Product.Id">@Model.OrderItemViewList[i].OrderItem.Product.Name</a>
+                        <a href="/Orders/Details/@Model.OrderItemViewList[i].OrderItem.Product.Id">@Model.OrderItemViewList[i].OrderItem.Product.Name</a>
+                        @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.ProductId)
+                        @Html.HiddenFor(model => model.OrderItemViewList[i].ShopCartItem.Id)
                     </td>
                     <td>
                         @Html.DisplayFor(x => x.OrderItemViewList[i].OrderItem.Price)
-  
+                        @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.Price)
                     </td>
                     <td>
                         @Html.DisplayFor(x => x.OrderItemViewList[i].OrderItem.Count)
-
+                        @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.Count)
                     </td>
                     <td>
                         @Html.DisplayFor(x => x.OrderItemViewList[i].OrderItem.Total)
+                        @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.Total)
                     </td>
                 </tr>
             }
@@ -62,11 +68,15 @@
             @Html.LabelFor(model => model.Order.TotalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Order.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
-
-
+                @Html.HiddenFor(model => model.Order.TotalPrice)
+        
             </div>
         </div>
- 
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="提交订单" class="btn btn-default" />
+            </div>
+        </div>
     </div>
- 
+}
 

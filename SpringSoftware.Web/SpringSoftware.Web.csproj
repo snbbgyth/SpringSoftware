@@ -229,6 +229,7 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\OrderItemsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShopCartItemsController.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="DAL\HandleQueue.cs" />
     <Compile Include="DAL\Kendoui\DataSourceRequest.cs" />
     <Compile Include="DAL\Kendoui\DataSourceResult.cs" />
+    <Compile Include="DAL\Manage\OrderManage.cs" />
     <Compile Include="DAL\Manage\ProductManage.cs" />
     <Compile Include="DAL\MyAuthorizeAttribute.cs" />
     <Compile Include="DAL\MySqlConfiguration.cs" />
@@ -252,6 +254,8 @@
     <Compile Include="Areas\Admin\Models\ManageViewModels.cs" />
     <Compile Include="DAL\MySqlInitializer.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
+    <Compile Include="Models\OrderItemViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ProductContentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2363,6 +2367,12 @@
     <Content Include="Scripts\tinymce\plugins\Roxy_Fileman\lang\pl.json" />
     <Content Include="Scripts\tinymce\plugins\Roxy_Fileman\web.config" />
     <Content Include="Scripts\tinymce\plugins\Roxy_Fileman\lang\zh_CN.json" />
+    <Content Include="Views\OrderItems\Create.cshtml" />
+    <Content Include="Views\OrderItems\Delete.cshtml" />
+    <Content Include="Views\OrderItems\Details.cshtml" />
+    <Content Include="Views\OrderItems\Edit.cshtml" />
+    <Content Include="Views\OrderItems\Index.cshtml" />
+    <Content Include="Views\Orders\Submit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
