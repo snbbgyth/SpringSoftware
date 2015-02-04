@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
+using SpringSoftware.Web.DAL.Manage;
 using SpringSoftware.Web.Models;
 using PagedList;
 
@@ -23,8 +24,7 @@ namespace SpringSoftware.Web.Controllers
             _newsDal = DependencyResolver.Current.GetService<INewsDal>();
         }
 
-        // GET: /News/
-        public async Task<ActionResult> CompanyIndex(string currentFilter, string searchString, int? page)
+        public async Task<ActionResult> ShowIndex(int id, string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
             {
@@ -35,7 +35,7 @@ namespace SpringSoftware.Web.Controllers
                 searchString = currentFilter;
             }
             ViewBag.CurrentFilter = searchString;
-            IEnumerable<News> entityList = await _newsDal.QueryByFunAsync(t => t.NewsType.Id == 1);
+            IEnumerable<News> entityList = await _newsDal.QueryByFunAsync(t => t.NewsType.Id == id);
             if (entityList.Any())
             {
                 if (!String.IsNullOrEmpty(searchString))
@@ -49,34 +49,8 @@ namespace SpringSoftware.Web.Controllers
             }
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            return View(entityList.ToPagedList(pageNumber, pageSize));
-        }
-
-        public async Task<ActionResult> IndustryIndex(string currentFilter, string searchString, int? page)
-        {
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-            ViewBag.CurrentFilter = searchString;
-            IEnumerable<News> entityList = await _newsDal.QueryByFunAsync(t => t.NewsType.Id == 2);
-            if (entityList.Any())
-            {
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    entityList = entityList.Where(s => s.Content.Contains(searchString)
-                                                       || s.Title.Contains(searchString)
-                                                       || s.Creater.Contains(searchString)
-                                                       || s.LastModifier.Contains(searchString));
-                }
-                entityList = entityList.OrderByDescending(s => s.LastModifyDate);
-            }
-            int pageSize = 20;
-            int pageNumber = (page ?? 1);
+            ViewBag.Title = NewsManage.QueryNewsTypeNameById(id);
+            ViewBag.NewsTypeId = id;
             return View(entityList.ToPagedList(pageNumber, pageSize));
         }
 

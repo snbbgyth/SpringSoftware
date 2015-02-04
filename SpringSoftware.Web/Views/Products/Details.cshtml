@@ -8,8 +8,11 @@
         $("#AddToShopCart").on("click", function () {
             var id = $("#ProductId").val();
             var count = $("#ProductCount").val();
-            if (count == 0) {
-           
+            var isLogin = '@User.Identity.IsAuthenticated.ToString()';
+            if (isLogin == 'False') {
+                $("#SuccesDiv").html("<b>添加失败! 请先登陆。</b>");
+            }
+            else if (count == 0) {
                 $("#SuccesDiv").html("<b>添加失败! 请选择数商品数量。</b>");
             } else {
                 $.ajax({
@@ -34,15 +37,15 @@
         <ul>
             <li>
                 <span>
-                    <a href="/" itemprop="url">
+                    <a href="~/" itemprop="url">
                         <span itemprop="title">首页</span>
                     </a>
                     <span>/</span>
-                    <a href="" itemprop="url">
+                    <a href="/Products/ShowIndex/@Model.Product.ProductTypeId" itemprop="url">
                         <span itemprop="title">@Model.Product.ProductType.Name</span>
                     </a>
                     <span>/</span>
-                    <strong>@Model.Product.Name</strong>
+                    <a href="#" itemprop="url"><strong>@Model.Product.Name</strong></a>
                 </span>
             </li>
         </ul>

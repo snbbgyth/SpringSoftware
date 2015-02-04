@@ -45,6 +45,7 @@ namespace SpringSoftware.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(IList<ShopCartItem> entityList)
         {
+            if (entityList == null || entityList.Count==0) return RedirectToAction("Index");
             if (entityList.Count > 0)
             {
                 var submitList = entityList.Where(t => t.IsSubmit);
@@ -57,7 +58,7 @@ namespace SpringSoftware.Web.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Submit","Orders");
         }
 
         // GET: ShopCartItems/Details/5
@@ -97,54 +98,6 @@ namespace SpringSoftware.Web.Controllers
             return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: ShopCartItems/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,CustomerName,Count,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] ShopCartItem shopCartItem)
-        {
-            if (ModelState.IsValid)
-            {
-                await _shopCartItemDal.InsertAsync(shopCartItem);
-                return RedirectToAction("Index");
-            }
-            return View(shopCartItem);
-        }
-
-        // GET: ShopCartItems/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ShopCartItem shopCartItem = await _shopCartItemDal.QueryByIdAsync(id);
-            if (shopCartItem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(shopCartItem);
-        }
-
-        // POST: ShopCartItems/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,CustomerName,Count,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] ShopCartItem shopCartItem)
-        {
-            if (ModelState.IsValid)
-            {
-                await _shopCartItemDal.ModifyAsync(shopCartItem);
-                return RedirectToAction("Index");
-            }
-            return View(shopCartItem);
-        }
-
         // GET: ShopCartItems/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
@@ -157,6 +110,7 @@ namespace SpringSoftware.Web.Controllers
             {
                 return HttpNotFound();
             }
+            shopCartItem.Product = await _productDal.QueryByIdAsync(shopCartItem.ProductId);
             return View(shopCartItem);
         }
 

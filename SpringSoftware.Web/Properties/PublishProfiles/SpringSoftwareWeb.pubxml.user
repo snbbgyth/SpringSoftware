@@ -178,7 +178,7 @@
       <publishTime>01/20/2015 11:28:13</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_Layout.cshtml">
-      <publishTime>02/02/2015 10:02:02</publishTime>
+      <publishTime>02/04/2015 17:34:22</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_LoginPartial.cshtml">
       <publishTime>01/20/2015 11:28:13</publishTime>
@@ -301,10 +301,10 @@
       <publishTime>01/20/2015 11:28:14</publishTime>
     </File>
     <File Include="bin/SpringSoftware.Core.dll">
-      <publishTime>02/03/2015 17:57:50</publishTime>
+      <publishTime>02/04/2015 17:36:06</publishTime>
     </File>
     <File Include="bin/SpringSoftware.Web.dll">
-      <publishTime>02/03/2015 17:57:52</publishTime>
+      <publishTime>02/04/2015 17:36:08</publishTime>
     </File>
     <File Include="bin/System.Data.SQLite.dll">
       <publishTime>12/15/2014 16:13:12</publishTime>
@@ -1777,7 +1777,7 @@
       <publishTime>01/20/2015 11:28:13</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>01/30/2015 16:56:56</publishTime>
+      <publishTime>02/04/2015 17:32:17</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>01/20/2015 11:28:13</publishTime>
@@ -6520,7 +6520,7 @@
       <publishTime>01/20/2015 11:28:13</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>01/29/2015 10:41:24</publishTime>
+      <publishTime>02/04/2015 17:34:53</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>12/15/2014 16:13:12</publishTime>
@@ -6559,7 +6559,7 @@
       <publishTime>12/15/2014 16:13:12</publishTime>
     </File>
     <File Include="Views/Comments/Create.cshtml">
-      <publishTime>02/03/2015 11:25:16</publishTime>
+      <publishTime>02/04/2015 09:16:53</publishTime>
     </File>
     <File Include="Views/Comments/Successful.cshtml">
       <publishTime>02/03/2015 11:26:02</publishTime>
@@ -6624,6 +6624,9 @@
     <File Include="Views/News/IndustryIndex.cshtml">
       <publishTime>01/20/2015 11:28:13</publishTime>
     </File>
+    <File Include="Views/News/ShowIndex.cshtml">
+      <publishTime>02/04/2015 14:25:05</publishTime>
+    </File>
     <File Include="Views/NewsTypes/Create.cshtml">
       <publishTime>12/16/2014 09:37:08</publishTime>
     </File>
@@ -6654,11 +6657,14 @@
     <File Include="Views/OrderItems/Index.cshtml">
       <publishTime>02/03/2015 10:04:17</publishTime>
     </File>
+    <File Include="Views/Orders/Complete.cshtml">
+      <publishTime>02/04/2015 10:18:45</publishTime>
+    </File>
     <File Include="Views/Orders/Create.cshtml">
       <publishTime>02/03/2015 09:59:09</publishTime>
     </File>
     <File Include="Views/Orders/Delete.cshtml">
-      <publishTime>02/03/2015 17:52:44</publishTime>
+      <publishTime>02/04/2015 15:56:50</publishTime>
     </File>
     <File Include="Views/Orders/Details.cshtml">
       <publishTime>02/03/2015 17:33:08</publishTime>
@@ -6669,14 +6675,23 @@
     <File Include="Views/Orders/Index.cshtml">
       <publishTime>02/03/2015 17:53:10</publishTime>
     </File>
+    <File Include="Views/Orders/NoPay.cshtml">
+      <publishTime>02/04/2015 09:36:16</publishTime>
+    </File>
+    <File Include="Views/Orders/NoSubmit.cshtml">
+      <publishTime>02/04/2015 09:23:50</publishTime>
+    </File>
     <File Include="Views/Orders/Submit.cshtml">
-      <publishTime>02/03/2015 17:48:30</publishTime>
+      <publishTime>02/04/2015 15:58:39</publishTime>
     </File>
     <File Include="Views/Products/Details.cshtml">
-      <publishTime>02/02/2015 15:53:48</publishTime>
+      <publishTime>02/04/2015 17:00:57</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
-      <publishTime>02/02/2015 15:57:44</publishTime>
+      <publishTime>02/04/2015 11:21:04</publishTime>
+    </File>
+    <File Include="Views/Products/ShowIndex.cshtml">
+      <publishTime>02/04/2015 11:18:44</publishTime>
     </File>
     <File Include="Views/Shared/EditorTemplates/tinymce_jquery_basic.cshtml">
       <publishTime>01/20/2015 11:28:13</publishTime>
@@ -6703,7 +6718,7 @@
       <publishTime>01/20/2015 11:28:13</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/03/2015 15:02:51</publishTime>
+      <publishTime>02/04/2015 17:33:52</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>01/20/2015 11:28:13</publishTime>
@@ -6712,7 +6727,7 @@
       <publishTime>02/02/2015 15:28:50</publishTime>
     </File>
     <File Include="Views/ShopCartItems/Delete.cshtml">
-      <publishTime>02/02/2015 15:28:50</publishTime>
+      <publishTime>02/04/2015 15:45:06</publishTime>
     </File>
     <File Include="Views/ShopCartItems/Details.cshtml">
       <publishTime>02/02/2015 15:28:50</publishTime>
@@ -6730,7 +6745,7 @@
       <publishTime>01/20/2015 11:28:13</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/02/2015 17:56:50</publishTime>
+      <publishTime>02/04/2015 17:36:09</publishTime>
     </File>
   </ItemGroup>
 </Project>

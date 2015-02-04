@@ -38,10 +38,14 @@ namespace SpringSoftware.Web.Controllers
             _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
         }
 
-        // GET: Orders
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> NoPay()
         {
-            return View(await _orderDal.QueryAllAsync());
+            return View(await _orderDal.QueryByFunAsync(t=>!t.IsPay));
+        }
+
+        public async Task<ActionResult> Complete()
+        {
+            return View(await _orderDal.QueryByFunAsync(t => t.IsPay));
         }
 
         public async Task<ActionResult> Submit()
@@ -49,6 +53,8 @@ namespace SpringSoftware.Web.Controllers
             var user = _userManager.FindByName(User.Identity.Name);
             var orderView = new OrderViewModel();
             orderView.OrderItemViewList = await OrderManage.GetOrderItemsByUserName(User.Identity.Name);
+            if (!orderView.OrderItemViewList.Any())
+                return RedirectToAction("NoSubmit");
             orderView.Order.CustomerName = User.Identity.Name;
             orderView.Order.CustomerPhone = user.PhoneNumber;
             orderView.Order.TotalPrice = orderView.OrderItemViewList.Sum(t => t.OrderItem.Total);
@@ -69,10 +75,15 @@ namespace SpringSoftware.Web.Controllers
                 await _orderItemDal.InsertAsync(orderItemView.OrderItem);
                 await _shopCartItemDal.DeleteByIdAsync(orderItemView.ShopCartItem.Id);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("NoPay");
         }
 
-
+        [HttpGet]
+        public async Task<ActionResult> DeleteShopCartItem(int id)
+        {
+            await _shopCartItemDal.DeleteByIdAsync(id);
+            return RedirectToAction("Submit");
+        }
 
         // GET: Orders/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -90,48 +101,9 @@ namespace SpringSoftware.Web.Controllers
         }
 
         // GET: Orders/Create
-        public ActionResult Create()
+        public ActionResult NoSubmit()
         {
             return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,CustomerId,CustomerPhone,ReceiveAddress,TotalPrice,IsPay,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                await _orderDal.InsertAsync(order);
-                return RedirectToAction("Index");
-            }
-            return View(order);
-        }
-
-        // GET: Orders/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = await _orderDal.QueryByIdAsync(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            return View(order);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,CustomerId,CustomerPhone,ReceiveAddress,TotalPrice,IsPay,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                await _orderDal.ModifyAsync(order);
-                return RedirectToAction("Index");
-            }
-            return View(order);
         }
 
         // GET: Orders/Delete/5
@@ -141,12 +113,12 @@ namespace SpringSoftware.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = await _orderDal.QueryByIdAsync(id);
-            if (order == null)
+            var orderView = await OrderManage.GetOrderView(id.Value);
+            if (orderView == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(orderView);
         }
 
         // POST: Orders/Delete/5
@@ -154,8 +126,8 @@ namespace SpringSoftware.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            await _orderDal.DeleteByIdAsync(id);
-            return RedirectToAction("Index");
+            await OrderManage.DeleteOrder(id);
+            return RedirectToAction("Complete");
         }
 
         protected override void Dispose(bool disposing)

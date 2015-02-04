@@ -18,17 +18,38 @@ namespace SpringSoftware.Web.DAL.Manage
         private static IProductDal _productDal;
         private static IProductTypeDal _productTypeDal;
 
+        private static IEnumerable<ProductType> allProductTypes; 
+
         static ProductManage()
         {
             _pictureDal = DependencyResolver.Current.GetService<IPictureDal>();
             _productDal = DependencyResolver.Current.GetService<IProductDal>();
             _productPictureDal = DependencyResolver.Current.GetService<IProductPictureDal>();
             _productTypeDal = DependencyResolver.Current.GetService<IProductTypeDal>();
+            NewTaskProductType();
         }
 
-        public static ProductManage Current
+
+        public static void RefreshProductType()
         {
-            get { return new ProductManage(); }
+            Task.Factory.StartNew(NewTaskProductType);
+        }
+
+        public static void NewTaskProductType()
+        {
+            allProductTypes = _productTypeDal.QueryAll();
+        }
+        
+
+        public static   ProductType QueryProductTypeById(int id)
+        {
+            return allProductTypes.FirstOrDefault(t => t.Id == id);
+            //return await _productTypeDal.QueryByIdAsync(id);
+        }
+
+        public static    IEnumerable<ProductType> QueryAllProductType()
+        {
+            return  allProductTypes;
         }
 
         public IEnumerable<Picture> GetPicturesById(int productId)

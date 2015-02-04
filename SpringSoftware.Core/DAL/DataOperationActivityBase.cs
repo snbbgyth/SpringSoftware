@@ -143,11 +143,13 @@ namespace SpringSoftware.Core.DAL
             {
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
+                    //var queryString = string.Format("delete from {0} where Id = :id ", typeof(T).Name);
+                    //reslut = session.CreateQuery(queryString)
+                    //                .SetParameter("id", id)
+                    //                .ExecuteUpdate();
 
-                    var queryString = string.Format(" delete {0} where Id = :id ", typeof(T).Name);
-                    reslut = session.CreateQuery(queryString)
-                                    .SetParameter("id", id)
-                                    .ExecuteUpdate();
+                    session.Delete(string.Format("from {0} where id = {1}", typeof (T).Name, id));
+                    session.Flush();
                 }
             }
             catch (Exception ex)

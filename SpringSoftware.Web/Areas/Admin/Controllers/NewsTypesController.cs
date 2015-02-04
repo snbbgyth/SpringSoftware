@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.DAL.Manage;
 using SpringSoftware.Web.Models;
 using PagedList;
 
@@ -95,10 +96,11 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                newsType.Creater = User.Identity.Name;
-                newsType.LastModifier = User.Identity.Name;
-                await _newsTypeDal.InsertAsync(newsType);
-                return RedirectToAction("Index");
+            newsType.Creater = User.Identity.Name;
+            newsType.LastModifier = User.Identity.Name;
+            await _newsTypeDal.InsertAsync(newsType);
+            NewsManage.RefreshNewsType();
+            return RedirectToAction("Index");
             //}
             //return View(newsType);
         }
@@ -125,13 +127,10 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Name,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] NewsType newsType)
         {
-            if (ModelState.IsValid)
-            {
-                newsType.LastModifier = User.Identity.Name;
-                await _newsTypeDal.ModifyAsync(newsType);
-                return RedirectToAction("Index");
-            }
-            return View(newsType);
+            newsType.LastModifier = User.Identity.Name;
+            await _newsTypeDal.ModifyAsync(newsType);
+            NewsManage.RefreshNewsType();
+            return RedirectToAction("Index");
         }
 
         // GET: NewsTypes/Delete/5
@@ -154,8 +153,8 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-
             await _newsTypeDal.DeleteByIdAsync(id);
+            NewsManage.RefreshNewsType();
             return RedirectToAction("Index");
         }
 

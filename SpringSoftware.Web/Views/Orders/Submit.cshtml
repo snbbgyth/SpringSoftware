@@ -17,12 +17,14 @@
             @Html.LabelFor(model => model.Order.CustomerPhone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Order.CustomerPhone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.CustomerPhone, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Order.ReceiveAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Order.ReceiveAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.ReceiveAddress, "", new { @class = "text-danger" })
             </div>
         </div>
         <table class="table">
@@ -39,6 +41,7 @@
                 <th>
                     总金额
                 </th>
+                <th></th>
             </tr>
             @for (var i = 0; i < Model.OrderItemViewList.Count(); i++)
             {
@@ -49,7 +52,7 @@
                         @Html.HiddenFor(model => model.OrderItemViewList[i].ShopCartItem.Id)
                     </td>
                     <td>
-                        @Html.DisplayFor(x => x.OrderItemViewList[i].OrderItem.Price)
+                        ¥@Html.DisplayFor(x => x.OrderItemViewList[i].OrderItem.Price)
                         @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.Price)
                     </td>
                     <td>
@@ -57,8 +60,11 @@
                         @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.Count)
                     </td>
                     <td>
-                        @Html.DisplayFor(x => x.OrderItemViewList[i].OrderItem.Total)
+                        ¥@Html.DisplayFor(x => x.OrderItemViewList[i].OrderItem.Total)
                         @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.Total)
+                    </td>
+                    <td>
+                        @Html.ActionLink("删除", "DeleteShopCartItem",  new { id = @Model.OrderItemViewList[i].ShopCartItem.Id })
                     </td>
                 </tr>
             }
@@ -67,7 +73,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Order.TotalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Order.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                ¥@Html.DisplayFor(model => model.Order.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.HiddenFor(model => model.Order.TotalPrice)
         
             </div>

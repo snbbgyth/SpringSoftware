@@ -73,13 +73,18 @@ namespace SpringSoftware.Web.DAL.Manage
             };
         }
 
-
-
         public static void GenerateOrderNumber(Order order)
         {
             var timeTick = DateTime.Now.ToString("yyyyMMddhhmmss");
             var random = new Random().Next(100, 10000).ToString("0000");
             order.OrderNumber = timeTick + random;
+        }
+
+        public static async Task<int> DeleteOrder(int orderId)
+        {
+            await _orderDal.DeleteByIdAsync(orderId);
+            _orderItemDal.DeleteByOrderId(orderId);
+            return 1;
         }
     }
 }

@@ -64,7 +64,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                     case "date_desc":
                         entityList = entityList.OrderByDescending(s => s.LastModifyDate);
                         break;
-                    default: // Name ascending 
+                    default: 
                         entityList = entityList.OrderBy(s => s.UserName);
                         break;
                 }

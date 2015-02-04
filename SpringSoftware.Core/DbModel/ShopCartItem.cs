@@ -12,9 +12,9 @@ namespace SpringSoftware.Core.DbModel
     {
         public ShopCartItem()
         {
-            //Product = new Product();
+            Count = 1;
         }
-
+        [DisplayName("用户名")]
         public virtual string CustomerName { get; set; }
 
         [DisplayName("数量")]
@@ -25,7 +25,6 @@ namespace SpringSoftware.Core.DbModel
         public virtual int ProductId { get; set; }
 
         [DisplayName("选择")]
-
         public virtual bool IsSubmit { get; set; }
     }
 }

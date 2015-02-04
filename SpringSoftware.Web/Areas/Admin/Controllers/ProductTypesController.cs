@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.DAL.Manage;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers
@@ -62,6 +63,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 InitInsert(productType);
                 await _productTypeDal.InsertAsync(productType);
+                ProductManage.RefreshProductType();
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -82,6 +84,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+ 
             return View(productType);
         }
 
@@ -96,6 +99,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 InitModify(productType);
                 await _productTypeDal.ModifyAsync(productType);
+                ProductManage.RefreshProductType();
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -125,6 +129,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             await _productTypeDal.DeleteByIdAsync(id);
+            ProductManage.RefreshProductType();
             return RedirectToAction("Index");
         }
 

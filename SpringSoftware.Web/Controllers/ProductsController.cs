@@ -26,7 +26,16 @@ namespace SpringSoftware.Web.Controllers
         // GET: Products
         public async Task<ActionResult> Index()
         {
+            ViewBag.Title = "所有产品";
             return View(await _productDal.QueryAllAsync());
+        }
+
+        public async Task<ActionResult> ShowIndex(int id)
+        {
+            var productType = ProductManage.QueryProductTypeById(id);
+            ViewBag.Title = productType.Name;
+
+            return View(await _productDal.QueryByFunAsync(t => t.ProductTypeId == id));
         }
 
         // GET: Products/Details/5

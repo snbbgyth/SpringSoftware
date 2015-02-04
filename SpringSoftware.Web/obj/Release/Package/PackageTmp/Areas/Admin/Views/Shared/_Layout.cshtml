@@ -9,57 +9,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @{
-    //var kendoVersion = "2014.2.716";//      2014.1.318
-    @Styles.Render("~/Content/css")
-        @*@Styles.Render("~/Content/jQuery.FileUpload/css/jquery.fileupload.css")*@
+        @Styles.Render("~/Content/css")
         @Styles.Render("~/Content/bootstrap-theme.min.css")
         @Styles.Render("~/Content/bootstrap.min.css")
-        @*@Styles.Render(string.Format("~/Content/kendo/{0}/kendo.rtl.min.css", kendoVersion))*@
-        @*@Styles.Render(string.Format("~/Content/kendo/{0}/kendo.default.min.css@*", kendoVersion))*@
-        @*@Styles.Render(string.Format("~/Content/kendo/{0}/kendo.common.min.css", kendoVersion))*@
-
-        @*@Styles.Render(string.Format("~/Content/kendo/{0}/kendo.dataviz.min.css", kendoVersion))
-            @Styles.Render(string.Format("~/Content/kendo/{0}/kendo.dataviz.default.min.css", kendoVersion))*@
-
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/Scripts/jquery-2.1.3.min.js")
         @Scripts.Render("~/Scripts/jquery-ui-1.11.2.min.js")
         @Scripts.Render("~/Scripts/bootstrap.min.js")
         @Scripts.Render("~/Scripts/tinymce/tinymce.js")
         @Scripts.Render("~/Scripts/jquery.ui.widget.js")
-        @*@Scripts.Render("~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js")
-        @Scripts.Render("~/Scripts/jQuery.FileUpload/jquery.fileupload.js")*@
+    }
 
-        @*@Scripts.Render(string.Format("~/Scripts/kendo/{0}/jquery.min.js", kendoVersion))*@
-        @*@Scripts.Render(string.Format("~/Scripts/kendo/{0}/kendo.all.min.js", kendoVersion))*@
- 
-    }
-    
     <script>
-    function RoxyFileBrowser(field_name, url, type, win) {
-        var roxyFileman = '@Url.Content("~/Scripts/tinymce/plugins/Roxy_Fileman/index.html")'; 
-        if (roxyFileman.indexOf("?") < 0) {
-            roxyFileman += "?type=" + type;
+        function RoxyFileBrowser(field_name, url, type, win) {
+            var roxyFileman = '@Url.Content("~/Scripts/tinymce/plugins/Roxy_Fileman/index.html")';
+            if (roxyFileman.indexOf("?") < 0) {
+                roxyFileman += "?type=" + type;
+            }
+            else {
+                roxyFileman += "&type=" + type;
+            }
+            roxyFileman += '&input=' + field_name + '&value=' + win.document.getElementById(field_name).value;
+            if (tinyMCE.activeEditor.settings.language) {
+                roxyFileman += '&langCode=' + tinyMCE.activeEditor.settings.language;
+            }
+            tinyMCE.activeEditor.windowManager.open({
+                file: roxyFileman,
+                title: 'Roxy Fileman',
+                width: 850,
+                height: 650,
+                resizable: "yes",
+                plugins: "media",
+                inline: "yes",
+                close_previous: "no"
+            }, { window: win, input: field_name });
+            return false;
         }
-        else {
-            roxyFileman += "&type=" + type;
-        }
-        roxyFileman += '&input=' + field_name + '&value=' + win.document.getElementById(field_name).value;
-        if (tinyMCE.activeEditor.settings.language) {
-            roxyFileman += '&langCode=' + tinyMCE.activeEditor.settings.language;
-        }
-        tinyMCE.activeEditor.windowManager.open({
-            file: roxyFileman,
-            title: 'Roxy Fileman',
-            width: 850,
-            height: 650,
-            resizable: "yes",
-            plugins: "media",
-            inline: "yes",
-            close_previous: "no"
-        }, { window: win, input: field_name });
-        return false;
-    }
         tinymce.init({
             selector: "textarea",
             plugins: [
@@ -77,13 +62,13 @@
             toolbar_items_size: 'small',
             relative_urls: false,
 
-                //picture manager
+            //picture manager
             file_browser_callback: RoxyFileBrowser,
 
 
-        //we should set "convert_urls" set to "false" (because of "relative_urls" requirement)
-        //otherwise, it'll break existing links when editing message template
-        convert_urls: false,
+            //we should set "convert_urls" set to "false" (because of "relative_urls" requirement)
+            //otherwise, it'll break existing links when editing message template
+            convert_urls: false,
             style_formats: [
                 { title: 'Bold text', inline: 'b' },
                 { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } },
