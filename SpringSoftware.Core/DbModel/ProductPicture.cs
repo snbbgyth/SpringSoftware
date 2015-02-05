@@ -7,12 +7,12 @@ using SpringSoftware.Core.Model;
 
 namespace SpringSoftware.Core.DbModel
 {
-   public class ProductPicture:BaseTable
+    public class ProductPicture : BaseTable
     {
-       public ProductPicture()
-       {
+        public ProductPicture()
+        {
 
-       }
+        }
 
         public virtual int DisplayOrder { get; set; }
 
@@ -20,6 +20,5 @@ namespace SpringSoftware.Core.DbModel
 
         public virtual int ProductId { get; set; }
 
-        
     }
 }

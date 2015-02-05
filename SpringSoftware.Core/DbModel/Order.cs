@@ -15,10 +15,12 @@ namespace SpringSoftware.Core.DbModel
         [DisplayName("用户名")]
         public virtual string CustomerName { get; set; }
 
+        [Required]
         [DisplayName("联系电话")]
         [StringLength(100, ErrorMessage = "{0} 必须至少包含 {2} 个字符。", MinimumLength = 11)]
         public virtual string CustomerPhone { get; set; }
 
+        [Required]
         [DisplayName("联系地址")]
         [StringLength(1000, ErrorMessage = "请输入祥细的联系地址。", MinimumLength = 5)]
         public virtual string ReceiveAddress { get; set; }

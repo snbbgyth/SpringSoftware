@@ -102,3 +102,4 @@ H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\zh-Hans\EntityFr
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.dll
 H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.pdb
+H:\Projects\Github\SpringSoftware\SpringSoftware.Core\obj\Debug\SpringSoftware.Core.csprojResolveAssemblyReference.cache

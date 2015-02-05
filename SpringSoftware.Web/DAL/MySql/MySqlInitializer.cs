@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Web;
 using SpringSoftware.Web.Areas.Admin.Models;
-using SpringSoftware.Web.Models;
 
-namespace SpringSoftware.Web.DAL
+namespace SpringSoftware.Web.DAL.MySql
 {
     public class MySqlInitializer : IDatabaseInitializer<ApplicationDbContext>
     {

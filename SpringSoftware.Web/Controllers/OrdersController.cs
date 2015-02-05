@@ -23,7 +23,7 @@ namespace SpringSoftware.Web.Controllers
     {
         private IOrderDal _orderDal;
         public UserManager<ApplicationUser> _userManager { get; private set; }
-        private ApplicationDbContext context { get;  set; }
+        private ApplicationDbContext context { get; set; }
 
         private IOrderItemDal _orderItemDal;
 
@@ -40,7 +40,7 @@ namespace SpringSoftware.Web.Controllers
 
         public async Task<ActionResult> NoPay()
         {
-            return View(await _orderDal.QueryByFunAsync(t=>!t.IsPay));
+            return View(await _orderDal.QueryByFunAsync(t => !t.IsPay));
         }
 
         public async Task<ActionResult> Complete()
@@ -59,23 +59,28 @@ namespace SpringSoftware.Web.Controllers
             orderView.Order.CustomerPhone = user.PhoneNumber;
             orderView.Order.TotalPrice = orderView.OrderItemViewList.Sum(t => t.OrderItem.Total);
             return View(orderView);
+
         }
 
         [HttpPost]
         public async Task<ActionResult> Submit(OrderViewModel orderView)
         {
-            var order = orderView.Order;
-            InitInsert(order);
-            OrderManage.GenerateOrderNumber(order);
-            var orderId=await _orderDal.InsertAsync(order);
-            foreach (var orderItemView in orderView.OrderItemViewList)
+            if (ModelState.IsValid)
             {
-                orderItemView.OrderItem.OrderId = orderId;
-                InitInsert(orderItemView.OrderItem);
-                await _orderItemDal.InsertAsync(orderItemView.OrderItem);
-                await _shopCartItemDal.DeleteByIdAsync(orderItemView.ShopCartItem.Id);
+                var order = orderView.Order;
+                InitInsert(order);
+                OrderManage.GenerateOrderNumber(order);
+                var orderId = await _orderDal.InsertAsync(order);
+                foreach (var orderItemView in orderView.OrderItemViewList)
+                {
+                    orderItemView.OrderItem.OrderId = orderId;
+                    InitInsert(orderItemView.OrderItem);
+                    await _orderItemDal.InsertAsync(orderItemView.OrderItem);
+                    await _shopCartItemDal.DeleteByIdAsync(orderItemView.ShopCartItem.Id);
+                }
+                return RedirectToAction("NoPay");
             }
-            return RedirectToAction("NoPay");
+            return View(orderView);
         }
 
         [HttpGet]

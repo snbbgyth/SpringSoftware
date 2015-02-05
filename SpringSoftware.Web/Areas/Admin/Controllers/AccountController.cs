@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.DAL.MySql;
 using SpringSoftware.Web.Models;
 
 namespace SpringSoftware.Web.Areas.Admin.Controllers

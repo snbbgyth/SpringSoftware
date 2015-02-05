@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.DAL;
+using SpringSoftware.Web.DAL.MySql;
 using SpringSoftware.Web.Models;
 using PagedList;
 

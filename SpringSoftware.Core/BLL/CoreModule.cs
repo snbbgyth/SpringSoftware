@@ -28,6 +28,8 @@ namespace SpringSoftware.Core.BLL
             builder.RegisterType<ShopCartItemDal>().As<IShopCartItemDal>();
             builder.RegisterType<PictureDal>().As<IPictureDal>();
             builder.RegisterType<ProductPictureDal>().As<IProductPictureDal>();
+            builder.RegisterType<WebContentDal>().As<IWebContentDal>();
+            builder.RegisterType<WebContentTypeDal>().As<IWebContentTypeDal>();
         }
     }
 }

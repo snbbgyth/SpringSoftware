@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Web;
+﻿using System.Data.Entity.Migrations;
 using SpringSoftware.Web.Areas.Admin.Models;
-using SpringSoftware.Web.Models;
 
-namespace SpringSoftware.Web.DAL
+namespace SpringSoftware.Web.DAL.MySql
 {
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
@@ -15,7 +9,7 @@ namespace SpringSoftware.Web.DAL
         {
             AutomaticMigrationsEnabled = false;
             // register mysql code generator
-            SetSqlGenerator("MySql.Data.MySqlClient",   new MySql.Data.Entity.MySqlMigrationSqlGenerator());
+            SetSqlGenerator("MySql.Data.MySqlClient",   new global::MySql.Data.Entity.MySqlMigrationSqlGenerator());
             SetHistoryContextFactory("MySql.Data.MySqlClient", (conn, schema) => new MySqlHistoryContext(conn, schema));
         }
 

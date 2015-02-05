@@ -11,6 +11,7 @@ using SpringSoftware.Core.DbModel;
 using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.DAL.Manage;
+using SpringSoftware.Web.DAL.MySql;
 using SpringSoftware.Web.Models;
 using PagedList;
 

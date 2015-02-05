@@ -5,6 +5,8 @@
 <h2>订单生成</h2>
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(model => model.Order.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,6 +52,8 @@
                         <a href="/Orders/Details/@Model.OrderItemViewList[i].OrderItem.Product.Id">@Model.OrderItemViewList[i].OrderItem.Product.Name</a>
                         @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.ProductId)
                         @Html.HiddenFor(model => model.OrderItemViewList[i].ShopCartItem.Id)
+                        @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.Product.Id)
+                        @Html.HiddenFor(model => model.OrderItemViewList[i].OrderItem.Product.Name)
                     </td>
                     <td>
                         ¥@Html.DisplayFor(x => x.OrderItemViewList[i].OrderItem.Price)

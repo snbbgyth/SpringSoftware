@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
-namespace SpringSoftware.Web.DAL
+namespace SpringSoftware.Web.DAL.MySql
 {
     public class MySqlConfiguration : DbConfiguration
     {

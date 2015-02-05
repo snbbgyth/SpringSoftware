@@ -17,6 +17,7 @@ using SpringSoftware.Core.IDAL;
 using SpringSoftware.Web.Areas.Admin.Models;
 using SpringSoftware.Web.DAL;
 using SpringSoftware.Web.DAL.Manage;
+using SpringSoftware.Web.DAL.MySql;
 using SpringSoftware.Web.Help;
 using SpringSoftware.Web.Models;
 

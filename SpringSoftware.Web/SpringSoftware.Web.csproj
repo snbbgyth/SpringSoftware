@@ -217,6 +217,8 @@
     <Compile Include="Areas\Admin\Controllers\ProductTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebContentsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebContentTypesController.cs" />
     <Compile Include="Areas\Admin\Models\ProductPictureViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductViewModel.cs" />
     <Compile Include="Areas\Admin\Models\UploadFileViewModel.cs" />
@@ -229,17 +231,17 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShopCartItemsController.cs" />
+    <Compile Include="DAL\Payment\AliPayPaymentProcessor.cs" />
     <Compile Include="DAL\BaseController.cs" />
-    <Compile Include="DAL\Configuration.cs" />
+    <Compile Include="DAL\Payment\ChinaPay.cs" />
+    <Compile Include="DAL\MySql\Configuration.cs" />
     <Compile Include="DAL\HandleQueue.cs" />
-    <Compile Include="DAL\Kendoui\DataSourceRequest.cs" />
-    <Compile Include="DAL\Kendoui\DataSourceResult.cs" />
     <Compile Include="DAL\Manage\NewsManage.cs" />
     <Compile Include="DAL\Manage\OrderManage.cs" />
     <Compile Include="DAL\Manage\ProductManage.cs" />
-    <Compile Include="DAL\MyAuthorizeAttribute.cs" />
-    <Compile Include="DAL\MySqlConfiguration.cs" />
-    <Compile Include="DAL\MySqlHistoryContext.cs" />
+    <Compile Include="DAL\MySql\MyAuthorizeAttribute.cs" />
+    <Compile Include="DAL\MySql\MySqlConfiguration.cs" />
+    <Compile Include="DAL\MySql\MySqlHistoryContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -249,7 +251,7 @@
     <Compile Include="Areas\Admin\Models\AccountViewModels.cs" />
     <Compile Include="Areas\Admin\Models\IdentityModels.cs" />
     <Compile Include="Areas\Admin\Models\ManageViewModels.cs" />
-    <Compile Include="DAL\MySqlInitializer.cs" />
+    <Compile Include="DAL\MySql\MySqlInitializer.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
     <Compile Include="Models\OrderItemViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -377,6 +379,16 @@
     <Content Include="Areas\Admin\Views\ProductTypes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ProductTypes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Products\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContents\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContents\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContents\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContents\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContents\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContentTypes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContentTypes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContentTypes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContentTypes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\WebContentTypes\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
