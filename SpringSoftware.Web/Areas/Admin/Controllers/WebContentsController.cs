@@ -36,8 +36,8 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             {
                 entity.WebContentType = await _webContentTypeDal.QueryByIdAsync(entity.WebContentTypeId);
             }
-         
-            return View(await _webContentDal.QueryAllAsync());
+
+            return View(entityList);
         }
 
         // GET: Admin/WebContents/Details/5
@@ -57,9 +57,11 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/WebContents/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var webContent = new WebContent();
+            webContent.WebContentTypeList = await _webContentTypeDal.QueryAllAsync();
+            return View(webContent);
         }
 
         // POST: Admin/WebContents/Create
@@ -67,16 +69,11 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,ContentTypeId,Content,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] WebContent webContent)
+        public async Task<ActionResult> Create(WebContent webContent)
         {
-            if (ModelState.IsValid)
-            {
-                InitInsert(webContent);
-                await _webContentDal.InsertAsync(webContent);
-                return RedirectToAction("Index");
-            }
-
-            return View(webContent);
+            InitInsert(webContent);
+            await _webContentDal.InsertAsync(webContent);
+            return RedirectToAction("Index");
         }
 
         // GET: Admin/WebContents/Edit/5
@@ -92,6 +89,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             webContent.WebContentType = await _webContentTypeDal.QueryByIdAsync(webContent.WebContentTypeId);
+            webContent.WebContentTypeList = await _webContentTypeDal.QueryAllAsync();
             return View(webContent);
         }
 
@@ -100,15 +98,11 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,ContentTypeId,Content,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] WebContent webContent)
+        public async Task<ActionResult> Edit(WebContent webContent)
         {
-            if (ModelState.IsValid)
-            {
-                InitModify(webContent);
-                await _webContentDal.ModifyAsync(webContent);
-                return RedirectToAction("Index");
-            }
-            return View(webContent);
+            InitModify(webContent);
+            await _webContentDal.ModifyAsync(webContent);
+            return RedirectToAction("Index");
         }
 
         // GET: Admin/WebContents/Delete/5

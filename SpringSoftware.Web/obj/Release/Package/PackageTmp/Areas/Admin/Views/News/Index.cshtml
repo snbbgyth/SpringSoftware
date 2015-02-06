@@ -2,7 +2,10 @@
 @using SpringSoftware.Web.Help
 @model PagedList.IPagedList<SpringSoftware.Core.DbModel.News>
 @using PagedList.Mvc;
- 
+ @{
+     ViewBag.Title = "新闻列表";
+}
+<h2>新闻列表</h2>
 <p>
     @Html.ActionLink("新建", "Create")
 </p>

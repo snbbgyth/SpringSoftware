@@ -37,13 +37,5 @@ namespace SpringSoftware.Web.Areas.Admin.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.OrderItem> OrderItems { get; set; }
-
-        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.Product> Products { get; set; }
-
-        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.WebContent> WebContents { get; set; }
-
-        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.WebContentType> WebContentTypes { get; set; }
-
     }
 }
