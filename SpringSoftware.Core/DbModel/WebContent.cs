@@ -19,6 +19,13 @@ namespace SpringSoftware.Core.DbModel
 
         public virtual int WebContentTypeId { get; set; }
 
+        /// <summary>
+        /// Each content type just display max display order
+        /// </summary>
+        [DisplayName("显示顺序")]
+        public virtual int DisplayOrder { get; set; }
+
+
         [AllowHtml]
         [DisplayName("正文")]
         public virtual string Content { get; set; }

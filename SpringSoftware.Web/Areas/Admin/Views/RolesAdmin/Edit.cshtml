@@ -1,12 +1,13 @@
 ﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
-
-<h2>编辑</h2>
+@{
+    ViewBag.Title = "编辑";
+}
+<h2>编辑权限角色</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Roles</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)

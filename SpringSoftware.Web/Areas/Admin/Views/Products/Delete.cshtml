@@ -4,9 +4,9 @@
     ViewBag.Title = "删除";
 }
 
-<h2>删除</h2>
+<h2>删除产品</h2>
 
-<h3>确定要删除此商品吗?</h3>
+<h3>确定要删除此产品吗?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -34,43 +34,7 @@
             @Html.DisplayFor(model => model.Price)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastModifyDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastModifyDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDelete)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Creater)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Creater)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LastModifier)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LastModifier)
-        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

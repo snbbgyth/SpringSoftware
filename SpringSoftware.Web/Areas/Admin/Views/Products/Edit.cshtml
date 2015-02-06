@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "编辑";
 }
-<h2>编辑</h2>
+<h2>编辑产品</h2>
 @using(Html.BeginForm("Edit", "Products", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     @Html.Partial("_CreateOrUpdate", Model)

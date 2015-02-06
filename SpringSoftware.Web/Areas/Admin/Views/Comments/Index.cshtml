@@ -2,10 +2,10 @@
 @model PagedList.IPagedList<SpringSoftware.Core.DbModel.Comment>
 @using PagedList.Mvc;
 @{
-    ViewBag.Title = "留言列表";
+    ViewBag.Title = "列表";
 }
 
-<h2>所有留言</h2>
+<h2>留言列表</h2>
 @using (Html.BeginForm("Index", "Comments", FormMethod.Get))
 {
     <p>
@@ -14,7 +14,6 @@
     </p>
 }
 <table class="table">
- 
     <tr>
         <th>
             手机号码

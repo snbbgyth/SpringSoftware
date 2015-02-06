@@ -20,6 +20,7 @@ namespace SpringSoftware.Core.DbModel.Mappings
 
             Map(x => x.Content);
             Map(x => x.WebContentTypeId);
+            Map(x => x.DisplayOrder);
         }
     }
 }

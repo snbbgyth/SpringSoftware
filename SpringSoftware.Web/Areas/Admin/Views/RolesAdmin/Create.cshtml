@@ -1,6 +1,8 @@
 ﻿@model SpringSoftware.Web.Areas.Admin.Models.RoleViewModel
-
-<h2>新建</h2>
+@{
+    ViewBag.Title = "新建";
+}
+<h2>新建权限角色</h2>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()

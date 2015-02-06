@@ -1,16 +1,15 @@
 ﻿@model SpringSoftware.Core.DbModel.ProductType
 
 @{
-    ViewBag.Title = "创建";
+    ViewBag.Title = "新建";
 }
 
-<h2>创建</h2>
+<h2>新建产品类型</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <h4>产品类型</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -22,7 +21,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="创建" class="btn btn-default" />
+                <input type="submit" value="新建" class="btn btn-default" />
             </div>
         </div>
     </div>
