@@ -44,7 +44,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-         
+
 
             if (searchString != null)
             {
@@ -65,6 +65,10 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                     entityList = entityList.Where(s => s.UserName.Contains(searchString)
                                                    || s.Email.Contains(searchString)
                                                    || s.PhoneNumber.Contains(searchString));
+                    entityList = entityList.Where(s => (s.UserName != null && s.UserName.Contains(searchString))
+                                                                      || (s.Email != null && s.Email.Contains(searchString))
+                                                                      || (s.PhoneNumber != null && s.PhoneNumber.Contains(searchString)));
+
                 }
                 switch (sortOrder)
                 {
@@ -224,7 +228,7 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                         return View();
                     }
                 }
-                 return RedirectToAction("Edit", new { id = id });
+                return RedirectToAction("Edit", new { id = id });
             }
             else
             {

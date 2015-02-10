@@ -40,10 +40,11 @@ namespace SpringSoftware.Web.Controllers
             {
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    entityList = entityList.Where(s => s.Content.Contains(searchString)
-                                                       || s.Title.Contains(searchString)
-                                                       || s.Creater.Contains(searchString)
-                                                       || s.LastModifier.Contains(searchString));
+                    entityList = entityList.Where(s => (s.Content != null && s.Content.Contains(searchString))
+                                                                                          || (s.Title != null && s.Title.Contains(searchString))
+                                                                                          || (s.Creater != null && s.Creater.Contains(searchString))
+                                                                                          || (s.LastModifier != null && s.LastModifier.Contains(searchString)));
+
                 }
                 entityList = entityList.OrderByDescending(s => s.LastModifyDate);
             }
