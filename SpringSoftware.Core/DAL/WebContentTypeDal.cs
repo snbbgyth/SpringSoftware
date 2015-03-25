@@ -8,7 +8,7 @@ using SpringSoftware.Core.IDAL;
 
 namespace SpringSoftware.Core.DAL
 {
-   public class WebContentTypeDal:DataOperationActivityBase<WebContentType>,IWebContentTypeDal
-   {
+    public class WebContentTypeDal : DataOperationActivityBase<WebContentType>, IWebContentTypeDal
+    {
     }
 }

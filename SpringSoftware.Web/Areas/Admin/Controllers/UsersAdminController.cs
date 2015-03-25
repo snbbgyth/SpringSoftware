@@ -45,7 +45,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-
             if (searchString != null)
             {
                 page = 1;
@@ -94,8 +93,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var user = await UserManager.FindByIdAsync(id);
-
-            //ViewBag.RoleId = new SelectList(RoleManager.Roles, "Id", "Name", user.Roles.Any() ? user.Roles.First().RoleId : null);
             ViewBag.RoleNameList = (from roleId in user.Roles
                                     select RoleManager.Roles.FirstOrDefault(t => t.Id == roleId.RoleId)
                                         into role

@@ -137,7 +137,6 @@ namespace SpringSoftware.Web.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                //db.Dispose();
             }
             base.Dispose(disposing);
         }
