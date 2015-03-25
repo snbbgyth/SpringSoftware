@@ -53,5 +53,7 @@ namespace SpringSoftware.Core.IDAL
 
         Task<IEnumerable<T>> QueryByIdsAsync(IEnumerable<dynamic> ids);
 
+        IEnumerable<T> QueryLast(int count);
+
     }
 }

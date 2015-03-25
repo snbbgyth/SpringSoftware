@@ -1,0 +1,80 @@
+﻿@using SpringSoftware.Web.DAL.Manage
+@using SpringSoftware.Web.Help
+
+@{
+    ViewBag.Title = "主页";
+}
+
+@{
+    var lastComments = CommentManage.LastComments(10);
+    var lastUsers =   UserRoleManage.QueryLast(10);
+}
+<h4>最近10条留言</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            手机号码
+        </th>
+        <th>
+            用户名
+        </th>
+        <th>
+            内容
+        </th>
+        <th>
+            最后修改时间
+        </th>
+        <th>
+            创建时间
+        </th>
+        <th>
+            最后修改时间
+        </th>
+    </tr>
+    @foreach (var item in lastComments)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.Raw(item.Content.StripTagsRegex().ToSummary(100))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModifyDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creater)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModifier)
+            </td>
+        </tr>
+    }
+</table>
+
+
+<h4>最近10位注册用户</h4>
+<table class="table">
+    <tr>
+        <th>
+            用户名
+        </th>
+ 
+    </tr>
+
+    @foreach (var item in lastUsers)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+ 
+        </tr>
+    }
+
+</table>

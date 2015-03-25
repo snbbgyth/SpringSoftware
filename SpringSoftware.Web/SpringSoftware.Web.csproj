@@ -209,6 +209,7 @@
     <Compile Include="Areas\Admin\BundleConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CommentsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsTypesController.cs" />
@@ -230,6 +231,8 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShopCartItemsController.cs" />
+    <Compile Include="DAL\Manage\CommentManage.cs" />
+    <Compile Include="DAL\Manage\UserRoleManage.cs" />
     <Compile Include="DAL\Payment\AliPayPaymentProcessor.cs" />
     <Compile Include="DAL\BaseController.cs" />
     <Compile Include="DAL\Payment\ChinaPay.cs" />
@@ -382,6 +385,7 @@
     <Content Include="Areas\Admin\Views\WebContentTypes\Details.cshtml" />
     <Content Include="Areas\Admin\Views\WebContentTypes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\WebContentTypes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

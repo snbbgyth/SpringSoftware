@@ -246,6 +246,24 @@ namespace SpringSoftware.Core.DAL
             return default(T);
         }
 
+
+        public IEnumerable<T> QueryLast( int count)
+        {
+            try
+            {
+                using (var session = FluentNHibernateDal.Instance.GetSession())
+                {
+                    return session.QueryOver<T>().OrderBy(t => t.CreateDate).Desc.Take(count).List<T>();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
+                return new List<T>();
+            }
+            
+        }
+
         /// <summary>
         /// Find first or default by funcation
         /// </summary>

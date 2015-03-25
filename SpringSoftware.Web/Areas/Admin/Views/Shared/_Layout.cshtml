@@ -94,7 +94,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="~/">主页</a></li>
+                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
                     <li>@Html.ActionLink("新闻", "Index", "News")</li>
                     <li>@Html.ActionLink("内容", "Index", "WebContents")</li>
                     <li>@Html.ActionLink("权限", "Index", "RolesAdmin")</li>
@@ -109,7 +109,7 @@
                             <li>@Html.ActionLink("内容类型", "Index", "WebContentTypes")</li>
                         </ul>
                     </li>
-              
+                    <li><a href="~/">返回前台主页</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

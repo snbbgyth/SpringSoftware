@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -18,6 +19,7 @@ namespace SpringSoftware.Web.Areas.Admin.Models
             // 在此处添加自定义用户声明
             return userIdentity;
         }
+ 
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
