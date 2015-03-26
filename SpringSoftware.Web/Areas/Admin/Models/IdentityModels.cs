@@ -39,5 +39,7 @@ namespace SpringSoftware.Web.Areas.Admin.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<SpringSoftware.Core.DbModel.Order> Orders { get; set; }
+
     }
 }

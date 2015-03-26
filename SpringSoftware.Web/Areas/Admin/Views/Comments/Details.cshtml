@@ -29,7 +29,7 @@
         </dt>
 
         <dd>
-            @Html.Raw(Model.Content.StripTagsRegex().ToSummary(100))
+            @Html.Raw(Model.Content)
         </dd>
 
         <dt>
@@ -38,38 +38,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastModifyDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastModifyDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDelete)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDelete)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Creater)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Creater)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastModifier)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastModifier)
         </dd>
 
     </dl>

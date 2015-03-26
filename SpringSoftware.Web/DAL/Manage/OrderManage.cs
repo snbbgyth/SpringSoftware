@@ -25,18 +25,24 @@ namespace SpringSoftware.Web.DAL.Manage
             _orderDal = DependencyResolver.Current.GetService<IOrderDal>();
             _orderItemDal = DependencyResolver.Current.GetService<IOrderItemDal>();
         }
- 
+
         public static async Task<OrderViewModel> GetOrderView(int orderId)
         {
             var orderView = new OrderViewModel();
-            orderView.Order =await _orderDal.QueryByIdAsync(orderId);
-            orderView.OrderItemViewList=await GetOrderItemViewList(orderId);
+            orderView.Order = await _orderDal.QueryByIdAsync(orderId);
+            orderView.OrderItemViewList = await GetOrderItemViewList(orderId);
             foreach (var orderItem in orderView.OrderItemViewList)
             {
                 orderItem.OrderItem.Product = await _productDal.QueryByIdAsync(orderItem.OrderItem.ProductId);
             }
             return orderView;
         }
+
+        public static IEnumerable<Order> LastOrders(int count)
+        {
+            return _orderDal.QueryLast(count);
+        }
+
 
         private static async Task<List<OrderItemViewModel>> GetOrderItemViewList(int orderId)
         {
@@ -60,16 +66,17 @@ namespace SpringSoftware.Web.DAL.Manage
         private static OrderItemViewModel ConvertToOrderItem(ShopCartItem shopCartItem)
         {
             shopCartItem.Product = _productDal.QueryById(shopCartItem.ProductId);
-            return new OrderItemViewModel{
-              OrderItem  = new OrderItem
+            return new OrderItemViewModel
             {
-                ProductId = shopCartItem.ProductId,
-                Count = shopCartItem.Count,
-                Price = shopCartItem.Product.Price,
-                Product = shopCartItem.Product,
-                Total = shopCartItem.Count * shopCartItem.Product.Price
-            },
-            ShopCartItem = shopCartItem
+                OrderItem = new OrderItem
+              {
+                  ProductId = shopCartItem.ProductId,
+                  Count = shopCartItem.Count,
+                  Price = shopCartItem.Product.Price,
+                  Product = shopCartItem.Product,
+                  Total = shopCartItem.Count * shopCartItem.Product.Price
+              },
+                ShopCartItem = shopCartItem
             };
         }
 
