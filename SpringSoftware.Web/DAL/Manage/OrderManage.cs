@@ -40,7 +40,7 @@ namespace SpringSoftware.Web.DAL.Manage
 
         public static IEnumerable<Order> LastOrders(int count)
         {
-            return _orderDal.QueryLast(count);
+            return _orderDal.QueryLastByFun(t=>t.IsPay,count);
         }
 
 

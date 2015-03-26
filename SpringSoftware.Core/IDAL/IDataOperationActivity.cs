@@ -55,5 +55,7 @@ namespace SpringSoftware.Core.IDAL
 
         IEnumerable<T> QueryLast(int count);
 
+        IEnumerable<T> QueryLastByFun(Expression<Func<T, bool>> fun,int count);
+
     }
 }

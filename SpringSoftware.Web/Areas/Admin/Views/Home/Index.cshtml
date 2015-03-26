@@ -79,44 +79,49 @@
     }
 </table>
 
+@{
+    if (lastOrders!=null&& lastOrders.Any())
+    { 
 <h4>最近10个己付款订单</h4>
-<table class="table">
-    <tr>
-        <th>
-            订单号
-        </th>
-        <th>
-            客户名
-        </th>
-        <th>
-            手机号
-        </th>
-        <th>
-            收货地址
-        </th>
-        <th>
-            订单金额
-        </th>
-    </tr>
+        <table class="table">
+            <tr>
+                <th>
+                    订单号
+                </th>
+                <th>
+                    客户名
+                </th>
+                <th>
+                    手机号
+                </th>
+                <th>
+                    收货地址
+                </th>
+                <th>
+                    订单金额
+                </th>
+            </tr>
 
-    @foreach (var item in lastOrders)
-    {
-        <tr>
-            <td>
-                <a href="Orders/Details/@item.Id">@item.OrderNumber</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiveAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-        </tr>
+            @foreach (var item in lastOrders)
+            {
+                <tr>
+                    <td>
+                        <a href="Orders/Details/@item.Id">@item.OrderNumber</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiveAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPrice)
+                    </td>
+                </tr>
+            }
+        </table>
     }
-</table>
+}

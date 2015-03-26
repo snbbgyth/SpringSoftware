@@ -264,6 +264,26 @@ namespace SpringSoftware.Core.DAL
             
         }
 
+        public IEnumerable<T> QueryLastByFun(Expression<Func<T, bool>> fun,int count)
+        {
+            var entityList = new List<T>();
+            try
+            {
+                using (var session = FluentNHibernateDal.Instance.GetSession())
+                {
+                    if (fun != null)
+                    {
+                       return  session.QueryOver<T>().Where(fun).OrderBy(t=>t.CreateDate).Desc.Take(count).Future().ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogInfoQueue.Instance.Insert(GetType(), MethodBase.GetCurrentMethod().Name, ex);
+            }
+            return entityList;
+        }
+
         /// <summary>
         /// Find first or default by funcation
         /// </summary>
@@ -350,5 +370,11 @@ namespace SpringSoftware.Core.DAL
             var task = Task.Factory.StartNew(() => FirstOrDefault(fun));
             return await task;
         }
+
+
+
+
+
+   
     }
 }
